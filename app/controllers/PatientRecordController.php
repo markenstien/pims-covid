@@ -102,7 +102,9 @@
 
 				$is_updated = $this->model->update($post , $post['id']);
 
-				dd($is_updated);
+				Flash::set('Record Updated!');
+
+				return redirect( _route('patient-record:show' , $post['id']));
 			}
 		}
 	}
