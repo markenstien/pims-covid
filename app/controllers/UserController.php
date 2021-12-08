@@ -47,7 +47,7 @@
 				if( isEqual($post['user_type'] , 'patient') )
 				{
 					Flash::set('Patient Record Created');
-					return redirect(_route('patient-record:create' , $user_id));
+					return redirect(_route('patient-record:create' , null , ['user_id' => $user_id]));
 				}
 			}
 
