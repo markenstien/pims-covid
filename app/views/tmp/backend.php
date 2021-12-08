@@ -44,6 +44,7 @@ License: For each use you must have a valid license purchased only from above li
   <link rel="shortcut icon" href="<?php echo _path_tmp('assets/images/favicon.png')?>" />
 </head>
 <body>
+    <?php $auth = auth()?>
     <div class="main-wrapper">
 
         <!-- partial:../../partials/_navbar.html -->
@@ -64,34 +65,6 @@ License: For each use you must have a valid license purchased only from above li
                         </form>
                         <ul class="navbar-nav">
                           <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i data-feather="grid"></i>
-                            </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="appsDropdown">
-                              <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                                <p class="mb-0 fw-bold">Web Apps</p>
-                                <a href="javascript:;" class="text-muted">Edit</a>
-                              </div>
-                              <div class="row g-0 p-1">
-                                <div class="col-3 text-center">
-                                  <a href="../../pages/apps/chat.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="message-square" class="icon-lg mb-1"></i><p class="tx-12">Chat</p></a>
-                                </div>
-                                <div class="col-3 text-center">
-                                  <a href="../../pages/apps/calendar.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="calendar" class="icon-lg mb-1"></i><p class="tx-12">Calendar</p></a>
-                                </div>
-                                <div class="col-3 text-center">
-                                  <a href="../../pages/email/inbox.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="mail" class="icon-lg mb-1"></i><p class="tx-12">Email</p></a>
-                                </div>
-                                <div class="col-3 text-center">
-                                  <a href="../../pages/general/profile.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="instagram" class="icon-lg mb-1"></i><p class="tx-12">Profile</p></a>
-                                </div>
-                              </div>
-                              <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                                <a href="javascript:;">View all</a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <i data-feather="mail"></i>
                             </a>
@@ -101,66 +74,20 @@ License: For each use you must have a valid license purchased only from above li
                                 <a href="javascript:;" class="text-muted">Clear all</a>
                               </div>
                               <div class="p-1">
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                <?php for($i = 0; $i < 3; $i++) :?>
+                                  <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                                   <div class="me-3">
                                     <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
                                   </div>
                                   <div class="d-flex justify-content-between flex-grow-1">
                                     <div class="me-4">
-                                      <p>Leonardo Payne</p>
-                                      <p class="tx-12 text-muted">Project status</p>
+                                      <p>TEST</p>
+                                      <p class="tx-12 text-muted">test-status</p>
                                     </div>
                                     <p class="tx-12 text-muted">2 min ago</p>
                                   </div>    
                                 </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="me-3">
-                                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                  </div>
-                                  <div class="d-flex justify-content-between flex-grow-1">
-                                    <div class="me-4">
-                                      <p>Carl Henson</p>
-                                      <p class="tx-12 text-muted">Client meeting</p>
-                                    </div>
-                                    <p class="tx-12 text-muted">30 min ago</p>
-                                  </div>    
-                                </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="me-3">
-                                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                  </div>
-                                  <div class="d-flex justify-content-between flex-grow-1">
-                                    <div class="me-4">
-                                      <p>Jensen Combs</p>
-                                      <p class="tx-12 text-muted">Project updates</p>
-                                    </div>
-                                    <p class="tx-12 text-muted">1 hrs ago</p>
-                                  </div>    
-                                </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="me-3">
-                                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                  </div>
-                                  <div class="d-flex justify-content-between flex-grow-1">
-                                    <div class="me-4">
-                                      <p>Amiah Burton</p>
-                                      <p class="tx-12 text-muted">Project deatline</p>
-                                    </div>
-                                    <p class="tx-12 text-muted">2 hrs ago</p>
-                                  </div>    
-                                </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="me-3">
-                                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                  </div>
-                                  <div class="d-flex justify-content-between flex-grow-1">
-                                    <div class="me-4">
-                                      <p>Yaretzi Mayo</p>
-                                      <p class="tx-12 text-muted">New record</p>
-                                    </div>
-                                    <p class="tx-12 text-muted">5 hrs ago</p>
-                                  </div>    
-                                </a>
+                                <?php endfor?>
                               </div>
                               <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
                                 <a href="javascript:;">View all</a>
@@ -176,55 +103,21 @@ License: For each use you must have a valid license purchased only from above li
                             </a>
                             <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
                               <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                                <p>6 New Notifications</p>
+                                <p>(6) Notification</p>
                                 <a href="javascript:;" class="text-muted">Clear all</a>
                               </div>
                               <div class="p-1">
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                <?php for($i = 0; $i < 3; $i++) :?>
+                                  <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                                   <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                     <i class="icon-sm text-white" data-feather="gift"></i>
                                   </div>
                                   <div class="flex-grow-1 me-2">
-                                    <p>New Order Recieved</p>
+                                    <p>New NOTIFICATION</p>
                                     <p class="tx-12 text-muted">30 min ago</p>
                                   </div>    
                                 </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <i class="icon-sm text-white" data-feather="alert-circle"></i>
-                                  </div>
-                                  <div class="flex-grow-1 me-2">
-                                    <p>Server Limit Reached!</p>
-                                    <p class="tx-12 text-muted">1 hrs ago</p>
-                                  </div>    
-                                </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                  </div>
-                                  <div class="flex-grow-1 me-2">
-                                    <p>New customer registered</p>
-                                    <p class="tx-12 text-muted">2 sec ago</p>
-                                  </div>    
-                                </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <i class="icon-sm text-white" data-feather="layers"></i>
-                                  </div>
-                                  <div class="flex-grow-1 me-2">
-                                    <p>Apps are ready for update</p>
-                                    <p class="tx-12 text-muted">5 hrs ago</p>
-                                  </div>    
-                                </a>
-                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <i class="icon-sm text-white" data-feather="download"></i>
-                                  </div>
-                                  <div class="flex-grow-1 me-2">
-                                    <p>Download completed</p>
-                                    <p class="tx-12 text-muted">6 hrs ago</p>
-                                  </div>    
-                                </a>
+                                <?php endfor?>
                               </div>
                               <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
                                 <a href="javascript:;">View all</a>
@@ -241,13 +134,13 @@ License: For each use you must have a valid license purchased only from above li
                                   <img class="wd-80 ht-80 rounded-circle" src="https://via.placeholder.com/80x80" alt="">
                                 </div>
                                 <div class="text-center">
-                                  <p class="tx-16 fw-bolder">Amiah Burton</p>
-                                  <p class="tx-12 text-muted">amiahburton@gmail.com</p>
+                                  <p class="tx-16 fw-bolder"><?php echo $auth->first_name . ' '.$auth->last_name?></p>
+                                  <p class="tx-12 text-muted"><?php echo $auth->email ?></p>
                                 </div>
                               </div>
                               <ul class="list-unstyled p-1">
                                 <li class="dropdown-item py-2">
-                                  <a href="../../pages/general/profile.html" class="text-body ms-0">
+                                  <a href="#" class="text-body ms-0">
                                     <i class="me-2 icon-md" data-feather="user"></i>
                                     <span>Profile</span>
                                   </a>
@@ -265,7 +158,7 @@ License: For each use you must have a valid license purchased only from above li
                                   </a>
                                 </li>
                                 <li class="dropdown-item py-2">
-                                  <a href="javascript:;" class="text-body ms-0">
+                                  <a href="<?php echo _route('auth:logout')?>" class="text-body ms-0">
                                     <i class="me-2 icon-md" data-feather="log-out"></i>
                                     <span>Log Out</span>
                                   </a>
@@ -284,11 +177,12 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="container">
                     <ul class="nav page-navigation">
                         <li class="nav-item">
-                            <a class="nav-link" href="../../dashboard.html">
+                            <a class="nav-link" href="<?php echo _route('dashboard:index')?>">
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
+                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="link-icon" data-feather="mail"></i>
@@ -307,20 +201,24 @@ License: For each use you must have a valid license purchased only from above li
                                 </ul>
                             </div>
                         </li>
+                        <?php endif?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo _route('patient-record:index')?>">
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="menu-title">Records</span>
                             </a>
                         </li>
-
+                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../dashboard.html">
+                            <a class="nav-link" href="#">
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="menu-title">Lab Results</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <?php endif?>
+
+                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="link-icon" data-feather="mail"></i>
                                 <span class="menu-title">Others</span>
@@ -329,16 +227,21 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="submenu">
                                 <ul class="submenu-item">
                                     <li class="category-heading">Forms</li>
-                                    <li class="nav-item"><a class="nav-link" href="../../pages/email/inbox.html">Questionarire</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="../../pages/email/read.html">Responses</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Questionarire</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Responses</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
+
+                        <?php endif?>
+
+                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
                         <li class="nav-item">
-                            <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="link-icon" data-feather="hash"></i>
                                 <span class="menu-title">Reports</span></a>
                         </li>
+                        <?php endif?>
                     </ul>
                 </div>
             </nav>
