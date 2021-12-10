@@ -181,8 +181,8 @@
 		</div>
 
 		<div class="card-footer">
-			<a href="?prepare_print">Prepare For Printing</a> 
-			<?php if( !isEqual(whoIs('user_type') , 'patient') ) : ?>
+			<a href="<?php echo $public_link.'&prepare_print=true'?>">Prepare For Printing</a> 
+			<?php if( !isEqual(whoIs('user_type') , 'patient' && whoIs()) ) : ?>
 				| <?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?>
 				| <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> 
 			<?php endif?>
