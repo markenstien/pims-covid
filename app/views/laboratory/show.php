@@ -156,6 +156,11 @@
 							<li>Pneumonia : <?php echo $lab_result->pneumonia?></li>
 							<li><strong>Severity : <?php echo $lab_result->severity?></strong></li>
 						</ul>
+
+						<?php if(!empty($lab_result->notes)) :?>
+							<h5>Doctors Notes</h5>
+							<p><?php echo $lab_result->notes?></p>
+						<?php endif?>
 					</div>
 				</div>
 				
@@ -187,14 +192,13 @@
 		</div>
 
 		<div class="card-footer">
-<<<<<<< HEAD
 			<a href="<?php echo $public_link.'&prepare_print=true'?>">Prepare For Printing</a> 
+
 			<?php if( !isEqual(whoIs('user_type') , 'patient' && whoIs()) ) : ?>
 				| <?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?>
-=======
-			<a href="?prepare_print">Prepare For Printing</a> 
+			<?php endif?>
+
 			<?php if( !isEqual(whoIs('user_type') , 'patient') ) : ?>
->>>>>>> development
 				| <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> 
 			<?php endif?>
 			<hr>

@@ -33,7 +33,7 @@
 
 			$lab_result = $this->model->get($id);
 
-			$this->data['record'] = $this->patient_record->get($lab_result->record_id);
+			$this->data['record'] = $this->patient_record->getComplete($lab_result->record_id);
 			$this->data['lab_form']->init(['url' => _route('lab:update' , $id)]);
 			$this->data['lab_form']->addId($id);
 			$this->data['lab_form']->setValueObject($lab_result);

@@ -45,7 +45,7 @@
 
 				if($res) {
 					Flash::set( $this->model->getMessageString());
-					return redirect( _route('user:edit' , $id) );
+					return redirect( _route('user:show' , $id) );
 				}else
 				{
 					Flash::set( $this->model->getErrorString() , 'danger');
@@ -89,6 +89,8 @@
 					Flash::set('Patient Record Created');
 					return redirect(_route('patient-record:create' , null , ['user_id' => $user_id]));
 				}
+
+				return redirect( _route('user:show' , $user_id) );
 			}
 
 			if(! isEqual(whoIs('user_type'), 'admin') ){

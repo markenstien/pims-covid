@@ -129,7 +129,7 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </li>
                               <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="<?php echo _route('user:show' , $auth->id)?>" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile">
                                 </a>
                                 <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
@@ -139,7 +139,7 @@ License: For each use you must have a valid license purchased only from above li
                                     </div>
                                     <div class="text-center">
                                       <p class="tx-16 fw-bolder"><?php echo $auth->first_name . ' '.$auth->last_name?></p>
-                                      <p class="tx-12 text-muted"><?php echo $auth->email ?></p>
+                                      <p class="tx-12 text-muted"><?php echo $auth->user_type ?></p>
                                     </div>
                                   </div>
                                   <ul class="list-unstyled p-1">
@@ -150,15 +150,9 @@ License: For each use you must have a valid license purchased only from above li
                                       </a>
                                     </li>
                                     <li class="dropdown-item py-2">
-                                      <a href="javascript:;" class="text-body ms-0">
+                                      <a href="<?php echo _route('user:edit' , $auth->id)?>" class="text-body ms-0">
                                         <i class="me-2 icon-md" data-feather="edit"></i>
                                         <span>Edit Profile</span>
-                                      </a>
-                                    </li>
-                                    <li class="dropdown-item py-2">
-                                      <a href="javascript:;" class="text-body ms-0">
-                                        <i class="me-2 icon-md" data-feather="repeat"></i>
-                                        <span>Switch User</span>
                                       </a>
                                     </li>
                                     <li class="dropdown-item py-2">

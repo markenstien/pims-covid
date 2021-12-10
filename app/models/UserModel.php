@@ -122,7 +122,7 @@
 				$this->addError("No file attached upload profile failed!");
 				return false;
 			}
-
+			
 			$upload = upload_image($file_name, PATH_UPLOAD);
 			
 			if( !isEqual($upload['status'] , 'success') ){
@@ -158,10 +158,6 @@
 			return true;
 		}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> development
 		public function getByKey($column , $key , $order = null)
 		{
 			if( is_null($order) )
