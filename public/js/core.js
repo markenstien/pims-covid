@@ -1,4 +1,4 @@
-const URL = 'https://vitalcare.sbs';
+const URL = 'https://vidco-pims.xyz';
 
 const DS  = '/';
 
