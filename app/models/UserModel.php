@@ -161,13 +161,6 @@
 			return true;
 		}
 
-		public function get($id)
-		{
-			$user = parent::get($id);
-
-			$user->full_name = $user->last_name . ','.$user->first_name . ' '.$user->middle_name;
-			return $user;
-		}
 
 		public function getByKey($column , $key , $order = null)
 		{
