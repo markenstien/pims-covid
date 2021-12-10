@@ -50,7 +50,6 @@ License: For each use you must have a valid license purchased only from above li
 <body>
     <?php $auth = auth()?>
     <div class="main-wrapper">
-
         <!-- partial:../../partials/_navbar.html -->
         <div class="horizontal-menu">
             <nav class="navbar top-navbar">
@@ -59,204 +58,208 @@ License: For each use you must have a valid license purchased only from above li
                         <a href="#" class="navbar-brand">
                             COVID<span>PIMS</span>
                         </a>
-                        <form class="search-form">
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                  <i data-feather="search"></i>
-                                </div>
-                                <input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
-                            </div>
-                        </form>
-                        <ul class="navbar-nav">
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i data-feather="mail"></i>
-                            </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="messageDropdown">
-                              <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                                <p>9 New Messages</p>
-                                <a href="javascript:;" class="text-muted">Clear all</a>
-                              </div>
-                              <div class="p-1">
-                                <?php for($i = 0; $i < 3; $i++) :?>
-                                  <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="me-3">
-                                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                  </div>
-                                  <div class="d-flex justify-content-between flex-grow-1">
-                                    <div class="me-4">
-                                      <p>TEST</p>
-                                      <p class="tx-12 text-muted">test-status</p>
+                        <?php if($auth) :?>
+                            <form class="search-form">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                      <i data-feather="search"></i>
                                     </div>
-                                    <p class="tx-12 text-muted">2 min ago</p>
-                                  </div>    
+                                    <input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
+                                </div>
+                            </form>
+                            <ul class="navbar-nav">
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i data-feather="mail"></i>
                                 </a>
-                                <?php endfor?>
-                              </div>
-                              <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                                <a href="javascript:;">View all</a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i data-feather="bell"></i>
-                              <div class="indicator">
-                                <div class="circle"></div>
-                              </div>
-                            </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
-                              <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                                <p>(6) Notification</p>
-                                <a href="javascript:;" class="text-muted">Clear all</a>
-                              </div>
-                              <div class="p-1">
-                                <?php for($i = 0; $i < 3; $i++) :?>
-                                  <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                  <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <i class="icon-sm text-white" data-feather="gift"></i>
+                                <div class="dropdown-menu p-0" aria-labelledby="messageDropdown">
+                                  <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                                    <p>9 New Messages</p>
+                                    <a href="javascript:;" class="text-muted">Clear all</a>
                                   </div>
-                                  <div class="flex-grow-1 me-2">
-                                    <p>New NOTIFICATION</p>
-                                    <p class="tx-12 text-muted">30 min ago</p>
-                                  </div>    
+                                  <div class="p-1">
+                                    <?php for($i = 0; $i < 3; $i++) :?>
+                                      <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                      <div class="me-3">
+                                        <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                                      </div>
+                                      <div class="d-flex justify-content-between flex-grow-1">
+                                        <div class="me-4">
+                                          <p>TEST</p>
+                                          <p class="tx-12 text-muted">test-status</p>
+                                        </div>
+                                        <p class="tx-12 text-muted">2 min ago</p>
+                                      </div>    
+                                    </a>
+                                    <?php endfor?>
+                                  </div>
+                                  <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                                    <a href="javascript:;">View all</a>
+                                  </div>
+                                </div>
+                              </li>
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i data-feather="bell"></i>
+                                  <div class="indicator">
+                                    <div class="circle"></div>
+                                  </div>
                                 </a>
-                                <?php endfor?>
-                              </div>
-                              <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                                <a href="javascript:;">View all</a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile">
-                            </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
-                              <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
-                                <div class="mb-3">
-                                  <img class="wd-80 ht-80 rounded-circle" src="https://via.placeholder.com/80x80" alt="">
+                                <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
+                                  <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                                    <p>(6) Notification</p>
+                                    <a href="javascript:;" class="text-muted">Clear all</a>
+                                  </div>
+                                  <div class="p-1">
+                                    <?php for($i = 0; $i < 3; $i++) :?>
+                                      <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                      <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="gift"></i>
+                                      </div>
+                                      <div class="flex-grow-1 me-2">
+                                        <p>New NOTIFICATION</p>
+                                        <p class="tx-12 text-muted">30 min ago</p>
+                                      </div>    
+                                    </a>
+                                    <?php endfor?>
+                                  </div>
+                                  <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                                    <a href="javascript:;">View all</a>
+                                  </div>
                                 </div>
-                                <div class="text-center">
-                                  <p class="tx-16 fw-bolder"><?php echo $auth->first_name . ' '.$auth->last_name?></p>
-                                  <p class="tx-12 text-muted"><?php echo $auth->email ?></p>
+                              </li>
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile">
+                                </a>
+                                <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
+                                  <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
+                                    <div class="mb-3">
+                                      <img class="wd-80 ht-80 rounded-circle" src="https://via.placeholder.com/80x80" alt="">
+                                    </div>
+                                    <div class="text-center">
+                                      <p class="tx-16 fw-bolder"><?php echo $auth->first_name . ' '.$auth->last_name?></p>
+                                      <p class="tx-12 text-muted"><?php echo $auth->email ?></p>
+                                    </div>
+                                  </div>
+                                  <ul class="list-unstyled p-1">
+                                    <li class="dropdown-item py-2">
+                                      <a href="#" class="text-body ms-0">
+                                        <i class="me-2 icon-md" data-feather="user"></i>
+                                        <span>Profile</span>
+                                      </a>
+                                    </li>
+                                    <li class="dropdown-item py-2">
+                                      <a href="javascript:;" class="text-body ms-0">
+                                        <i class="me-2 icon-md" data-feather="edit"></i>
+                                        <span>Edit Profile</span>
+                                      </a>
+                                    </li>
+                                    <li class="dropdown-item py-2">
+                                      <a href="javascript:;" class="text-body ms-0">
+                                        <i class="me-2 icon-md" data-feather="repeat"></i>
+                                        <span>Switch User</span>
+                                      </a>
+                                    </li>
+                                    <li class="dropdown-item py-2">
+                                      <a href="<?php echo _route('auth:logout')?>" class="text-body ms-0">
+                                        <i class="me-2 icon-md" data-feather="log-out"></i>
+                                        <span>Log Out</span>
+                                      </a>
+                                    </li>
+                                  </ul>
                                 </div>
-                              </div>
-                              <ul class="list-unstyled p-1">
-                                <li class="dropdown-item py-2">
-                                  <a href="#" class="text-body ms-0">
-                                    <i class="me-2 icon-md" data-feather="user"></i>
-                                    <span>Profile</span>
-                                  </a>
-                                </li>
-                                <li class="dropdown-item py-2">
-                                  <a href="javascript:;" class="text-body ms-0">
-                                    <i class="me-2 icon-md" data-feather="edit"></i>
-                                    <span>Edit Profile</span>
-                                  </a>
-                                </li>
-                                <li class="dropdown-item py-2">
-                                  <a href="javascript:;" class="text-body ms-0">
-                                    <i class="me-2 icon-md" data-feather="repeat"></i>
-                                    <span>Switch User</span>
-                                  </a>
-                                </li>
-                                <li class="dropdown-item py-2">
-                                  <a href="<?php echo _route('auth:logout')?>" class="text-body ms-0">
-                                    <i class="me-2 icon-md" data-feather="log-out"></i>
-                                    <span>Log Out</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </li>
-                        </ul>
-                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
-                            <i data-feather="menu"></i>                 
-                        </button>
+                              </li>
+                            </ul>
+                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                                <i data-feather="menu"></i>                 
+                            </button>
+                        <?php endif?>
                     </div>
                 </div>
             </nav>
-            <nav class="bottom-navbar">
-                <div class="container">
-                    <ul class="nav page-navigation">
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo _route('dashboard:index')?>">
-                                <i class="link-icon" data-feather="box"></i>
-                                <span class="menu-title">Dashboard</span>
-                            </a>
-                        </li>
-                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="link-icon" data-feather="mail"></i>
-                                <span class="menu-title">Users</span>
-                                <i class="link-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:create')?>">Create</a></li>
-                                    <li class="category-heading">Medical Personels</li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'medical personels'])?>">Staff</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'doctor'])?>">Doctors</a></li>
-                                    <li class="category-heading">Others<li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index')?>">All</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'patient'])?>">Patients</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <?php endif?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo _route('patient-record:index')?>">
-                                <i class="link-icon" data-feather="box"></i>
-                                <span class="menu-title">Records</span>
-                            </a>
-                        </li>
-                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="link-icon" data-feather="mail"></i>
-                                <span class="menu-title">Lab Results</span>
-                                <i class="link-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:create')?>">Create Request</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:index' , ['user_type' => 'medical personels'])?>">Requests</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab:index' , ['user_type' => 'doctor'])?>">Results</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <?php endif?>
+            <?php if($auth) :?>
+                <nav class="bottom-navbar">
+                    <div class="container">
+                        <ul class="nav page-navigation">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('dashboard:index')?>">
+                                    <i class="link-icon" data-feather="box"></i>
+                                    <span class="menu-title">Dashboard</span>
+                                </a>
+                            </li>
+                            <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="link-icon" data-feather="mail"></i>
+                                    <span class="menu-title">Users</span>
+                                    <i class="link-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul class="submenu-item">
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:create')?>">Create</a></li>
+                                        <li class="category-heading">Medical Personels</li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'medical personels'])?>">Staff</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'doctor'])?>">Doctors</a></li>
+                                        <li class="category-heading">Others<li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index')?>">All</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'patient'])?>">Patients</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <?php endif?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('patient-record:index')?>">
+                                    <i class="link-icon" data-feather="box"></i>
+                                    <span class="menu-title">Records</span>
+                                </a>
+                            </li>
+                            <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="link-icon" data-feather="mail"></i>
+                                    <span class="menu-title">Lab Results</span>
+                                    <i class="link-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul class="submenu-item">
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:create')?>">Create Request</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:index' , ['user_type' => 'medical personels'])?>">Requests</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab:index' , ['user_type' => 'doctor'])?>">Results</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <?php endif?>
 
-                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="link-icon" data-feather="mail"></i>
-                                <span class="menu-title">Others</span>
-                                <i class="link-arrow"></i>
-                            </a>
-                            <div class="submenu">
-                                <ul class="submenu-item">
-                                    <li class="category-heading">Forms</li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Questionarire</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Responses</a></li>
-                                </ul>
-                            </div>
-                        </li> -->
+                            <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
+                            <!-- <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="link-icon" data-feather="mail"></i>
+                                    <span class="menu-title">Others</span>
+                                    <i class="link-arrow"></i>
+                                </a>
+                                <div class="submenu">
+                                    <ul class="submenu-item">
+                                        <li class="category-heading">Forms</li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Questionarire</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Responses</a></li>
+                                    </ul>
+                                </div>
+                            </li> -->
 
-                        <?php endif?>
+                            <?php endif?>
 
-                        <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="link-icon" data-feather="hash"></i>
-                                <span class="menu-title">Reports</span></a>
-                        </li>
-                        <?php endif?>
-                    </ul>
-                </div>
-            </nav>
+                            <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="link-icon" data-feather="hash"></i>
+                                    <span class="menu-title">Reports</span></a>
+                            </li>
+                            <?php endif?>
+                        </ul>
+                    </div>
+                </nav>
+            <?php endif?>
         </div>
         <!-- partial -->
     

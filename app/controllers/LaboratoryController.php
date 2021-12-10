@@ -91,7 +91,7 @@
 
 
 			$this->data['public_link'] = $this->model->publicLink( $id );
-
+			
 			return $this->view('laboratory/show' , $this->data);
 		}
 
