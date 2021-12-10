@@ -2,9 +2,10 @@
     
     function bool_convert($bool , $response = ['Yes' , 'No'])
     {
-        if( boolval($bool) === TRUE )
-            return $response[0];
-        return $response[1];
+        if( boolval($bool) === TRUE ){
+            return 'Yes';
+        }
+        return 'No';
     }        
     /*check if tomatch is array*/
     function isEqual($subject , $toMatch)

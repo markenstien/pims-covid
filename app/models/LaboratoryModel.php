@@ -88,6 +88,15 @@
 		}
 
 
+		public function getByPatient($patient_id)
+		{
+			return $this->getAll([
+				'where' => [
+					'patient_id' => $patient_id
+				],
+				'order' => ' lab.id desc '
+			]);
+		}
 		public function getAll( $params = [])
 		{
 

@@ -148,8 +148,14 @@
 						<?php echo $lab_result->remarks ?>
 					</div>
 					<div class="section">
-						<h5>Severity</h5>
-						<?php echo $lab_result->severity ?>
+						Criteria For Covid Severity
+						<ul>
+							<li>Oxygen Level : <?php echo $record->oxygen_level_num?>%</li>
+							<li>Respiratory Rate : <?php echo $record->respirator_rate_num?></li>
+							<li>Fever : <?php echo bool_convert($record->is_fever) ?></li>
+							<li>Pneumonia : <?php echo $lab_result->pneumonia?></li>
+							<li><strong>Severity : <?php echo $lab_result->severity?></strong></li>
+						</ul>
 					</div>
 				</div>
 				
@@ -181,11 +187,23 @@
 		</div>
 
 		<div class="card-footer">
+<<<<<<< HEAD
 			<a href="<?php echo $public_link.'&prepare_print=true'?>">Prepare For Printing</a> 
 			<?php if( !isEqual(whoIs('user_type') , 'patient' && whoIs()) ) : ?>
 				| <?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?>
+=======
+			<a href="?prepare_print">Prepare For Printing</a> 
+			<?php if( !isEqual(whoIs('user_type') , 'patient') ) : ?>
+>>>>>>> development
 				| <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> 
 			<?php endif?>
+			<hr>
+			<div>
+				<?php if( isEqual(whoIs('user_type') , ['doctor' , 'admin']) ) :?>
+					<a href="<?php echo _route('lab:classify' , $lab_result->id)?>"
+						class="btn btn-primary btn-lg">Classify</a>
+				<?php endif?>
+			</div>
 		</div>
 
 	</div>

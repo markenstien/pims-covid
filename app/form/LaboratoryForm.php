@@ -42,6 +42,9 @@ class LaboratoryForm extends Form
         $this->addPatientId();
 		$this->addDoctorId();
 		$this->addRecordId();
+		$this->addSeverity();
+		$this->addNotes();
+
         $this->customSubmit('Save Result');
 	}
 
@@ -124,6 +127,13 @@ class LaboratoryForm extends Form
         $this->addTextArea('clarity' , 'Decribe Urine Clarity');
     }
 
+
+    public function addNotes()
+    {
+        $this->addTextArea('notes' , 'Doctors Notes');
+    }
+
+
 	public function addStoolOva()
 	{
 		$this->addText('ova' , 'Ova');
@@ -197,6 +207,23 @@ class LaboratoryForm extends Form
                 'option_values' => [
                     '1' => 'Yes',
                     '0' => 'No'
+                ]
+            ],
+
+            'class' => 'form-control',
+            'required' => true
+        ]);
+    }
+
+    public function addSeverity()
+    {
+        $this->add([
+            'type' => 'select',
+            'name' => 'severity',
+            'options' => [
+                'label' => 'Severity',
+                'option_values' => [
+                	'miled' , 'moderate' , 'severe'
                 ]
             ],
 

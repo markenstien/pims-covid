@@ -69,7 +69,8 @@
 		'show'   => $controller.'/show',
 		'update' => $controller.'/update',
 		'view-public' => $controller.'/viewPublic',
-		'send-to-mail' => $controller.'/sendToMail'
+		'send-to-mail' => $controller.'/sendToMail',
+		'classify'  => $controller.'/classify'
 	];
 
 	$controller = '/LaboratoryRequestController';

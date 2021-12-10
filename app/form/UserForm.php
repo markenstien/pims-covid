@@ -231,7 +231,7 @@
 				'options' => [
 					'label' => 'User Type',
 					'option_values' => [
-						'admin' , 'medical personal' , 'doctor' , 'patient'
+						'admin' , 'medical personel' , 'doctor' , 'patient'
 					]
 				],
 

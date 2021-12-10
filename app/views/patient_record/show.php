@@ -55,6 +55,7 @@
 
 				<div class="col-md-4">
 					<h4>Physical Examination</h4>
+					<a href="<?php echo _route('patient-record:phyical-examination' , $record->id , ['pe_id'=>$record->id])?>">Edit</a>
 					<table class="table table-bordered table-sm">
 						<tr>
 							<td>Oxygen Level </td>
@@ -89,34 +90,35 @@
 
 				<div class="col-md-4">
 					<h4>Health Decleration</h4>
+					<a href="<?php echo _route('patient-record:create' , $record->id , ['pe_id'=>$record->id])?>">Edit</a>
 					<table class="table table-bordered table-sm">
 						<tr>
 							<td><?php echo $patient_record_form->label('is_fever')?></td>
-							<td><?php echo bool_convert('is_fever')?></td>
+							<td><?php echo bool_convert($record->is_fever)?></td>
 						</tr>
 						<tr>
 							<td><?php echo $patient_record_form->label('is_body_pains')?></td>
-							<td><?php echo bool_convert('is_body_pains')?></td>
+							<td><?php echo bool_convert($record->is_body_pains)?></td>
 						</tr>
 						<tr>
 							<td><?php echo $patient_record_form->label('is_sore_throat')?></td>
-							<td><?php echo bool_convert('is_sore_throat')?></td>
+							<td><?php echo bool_convert($record->is_sore_throat)?></td>
 						</tr>
 						<tr>
 							<td><?php echo $patient_record_form->label('is_headache')?></td>
-							<td><?php echo bool_convert('is_headache')?></td>
+							<td><?php echo bool_convert($record->is_headache)?></td>
 						</tr>
 						<tr>
 							<td><?php echo $patient_record_form->label('is_diarrhea')?></td>
-							<td><?php echo bool_convert('is_diarrhea')?></td>
+							<td><?php echo bool_convert($record->is_diarrhea)?></td>
 						</tr>
 						<tr>
 							<td><?php echo $patient_record_form->label('is_lost_of_taste_smell')?></td>
-							<td><?php echo bool_convert('is_lost_of_taste_smell')?></td>
+							<td><?php echo bool_convert($record->is_lost_of_taste_smell)?></td>
 						</tr>
 						<tr>
 							<td><?php echo $patient_record_form->label('is_dificulty_breathing')?></td>
-							<td><?php echo bool_convert('is_dificulty_breathing')?></td>
+							<td><?php echo bool_convert($record->is_dificulty_breathing)?></td>
 						</tr>
 					</table>
 				</div>

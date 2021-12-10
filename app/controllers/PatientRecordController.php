@@ -68,6 +68,19 @@
 
 			$this->data['patient_record_form']->addUser($user_id);
 
+			if( !empty(request()->input('pe_id')) )
+			{
+				$patient_record_id = request()->input('pe_id');
+				$patient_record = $this->model->get($patient_record_id);
+
+				$this->data['patient_record_form']->init([
+					'url' => _route('patient-record:update')
+				]);
+
+				$this->data['patient_record_form']->addId($patient_record_id);
+				$this->data['patient_record_form']->setValueObject( $patient_record );
+			}
+
 			return $this->view('patient_record/create' , $this->data);
 		}
 
@@ -92,6 +105,13 @@
 			$this->data['user'] = $this->user_model->get($patient_record->user_id);
 
 			$this->data['patient_record_form']->addUser($patient_record->user_id);
+			$this->data['content_title'] = 'Patient Record';
+
+			if( !empty( request()->input('pe_id') ) )
+			{
+				$this->data['content_title'] = 'Patient Record Edit';
+				$this->data['patient_record_form']->setValueObject( $patient_record );
+			}
 
 			return $this->view('patient_record/physical_examination' , $this->data);
 		}
@@ -101,8 +121,7 @@
 		{
 			$record = $this->model->getComplete($id);
 
-			$this->data['record'] = $record;
-			
+			$this->data['record'] = $record;			
 			return $this->view('patient_record/show' , $this->data);
 		}
 

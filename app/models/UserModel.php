@@ -148,11 +148,8 @@
 		{
 			$res = $this->save($user_data , $id);
 
-			//check muna if doctor
-
-
 			if(!$res) {
-				$this->addError("Unable to create user");
+				$this->addError("Unable to update user");
 				return false;
 			}
 
@@ -161,7 +158,10 @@
 			return true;
 		}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
 		public function getByKey($column , $key , $order = null)
 		{
 			if( is_null($order) )
