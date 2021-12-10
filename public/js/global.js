@@ -20,10 +20,11 @@ $( document ).ready(function()
 	{
 
 		$('.copy-to-clip-board').click( function() {
-			let value = $(this).data('value');
+			let clip_board_value = $(this).data('copy');
 
+			console.log(clip_board_value);
 			alert("Copied to Clipboard");
-			copyStringToClipBoard(value);
+			copyStringToClipBoard(clip_board_value);
 		});
 		
 	}

@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title><?php echo $page_title ?? SITE_NAME?></title>
+    <title><?php echo $page_title ?? COMPANY_NAME?></title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,23 +25,27 @@ License: For each use you must have a valid license purchased only from above li
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <!-- End fonts -->
 
-    <!-- core:css -->
-    <link rel="stylesheet" href="<?php echo _path_tmp('assets/vendors/core/core.css')?>">
-    <!-- endinject -->
+<!-- core:css -->
+<link rel="stylesheet" href="<?php echo _path_tmp('assets/vendors/core/core.css')?>">
+<!-- endinject -->
 
-    <!-- Plugin css for this page -->
+<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="<?php echo _path_tmp('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')?>">
     <!-- End plugin css for this page -->
 
-    <!-- inject:css -->
-    <link rel="stylesheet" href="<?php echo _path_tmp('assets/fonts/feather-font/css/iconfont.css')?>">
-    <link rel="stylesheet" href="<?php echo _path_tmp('assets/vendors/flag-icon-css/css/flag-icon.min.css')?>">
-    <!-- endinject -->
+<!-- inject:css -->
+<link rel="stylesheet" href="<?php echo _path_tmp('assets/fonts/feather-font/css/iconfont.css')?>">
+<link rel="stylesheet" href="<?php echo _path_tmp('assets/vendors/flag-icon-css/css/flag-icon.min.css')?>">
+<!-- endinject -->
 
-  <!-- Layout styles -->  
-    <link rel="stylesheet" href="<?php echo _path_tmp('assets/css/demo3/style.css')?>">
-  <!-- End layout styles -->
+<!-- Layout styles -->  
+<link rel="stylesheet" href="<?php echo _path_tmp('assets/css/demo3/style.css')?>">
+<!-- End layout styles -->
 
-  <link rel="shortcut icon" href="<?php echo _path_tmp('assets/images/favicon.png')?>" />
+<link rel="shortcut icon" href="<?php echo _path_tmp('assets/images/favicon.png')?>" />
+
+  <?php produce('styles')?>
+  
 </head>
 <body>
     <?php $auth = auth()?>
@@ -210,10 +214,18 @@ License: For each use you must have a valid license purchased only from above li
                         </li>
                         <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="link-icon" data-feather="box"></i>
+                            <a href="#" class="nav-link">
+                                <i class="link-icon" data-feather="mail"></i>
                                 <span class="menu-title">Lab Results</span>
+                                <i class="link-arrow"></i>
                             </a>
+                            <div class="submenu">
+                                <ul class="submenu-item">
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:create')?>">Create Request</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:index' , ['user_type' => 'medical personels'])?>">Requests</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab:index' , ['user_type' => 'doctor'])?>">Results</a></li>
+                                </ul>
+                            </div>
                         </li>
                         <?php endif?>
 
@@ -267,6 +279,8 @@ License: For each use you must have a valid license purchased only from above li
 
     <!-- core:js -->
     <script src="<?php echo _path_tmp('assets/vendors/core/core.js')?>"></script>
+    <script src="<?php echo _path_public('js/core.js')?>"></script>
+    <script src="<?php echo _path_public('js/global.js')?>"></script>
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
@@ -277,6 +291,40 @@ License: For each use you must have a valid license purchased only from above li
     <script src="<?php echo _path_tmp('assets/js/template.js')?>"></script>
     <!-- endinject -->
 
+    <!-- Plugin js for this page -->
+      <script src="<?php echo _path_tmp('assets/vendors/datatables.net/jquery.dataTables.js')?>"></script>
+      <script src="<?php echo _path_tmp('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')?>"></script>
+
+    <script type="text/javascript" defer>
+        $(function() {
+          'use strict';
+
+          $(function() {
+            $('.dataTable').DataTable({
+              "aLengthMenu": [
+                [10, 30, 50, -1],
+                [10, 30, 50, "All"]
+              ],
+              "iDisplayLength": 10,
+              "language": {
+                search: ""
+              }
+            });
+            $('.dataTable').each(function() {
+              var datatable = $(this);
+              // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+              var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+              search_input.attr('placeholder', 'Search');
+              search_input.removeClass('form-control-sm');
+              // LENGTH - Inline-Form control
+              var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+              length_sel.removeClass('form-control-sm');
+            });
+          });
+
+        });
+    </script>
+    <?php produce('scripts')?>
     <!-- Custom js for this page -->
   <!-- End custom js for this page -->
 </body>

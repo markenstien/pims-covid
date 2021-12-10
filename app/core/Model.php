@@ -1,5 +1,8 @@
 <?php
 	
+	use Core\Token;
+	load(['Token'] , CORE);
+	
  	abstract class Model extends ModelCore
 	 {
 
@@ -32,6 +35,8 @@
 
 
  			$this->prefix  = DB_PREFIX;
+
+ 			$this->token = new Token();
 		 }
 
 		public function store($values)
@@ -381,4 +386,8 @@
 			return $WHERE;
 		}
 		
+
+
+
+
  }

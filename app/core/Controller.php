@@ -13,6 +13,8 @@
 			{
 				$this->_attachmentForm = new AttachmentForm();
 			}
+
+			$this->data = [];
 		}
 
 		public function model($model)

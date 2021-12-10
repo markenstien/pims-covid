@@ -16,11 +16,26 @@
 
 			$this->model = model('PatientRecordModel');
 			$this->user_model = model('UserModel');
+
+			$this->data['whoIs'] = whoIs();
 		}
 
 		public function index()
 		{
 			$patient_records = $this->model->getAll();
+
+
+			if( isEqual($this->data['whoIs']->user_type , 'patient') )
+			{
+				$patient_records = $this->model->getAll([
+					'where' => [
+						'user_id' => $this->data['whoIs']->id
+					]
+				]);
+			}else
+			{
+				$patient_records = $this->model->getAll();
+			}
 
 			$this->data['patient_records'] = $patient_records;
 			

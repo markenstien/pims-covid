@@ -122,6 +122,79 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="card-footer">
+			<?php if( !isEqual(whoIs('user_type') , 'patient')) :?>
+				<h4>Lab Results</h4>
+				<?php echo anchor(_route('lab-request:create' ,null, ['record_id' => $record->id]) , 'custom' , 'Request Laboratory Result')?>
+				<?php divider()?>
+			<?php endif?>
+
+			<?php if( $record->lab_requests && !isEqual(whoIs('user_type') , 'patient')) :?>
+				<h5>Requests</h5>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<th>Refence</th>
+							<th>Date Requested</th>
+							<th>Doctor</th>
+							<th>Status</th>
+							<th>Submitted On</th>
+							<th>Action</th>
+						</thead>
+
+						<tbody>
+							<?php foreach( $record->lab_requests as $row) : ?>
+								<tr>
+									<td><?php echo $row->reference?></td>
+									<td><?php echo $row->date_requested?></td>
+									<td><?php echo $row->doctor_name?></td>
+									<td><?php echo $row->status?></td>
+									<td><?php echo $row->created_at?></td>
+									<td><?php echo btnView( _route('lab-request:show' , $row->id)  , 'Show')?></td>
+								</tr>
+							<?php endforeach?>
+						</tbody>
+					</table>
+				</div>
+			<?php else:?>
+				<p>No Pending Lab result request</p>
+			<?php endif?>
+
+			<?php divider()?>
+			<?php if( $record->lab_requests ) :?>
+				<h5>Results</h5>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<th>Refence</th>
+							<th>Date Requested</th>
+							<th>Date Reported</th>
+							<th>Doctor</th>
+							<th>Remarks</th>
+							<th>Action</th>
+						</thead>
+
+						<tbody>
+							<?php foreach( $record->lab_results as $row) : ?>
+								<tr>
+									<td><?php echo $row->reference?></td>
+									<td><?php echo $row->date_requested?></td>
+									<td><?php echo $row->date_reported?></td>
+									<td><?php echo $row->doctor_name?></td>
+									<td><?php echo $row->remarks?></td>
+									<td>
+										<?php echo btnView( _route('lab:show' , $row->id)  , 'Show')?>
+									</td>
+								</tr>
+							<?php endforeach?>
+						</tbody>
+					</table>
+				</div>
+			<?php else:?>
+				<p>No Pending Lab result request</p>
+			<?php endif?>
+		</div>
 	</div>
 <?php endbuild()?>
 

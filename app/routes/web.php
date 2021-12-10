@@ -58,5 +58,33 @@
 		'phyical-examination' => $controller. '/phyicalExamination'
 	];
 
+	$controller = '/LaboratoryController';
+
+	$routes['lab'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'show'   => $controller.'/show',
+		'update' => $controller.'/update',
+		'view-public' => $controller.'/viewPublic',
+		'send-to-mail' => $controller.'/sendToMail'
+	];
+
+	$controller = '/LaboratoryRequestController';
+
+	$routes['lab-request'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'show'   => $controller.'/show',
+		'update' => $controller.'/update',
+		'phyical-examination' => $controller. '/phyicalExamination'
+	];
+
+	
 	return $routes;
 ?>

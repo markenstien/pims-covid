@@ -10,8 +10,8 @@
 		<div class="card-body">
 			<?php Flash::show()?>
 
-			<div class="table-responsive" style="min-height: 50vh;">
-				<table class="table table-bordered">
+			<div class="table-responsive" style="min-height: 30vh;">
+				<table class="table table-bordered dataTable">
 					<thead>
 						<th>Reference</th>
 						<th>Name</th>

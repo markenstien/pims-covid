@@ -18,7 +18,7 @@
             define('DBPASS' , '');
             define('DBNAME' , 'th_covid_pims');
 
-            define('BASECONTROLLER' , 'HomeController');
+            define('BASECONTROLLER' , 'AuthController');
             define('BASEMETHOD' , 'index');
 
             ini_set('display_errors', 1);
@@ -66,7 +66,7 @@
             define('DBPASS' , 'UO45)AZm^5X6');
             define('DBNAME' , 'arthsobx_pims_covid');
 
-            define('BASECONTROLLER' , 'AppointmentController');
+            define('BASECONTROLLER' , 'AuthController');
             define('BASEMETHOD' , 'index');
         break;
     }

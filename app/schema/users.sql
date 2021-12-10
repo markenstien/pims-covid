@@ -18,3 +18,7 @@ create table users(
 	created_at timestamp default now(),
 	updated_at timestamp default now() ON UPDATE now()
 );
+
+
+alter table users 
+	add column age char(3) after birthdate;

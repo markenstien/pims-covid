@@ -4,7 +4,7 @@
     {
         $attributes = keypair_to_str($attributes ?? []);
         return <<<EOF
-            <a href="{$route}" class="btn btn-primary btn-sm" {$attributes}><i class='fa fa-plus'> </i> {$text} </a>
+            <a href="{$route}" class="btn btn-primary btn-xs" {$attributes}><i class='fa fa-plus'> </i> {$text} </a>
         EOF;
     }
     
@@ -12,7 +12,7 @@
     {
         $attributes = keypair_to_str($attributes ?? []);
         return <<<EOF
-            <a href="{$route}" class="btn btn-primary btn-sm" {$attributes}><i class='fa fa-eye'> </i> {$text} </a>
+            <a href="{$route}" class="btn btn-primary btn-xs" {$attributes}><i class='fa fa-eye'> </i> {$text} </a>
         EOF;
     }
 
@@ -20,7 +20,7 @@
     {
         $attributes = keypair_to_str($attributes ?? []);
         return <<<EOF
-            <a href="{$route}" class="btn btn-primary btn-sm" {$attributes}><i class='fa fa-edit'> </i> {$text}  </a>
+            <a href="{$route}" class="btn btn-primary btn-xs" {$attributes}><i class='fa fa-edit'> </i> {$text}  </a>
         EOF;
     }
 
@@ -28,7 +28,7 @@
     {
         $attributes = keypair_to_str($attributes ?? []);
         return <<<EOF
-            <a href="{$route}" class="form-verify btn btn-danger btn-sm" {$attributes}><i class='fa fa-trash'> </i> {$text} </a>
+            <a href="{$route}" class="form-verify btn btn-danger btn-xs" {$attributes}><i class='fa fa-trash'> </i> {$text} </a>
         EOF;
     }
 
@@ -36,7 +36,7 @@
     {
         $attributes = keypair_to_str($attributes ?? []);
         return <<<EOF
-            <a href="{$route}" class="btn btn-primary btn-sm" {$attributes}><i class='fa fa-list'> </i> {$text}  </a>
+            <a href="{$route}" class="btn btn-primary btn-xs" {$attributes}><i class='fa fa-list'> </i> {$text}  </a>
         EOF;
     }
 
@@ -99,6 +99,9 @@
                 $icon = 'plus';
                 $a_text = 'Create';
             break;
+
+            default:
+                $icon = 'fa-check-circle';
         }
 
         if( !is_null($text) )

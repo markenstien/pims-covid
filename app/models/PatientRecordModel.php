@@ -81,10 +81,38 @@
 
 		public function getComplete($id)
 		{
-			return $this->getAll([
+			$record = $this->getAll([
 				'where' => [
 					'record.id' => $id
 				]
 			])[0] ?? false;
+
+			if(!$record) 
+				return $record;
+
+			$lab_request_model = model('LaboratoryRequestModel');
+			$lab_model = model('LaboratoryModel');
+
+
+			$lab_requests = $lab_request_model->getAll([
+				'where' => [
+					'record_id' => $id,
+				],
+				'order' => 'lab_req.id desc'
+			]);
+
+			$lab_results = $lab_model->getAll([
+				'where' => [
+					'record_id' => $id,
+				],
+				'order' => 'lab.id desc'
+			]);
+
+			$record->lab_results = $lab_results;
+			$record->lab_requests = $lab_requests;
+
+			return $record;
+			//load lab_requests
+			//load lab_results
 		}
 	}

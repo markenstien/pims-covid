@@ -9,7 +9,7 @@
 			<?php Flash::show()?>
 
 			<div class="table-responsive">
-				<table class="table table-bordered">
+				<table class="table table-bordered dataTable">
 					<thead>
 						<th>Reference</th>
 						<th>Name</th>

@@ -7,13 +7,15 @@
     define('DEFAULT_REPLY_TO' , '');
 
     const MAILER_AUTH = [
-        // 'username' => '',
-        // 'password' => '',
-        // 'host'     => '',
-        // 'name'     => '',
-        // 'replyTo'  => '',
-        // 'replyToName' => ''
+        'username' => 'super@vidco-pims.xyz',
+        'password' => 'u8BK++k}4l9x',
+        'host'     => 'vidco-pims.xyz',
+        'name'     => 'Covid Triage',
+        'replyTo'  => 'super@vidco-pims.xyz',
+        'replyToName' => 'Covid Triage'
     ];
+
+
 
     const ITEXMO = [
         'key' => '',
@@ -31,7 +33,7 @@
 
     define('COMPANY_NAME' , 'Covid Triage PIMS');
 
-    define('KEY_WORDS' , '#############');
+    define('KEY_WORDS' , 'BEST COVID APP');
 
 
     define('DESCRIPTION' , '#############');
@@ -39,5 +41,6 @@
     define('AUTHOR' , SITE_NAME);
 
 
+    define('APP_KEY' , 'COVID-PIMS-5175140471');
     
 ?>

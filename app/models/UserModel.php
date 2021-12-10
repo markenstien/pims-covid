@@ -32,6 +32,10 @@
 
 			$validated = $this->validate($fillable_datas , $id );
 
+			//include age
+			if( isset($fillable_datas['birthdate']) )
+				$fillable_datas['age'] = $this->computeAge($fillable_datas['birthdate']);
+
 			if(!$validated) return false;
 				
 
@@ -53,27 +57,6 @@
 				$fillable_datas['user_code'] = $this->generateCode($user_data['user_type']);
 				$user_id = parent::store($fillable_datas);
 			}
-
-			// $is_doctor = isEqual($user_data['user_type'] , 'doctor');
-
-			// if( $is_doctor )
-			// {
-			// 	//load doctormodel
-			// 	$this->doctor_model = model('DoctorModel');
-
-			// 	$is_doctor_lincensed_valid = $this->doctor_model->validateLicensedNumber($user_data['license_number']);
-
-			// 	if(!$is_doctor_lincensed_valid){
-			// 		$this->addError( $this->doctor_model->getErrorString() );
-			// 		return false;
-			// 	}
-
-			// 	$this->doctor_model->save([
-			// 		'license_number' => $user_data['license_number'],
-			// 		'user_id'        => $user_id
-			// 	]);
-					
-			// }
 
 			return $user_id;
 		}
@@ -182,12 +165,7 @@
 		{
 			$user = parent::get($id);
 
-			if( isEqual($user->user_type , 'doctor') )
-			{
-				$this->doctor = model('DoctorModel');
-				$user->license_number = $this->doctor->getByUser($id)->license_number ?? null;
-			}
-
+			$user->full_name = $user->last_name . ','.$user->first_name . ' '.$user->middle_name;
 			return $user;
 		}
 
@@ -282,4 +260,16 @@
 			return $auth;
 		}
 
+		public function computeAge($birth_date)
+		{
+			//date in mm/dd/yyyy format; or it can be in other formats as well
+			$birth_date = "12/17/1983";
+			 //explode the date to get month, day and year
+			$birth_date = explode("/", $birth_date);
+			  //get age from date or birthdate
+			$age = (date("md", date("U", mktime(0, 0, 0, $birth_date[0], $birth_date[1], $birth_date[2]))) > date("md")
+			    ? ((date("Y") - $birth_date[2]) - 1)
+			    : (date("Y") - $birth_date[2]));
+			  echo "Age is:" . $age;
+		}
 	}

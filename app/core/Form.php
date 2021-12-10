@@ -5,6 +5,9 @@
 
 	abstract class Form
 	{
+
+		protected $_type = 'crud';
+
 		protected $_form = null;
 
 		protected $_form_param = [];
@@ -39,6 +42,7 @@
 				$form_param = array_merge( $form_param , $params['attributes']);
 
 			$this->_form_param = $form_param;
+
 		}
 
 		public function start()
@@ -164,12 +168,6 @@
 				$attributes = $item['attributes'];
 
 			$item = $this->overwriteParams($item , $attributes);
-
-			// if( $name == 'first_name' )
-			// 	dd($item);
-
-			// dd($item);
-
 			switch( $item['type'] )
 			{
 				case 'text':
@@ -271,6 +269,7 @@
 
 		private function overwriteParams($attributes , $new_attributes)
 		{
+
 			
 			foreach($new_attributes as $new_attr_key => $new_attr)
 			{
@@ -305,6 +304,12 @@
 			}
 			
 			return $attributes;
+		}
+
+
+		public function setType( $type )
+		{
+			$this->_type = $type;
 		}
 
 		public function setValue($name , $value)

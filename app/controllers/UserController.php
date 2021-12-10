@@ -14,11 +14,15 @@
 			$this->data['page_title'] = ' Users ';
 
 			$this->data['user_form'] = new UserForm();
+
+			$this->data['whoIs'] = whoIs();
 		}
 
 		public function index()
 		{
 			$params = request()->inputs();
+
+
 
 			if( !empty($params) )
 			{
@@ -26,6 +30,8 @@
 			}else{
 				$this->data['users'] = $this->model->getAll( );
 			}
+			
+			
 			
 
 			return $this->view('user/index' , $this->data);
