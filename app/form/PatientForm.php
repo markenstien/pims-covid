@@ -42,7 +42,15 @@
 
 		public function addBloodPresure()
 		{
-			$this->inputTypeNum('blood_presure_num' , 'Blood Presure');
+			$this->add([
+				'type' => 'text',
+				'name' => 'blood_presure_num',
+				'class' => 'form-control',
+				'options' => [
+					'label' => 'Blood Presure'
+				],
+				'required' => true
+			]);
 		}
 
 		public function addTemperature()
@@ -62,12 +70,12 @@
 
 		public function addHeight()
 		{
-			$this->inputTypeNum('height_num' , 'Height');
+			$this->inputTypeNum('height_num' , 'Height(cm)');
 		}
 
 		public function addWeight()
 		{
-			$this->inputTypeNum('weight_num' , 'Weight');
+			$this->inputTypeNum('weight_num' , 'Weight(kgs)');
 		}
 
 		public function addOxygenLevel()
@@ -130,7 +138,7 @@
 				'required' => true,
 				'class' => 'form-control',
 				'options' => [
-					'label' => 'Date'
+					'label' => 'Time'
 				]
 			]);
 		}

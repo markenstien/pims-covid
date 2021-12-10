@@ -33,9 +33,7 @@
 
 			$form_param['method'] = strtoupper($params['method'] ?? $this->_method);
 			$form_param['url'] = $params['url'] ?? $this->_url;
-
-			if( isset($params['enctype']))
-				$form_param['enctype'] = 'multipart/form-data';
+			$form_param['enctype'] = 'multipart/form-data';
 
 
 			if( isset($params['attributes']) )
@@ -53,6 +51,20 @@
 		public function end()
 		{
 			return $this->_form->close();
+		}
+
+		public function remove($name)
+		{
+			$items = $this->_items;
+
+			foreach( $items as $key => $item )
+			{
+				if( $item['name'] == $name ){
+					unset($items[$key]);
+				}
+			}
+
+			$this->_items = $items;
 		}
 
 		public function add($params = [])
@@ -128,6 +140,11 @@
 			$this->_items = $new_order;
 		}
 
+		public function checkField($name)
+		{
+			return $this->_items[$name] ?? false;
+		}
+
 		public function getRaw($name , $attributes = [])
 		{
 			$item = $this->_items[$name] ?? false;
@@ -150,8 +167,6 @@
 				'inputs' => $this->_items
 			];
 		}
-
-
 
 		/*
 		*add attributes

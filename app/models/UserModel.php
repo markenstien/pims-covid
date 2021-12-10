@@ -148,25 +148,14 @@
 		{
 			$res = $this->save($user_data , $id);
 
-			//check muna if doctor
-
-
 			if(!$res) {
-				$this->addError("Unable to create user");
+				$this->addError("Unable to update user");
 				return false;
 			}
 
 			$this->addMessage("User {$user_data['first_name']} has been updated!");
 
 			return true;
-		}
-
-		public function get($id)
-		{
-			$user = parent::get($id);
-
-			$user->full_name = $user->last_name . ','.$user->first_name . ' '.$user->middle_name;
-			return $user;
 		}
 
 		public function getByKey($column , $key , $order = null)

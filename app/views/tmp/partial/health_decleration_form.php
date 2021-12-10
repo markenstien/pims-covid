@@ -27,6 +27,11 @@
 
 	<?php echo $patient_form->start()?>
 	<?php echo $patient_form->get('user_id')?>
+
+	<?php 
+		if( $patient_form->checkField('id') )
+			echo $patient_form->get('id');
+	?>
 	
 	<div class="col-md-5">
 		<h4>Arrival</h4>

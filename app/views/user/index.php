@@ -43,15 +43,13 @@
 												'text' => 'Edit',
 												'icon' => 'edit'
 											],
-										];
-
-										if( isEqual($row->user_type , 'patient') )
-											array_push($anchor_items , [
-											'url' => _route('patient-record:create' , null , ['user_id' => $row->id]),
-											'text' => 'add record',
-											'icon' => 'plus'
-										]);
+											[
+												'url' => _route('patient-record:create' , null , ['user_id' => $row->id]),
+												'text' => 'add record',
+												'icon' => 'plus'
+											]
 										
+										];
 									echo anchorList($anchor_items)?>
 								</td>
 							</tr>

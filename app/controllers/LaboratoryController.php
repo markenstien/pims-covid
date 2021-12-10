@@ -27,6 +27,36 @@
 			return $this->view('laboratory/index' , $this->data);
 		}
 
+		public function classify($id)
+		{
+			$this->data['page_title'] = " Classify Patient ";
+
+			$lab_result = $this->model->get($id);
+
+			$this->data['record'] = $this->patient_record->get($lab_result->record_id);
+			$this->data['lab_form']->init(['url' => _route('lab:update' , $id)]);
+			$this->data['lab_form']->addId($id);
+			$this->data['lab_form']->setValueObject($lab_result);
+
+			return $this->view('laboratory/classify' , $this->data);
+		}
+
+
+		public function update()
+		{
+			if( isSubmitted() )
+			{
+				$post = request()->posts();
+
+				$res = $this->model->save($post , $post['id']);
+
+				if($res) {
+					Flash::set( " Laboratory Result Updated!");
+					return redirect( _route('lab:show' , $post['id']) );
+				}
+			}
+		}
+
 		public function create()
 		{
 			$record_id = request()->input('record_id');

@@ -2,7 +2,7 @@
 	
 	<div class="card">
 		<div class="card-header">
-			<h4 class="card-title">Patient Record</h4>
+			<h4 class="card-title"><?php echo $content_title?></h4>
 		</div>
 
 		<div class="card-body">
