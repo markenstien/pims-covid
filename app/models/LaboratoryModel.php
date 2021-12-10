@@ -183,10 +183,20 @@
 				return false;
 			}
 
+			$lab = $this->get($lab_id);
+
 			$recipients = explode(',' , $recipients);
 
 
-			_mail($recipients , $subject , $body);
+			$template = pull_view('laboratory/partial/tmp_email_result' , [
+				'lab_result' => $lab,
+				'public_link' => $this->publicLink($lab->id)
+			]);
+
+			if( !empty($body))
+				$template .= " <div stlye='margin-top:40px'> Notes from sender : <p>{$body}</p> </div>";
+
+			_mail($recipients , $subject , $template);
 
 			return true;
 		}

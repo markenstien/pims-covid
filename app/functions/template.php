@@ -39,11 +39,25 @@
     }
 
 
-    function grab($viewPath , $data = null)
+    function pull_view($viewPath , $data = null)
     {
         $viewPath = convertDotToDS($viewPath);
 
+        if(isset($_GLOBALS['data']))
+        {
+            $globalData = $GLOBALS['data'];
+            extract($globalData);
+        }
 
+
+        $viewPath = convertDotToDS($viewPath);
+
+        return require_once VIEWS.DS.$viewPath.'.php';
+    }
+
+    function grab($viewPath , $data = null)
+    {
+        $viewPath = convertDotToDS($viewPath);
 
         if(isset($_GLOBALS['data']))
         {
@@ -55,7 +69,6 @@
         $viewPath = convertDotToDS($viewPath);
 
         require_once VIEWS.DS.$viewPath.'.php';
-
     }
 
     function grab_script($path)

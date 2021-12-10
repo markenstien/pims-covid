@@ -207,7 +207,7 @@
 
 	      		<div class="form-group">
 	      			<label>Subject</label>
-	      			<?php Form::textarea('subject' , '' , ['class' => 'form-control' , 
+	      			<?php Form::textarea('subject' , $patient->first_name . ' '.'Your Lab Result is ready' , ['class' => 'form-control' , 
 	      			'rows' => 1 , 'placeholder' => $patient->first_name . ', Your Lab Result is ready'])?>
 
 	      			<small>Seperate Emails with (,) to send on multiple recipients</small>
@@ -216,7 +216,7 @@
 
 	      		<div class="form-group">
 	      			<label>Email</label>
-	      			<?php Form::textarea('recipients' , '' , ['class' => 'form-control' , 
+	      			<?php Form::textarea('recipients' , $patient->email , ['class' => 'form-control' , 
 	      			'rows' => 1 , 'placeholder' => 'eg.'.$patient->email])?>
 
 	      			<small>Seperate Emails with (,) to send on multiple recipients</small>
@@ -224,8 +224,8 @@
 
 	      		<div class="form-group">
 	      			<label>Additional Notes</label>
-	      			<?php Form::textarea('body' , '' , ['class' => 'form-control' , 
-	      			'rows' => 3 , 'placeholder' => 'eg.'.$patient->email])?>
+	      			<?php Form::textarea('body' , '', ['class' => 'form-control' , 
+	      			'rows' => 3 , 'placeholder' => 'some-text' ])?>
 
 	      			<small>Seperate Emails with (,) to send on multiple recipients</small>
 	      		</div>
@@ -236,8 +236,7 @@
 	      	<?php divider()?>
 
 	      	<input type="text" name="" value="<?php echo $public_link?>" data-copy="<?php echo $public_link?>"
-	      		class="form-control copy-to-clip-board"  readonly>
-	      	<small>Click the link to copy</small>
+	      		class="form-control">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

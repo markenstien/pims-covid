@@ -28,6 +28,9 @@
 
 				<?php if( isEqual($lab_result->status , 'pending')) :?>
 					<div class="mt-3"><a href="<?php echo _route('lab:create' , null , ['record_id' => $lab_result->record_id , 'request_id' => $lab_result->id])?>" class="btn btn-primary btn-lg">Create Lab Result</a></div>
+
+				<?php else:?>
+					<div class="mt-3"><a href="<?php echo _route('lab:show' ,  $lab_result->record_id )?>" class="btn btn-primary btn-lg">Show Lab Result</a></div>
 				<?php endif?>
 			</div>
 		</div>
