@@ -270,6 +270,6 @@
 			$age = (date("md", date("U", mktime(0, 0, 0, $birth_date[0], $birth_date[1], $birth_date[2]))) > date("md")
 			    ? ((date("Y") - $birth_date[2]) - 1)
 			    : (date("Y") - $birth_date[2]));
-			  echo "Age is:" . $age;
+			return $age;
 		}
 	}
