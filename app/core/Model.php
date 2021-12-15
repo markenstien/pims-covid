@@ -129,9 +129,12 @@
 		}
 
 
-		public function single(array $where, $fields = '*' , $orderBy = null)
-		{
-			$whereString = $this->conditionEqual($where);
+		public function single($where = null, $fields = '*' , $orderBy = null)
+		{	
+			$whereString = null;
+
+			if( !is_null($where) )
+				$whereString = $this->conditionEqual($where);
 
 			$data = [
 				$this->table ,

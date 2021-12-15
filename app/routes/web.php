@@ -87,5 +87,45 @@
 	];
 
 	
+	$controller = '/QueueController';
+
+	$routes['queue'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'download' => $controller.'/download',
+		'show'   => $controller.'/show',
+		'live'   => $controller.'/live',
+		'new'    => $controller.'/new',
+		'serve'  => $controller.'/serve',
+		'skip'   => $controller.'/skip',
+		'complete' => $controller.'/complete',
+		'reset'   => $controller.'/reset'
+	];
+
+
+	$controller = '/HospitalController';
+
+	$routes['hospital'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'download' => $controller.'/download',
+		'show'   => $controller.'/show'
+	];
+
+	$controller = '/AddressController';
+
+	$routes['address'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'download' => $controller.'/download',
+		'show'   => $controller.'/show'
+	];
+
 	return $routes;
 ?>

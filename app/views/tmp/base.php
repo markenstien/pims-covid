@@ -42,6 +42,8 @@ License: For each use you must have a valid license purchased only from above li
   <!-- End layout styles -->
 
   <!-- <link rel="shortcut icon" href="<?php echo _path_tmp('assets/images/favicon.png')?>" /> -->
+  <?php echo produce('headers')?>
+  <?php echo produce('styles')?>
 </head>
 <body>
     <div class="main-wrapper">
@@ -59,9 +61,10 @@ License: For each use you must have a valid license purchased only from above li
     <script src="<?php echo _path_tmp('assets/vendors/feather-icons/feather.min.js')?>"></script>
     <script src="<?php echo _path_tmp('assets/js/template.js')?>"></script>
     <!-- endinject -->
-
+    <script type="text/javascript" src="<?php echo _path_public('js/core.js')?>"></script>
+    <script type="text/javascript" src="<?php echo _path_public('js/global.js')?>"></script>
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
-
+    <?php echo produce('scripts')?>
 </body>
 </html>

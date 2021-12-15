@@ -1,6 +1,8 @@
 <?php
 	use Form\AttachmentForm;
-	load(['AttachmentForm'] , APPROOT.DS.'form');
+	use Form\AddressForm;
+	
+	load(['AttachmentForm' , 'AddressForm'] , APPROOT.DS.'form');
 
 	class Controller
 	{	
@@ -12,7 +14,9 @@
 			if( is_null($this->_attachmentForm) )
 			{
 				$this->_attachmentForm = new AttachmentForm();
+				
 			}
+			$this->_addressForm = new AddressForm();
 
 			$this->data = [];
 		}

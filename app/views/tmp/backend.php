@@ -226,7 +226,7 @@ License: For each use you must have a valid license purchased only from above li
                             <?php endif?>
 
                             <?php if( isEqual($auth->user_type , ['medical personels' , 'admin' , 'doctor'])) :?>
-                            <!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="link-icon" data-feather="mail"></i>
                                     <span class="menu-title">Others</span>
@@ -234,12 +234,11 @@ License: For each use you must have a valid license purchased only from above li
                                 </a>
                                 <div class="submenu">
                                     <ul class="submenu-item">
-                                        <li class="category-heading">Forms</li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Questionarire</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Responses</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('queue:index')?>">Queueing</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('hospital:index')?>">Hospitals</a></li>
                                     </ul>
                                 </div>
-                            </li> -->
+                            </li>
 
                             <?php endif?>
 
