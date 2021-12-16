@@ -95,14 +95,13 @@
 
 
 			$this->db->query(
-				"SELECT * , deploy.id as id  FROM {$this->table} as deploy
+				"SELECT DISTINCT * , deploy.id as id  
+					FROM {$this->table} as deploy
 					LEFT JOIN hospitals as hosp
 					ON hosp.id = deploy.hospital_id
 					LEFT JOIN users as user 
 					ON user.id = deploy.patient_id
-					{$where} {$order} 
-
-					GROUP BY deploy.id"
+					{$where} GROUP BY deploy.id {$order}"
 			);
 
 			return $this->db->resultSet();
