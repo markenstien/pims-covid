@@ -24,10 +24,19 @@
 				<dt>Address</dt>
 				<dd><?php echo $record->address?></dd>
 			</dl>
+
+			<details>
+				<summary class="text-danger">Page Contents</summary>
+				<ul>
+					<li><a href="#id-lab-result">Lab Results</a></li>
+					<li><a href="#id-page-actions">Actions</a></li>
+				</ul>
+			</details>
 		</div>
 		<div class="card-body">
+
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h4>Personal</h4>
 					<table class="table table-bordered table-sm">
 						<tr>
@@ -51,9 +60,8 @@
 							<td><?php echo $record->gender?></td>
 						</tr>
 					</table>
-				</div>
-
-				<div class="col-md-4">
+					<?php divider()?>
+					<!--Physical Examination-->
 					<h4>Physical Examination</h4>
 					<a href="<?php echo _route('patient-record:phyical-examination' , $record->id , ['pe_id'=>$record->id])?>">Edit</a>
 					<table class="table table-bordered table-sm">
@@ -86,9 +94,8 @@
 							<td><?php echo $record->weight_num?>Kg</td>
 						</tr>
 					</table>
-				</div>
-
-				<div class="col-md-4">
+					<?php divider()?>
+				<!--Health Decleration-->
 					<h4>Health Decleration</h4>
 					<a href="<?php echo _route('patient-record:create' , $record->id , ['pe_id'=>$record->id])?>">Edit</a>
 					<table class="table table-bordered table-sm">
@@ -122,10 +129,28 @@
 						</tr>
 					</table>
 				</div>
+
+				<div class="col-md-6">
+					<h4>Record Updates & Files</h4>
+					<table class="table table-bordered">
+						<tr>
+							<td>Record Status:</td>
+							<td><?php echo $record->report_status?></td>
+						</tr>
+						<tr>
+							<td>Completion Status:</td>
+							<td><?php echo $record->completion_status ?? 'N/A'?></td>
+						</tr>
+						<tr>
+							<td>Is Deployed:</td>
+							<td><?php echo bool_convert($record->is_deployed)?></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 
-		<div class="card-footer">
+		<div class="card-footer" id="id-lab-result">
 			<?php if( !isEqual(whoIs('user_type') , 'patient')) :?>
 				<h4>Lab Results</h4>
 				<?php echo anchor(_route('lab-request:create' ,null, ['record_id' => $record->id]) , 'custom' , 'Request Laboratory Result')?>
@@ -196,6 +221,25 @@
 			<?php else:?>
 				<p>No Pending Lab result request</p>
 			<?php endif?>
+		</div>
+
+		<div class="card-footer" id="id-page-actions">
+			<h4>Actions</h4>
+			<?php if( !$record->is_deployed) :?>
+				<details>
+					<summary class="text-danger">Deployment</summary>
+					<ul>
+						<li><a href="#id-lab-result">Home Quarantine</a></li>
+						<li><a href="<?php echo _route('deployment:create' , $record->id, [
+							'type' => 'hospital'
+						])?>">Hospitalize</a></li>
+					</ul>
+				</details>
+			<?php else:?>
+				<p>Already Deployed : <?php echo anchor( _route('deployment:show' , $record->deployment->id) , 'view' , 'View Deployment')?> </p>
+			<?php endif?>
+
+			<?php echo anchor( _route('patient-record:complete' , $record->id) , 'check' , 'Complete Record' )?>
 		</div>
 	</div>
 <?php endbuild()?>

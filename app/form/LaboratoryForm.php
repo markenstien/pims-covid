@@ -223,7 +223,7 @@ class LaboratoryForm extends Form
             'options' => [
                 'label' => 'Severity',
                 'option_values' => [
-                	'miled' , 'moderate' , 'severe'
+                	'mild' , 'moderate' , 'severe'
                 ]
             ],
 

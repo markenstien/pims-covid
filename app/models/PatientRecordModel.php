@@ -33,8 +33,12 @@
 			'created_by',
 			'updated_by',
 			'created_at',
-			'updated_ons'
+			'updated_ons',
+			'doctors_approval',
+			'is_deployed',
+			'report_status'
 		];
+
 
 		public function create($record_data)
 		{
@@ -47,8 +51,31 @@
 		public function update($record_data , $id)
 		{
 			$_fillables = $this->getFillablesOnly($record_data);
-
 			return parent::update($_fillables , $id);
+		}
+
+		public function getAdvance($where_parameter)
+		{
+			$where = [];
+
+			if( !empty($where_parameter['start_date']) && !empty($where_parameter['end_date']) )
+			{
+				$where['date'] = [
+					'condition' => 'between',
+					'value' => [$where_parameter['start_date'] , $where_parameter['end_date']],
+					'concatinator' => 'AND'
+				];
+			}
+
+			$fillable_datas = $this->getFillablesOnly($where_parameter);
+
+			$where = array_merge($where , $fillable_datas);
+			$where = array_filter($where);
+			
+			return $this->getAll([
+				'where' => $where
+			]);
+
 		}
 
 
@@ -79,6 +106,23 @@
 			return strtoupper( random_number(3).'-'.random_letter(5) );
 		}
 
+		public function complete($id)
+		{
+			$res = parent::update([
+				'report_status' => 'completed'
+			] , $id );
+
+			$patient_record = parent::get($id);
+
+			if($res) {
+				$this->addMessage("Patient Record #{$patient_record->reference}");
+				return $res;
+			}else{
+				$this->addError("Patient Record Update failed");
+			}
+			return true;
+		}
+
 		public function getComplete($id)
 		{
 			$record = $this->getAll([
@@ -92,6 +136,7 @@
 
 			$lab_request_model = model('LaboratoryRequestModel');
 			$lab_model = model('LaboratoryModel');
+			$deploy_model = model('DeployModel');
 
 
 			$lab_requests = $lab_request_model->getAll([
@@ -110,9 +155,14 @@
 
 			$record->lab_results = $lab_results;
 			$record->lab_requests = $lab_requests;
+			$deployed = $deploy_model->getAll([
+				'where' => [
+					'record_id' => $record->id
+				]
+			])[0] ?? false;
+
+			$record->deployment = $deployed;
 
 			return $record;
-			//load lab_requests
-			//load lab_results
 		}
 	}

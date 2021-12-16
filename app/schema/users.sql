@@ -22,3 +22,5 @@ create table users(
 
 alter table users 
 	add column age char(3) after birthdate;
+
+

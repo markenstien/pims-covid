@@ -90,7 +90,7 @@
 					return redirect(_route('patient-record:create' , null , ['user_id' => $user_id]));
 				}
 
-				return redirect( _route('user:show' , $user_id) );
+				return redirect( _route('user:show' , null, ['user_id' => $user_id]) );
 			}
 
 			if(! isEqual(whoIs('user_type'), 'admin') ){

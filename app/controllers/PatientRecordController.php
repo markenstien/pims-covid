@@ -24,7 +24,8 @@
 		{
 			$patient_records = $this->model->getAll();
 
-
+			$request_params = request()->inputs();
+			
 			if( isEqual($this->data['whoIs']->user_type , 'patient') )
 			{
 				$patient_records = $this->model->getAll([
@@ -32,9 +33,21 @@
 						'user_id' => $this->data['whoIs']->id
 					]
 				]);
-			}else
+			}elseif( isset($request_params['filter']) )
+			{	
+
+				$patient_records = $this->model->getAdvance($request_params);
+			} 
+			else
 			{
-				$patient_records = $this->model->getAll();
+				$patient_records = $this->model->getAll([
+					'where' => [
+						'report_status' => [
+							'condition' => 'in',
+							'value'  => ['pending' , 'on-going']
+						]
+					]
+				]);
 			}
 
 			$this->data['patient_records'] = $patient_records;
@@ -140,5 +153,19 @@
 
 				return redirect( _route('patient-record:show' , $post['id']));
 			}
+		}
+
+		public function complete($id)
+		{
+			$res = $this->model->complete($id);
+
+			if($res) {
+				Flash::set( $this->model->getMessageString());
+				return redirect(_route('patient-record:index'));
+			}else{
+				Flash::set( $this->model->getErrorString() , 'danger');
+			}
+
+			return request()->return();
 		}
 	}

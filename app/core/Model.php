@@ -56,7 +56,7 @@
 				$values,
 				"id = '{$id}'"
 			];
-
+			
 			return $this->dbHelper->update(...$data);
 		}
 

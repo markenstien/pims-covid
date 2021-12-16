@@ -33,11 +33,12 @@
 			'ova',
 			'larva',
 			'adult_forms',
+			'severity',
+			'classify_doc_id',
 
 			'allergies',
 			'meds',
 			'remarks',
-			'severerity',
 			'quarantine',
 			'pathologist',
 			'medical_technologist',
@@ -54,6 +55,28 @@
 
 
 
+		public function classify($laboratory_data , $id = null)
+		{
+			$save_action = $this->save($laboratory_data , $id);
+
+			//update patient record
+			if( $save_action )
+			{
+				$lab_result = parent::get($id);
+
+				//load patient record model
+				$this->patient_record = model('PatientRecordModel');
+
+				$res = $this->patient_record->update([
+					'doctors_approval' => whoIs('id')
+				] , $lab_result->record_id );
+
+				$this->record_id = $lab_result->record_id;
+			}
+
+			return $save_action;
+		}
+
 		public function save($laboratory_data , $id = null)
 		{
 			$_fillables = $this->getFillablesOnly($laboratory_data);
@@ -63,14 +86,17 @@
 			
 			$patient_record = $this->patient_record->get($_fillables['record_id']);
 
-			$severity = $this->labResultGetRemarks(...[
-				$patient_record->respirator_rate_num,
-				$_fillables['pneumonia'],
-				$patient_record->oxygen_level_num,
-				$patient_record->is_fever
-			]);
+			if( !isset($_fillables['severity']) )
+			{
+				$severity = $this->labResultGetRemarks(...[
+					$patient_record->respirator_rate_num,
+					$_fillables['pneumonia'],
+					$patient_record->oxygen_level_num,
+					$patient_record->is_fever
+				]);
 
-			$_fillables['severity'] = $severity;
+				$_fillables['severity'] = $severity;
+			}
 
 
 			if( !is_null($id))
@@ -82,6 +108,7 @@
 				return parent::store($_fillables);
 			}
 		}
+
 		public function createReference()
 		{
 			return strtoupper(random_number(3).'-'.random_letter(5));
@@ -97,9 +124,57 @@
 				'order' => ' lab.id desc '
 			]);
 		}
+
+		public function getAdvance( $params = [])
+		{
+			$where_parameter = $params['where'];
+
+			$where = [];
+
+			if(!empty($where_parameter['start_date']) && !empty($where_parameter['end_date'])) {
+
+				$where['date_reported'] = [
+					'condition' => 'between',
+					'value'     => [$where_parameter['start_date'] , $where_parameter['end_date']],
+					'concatinator' => 'AND'
+				];
+			}
+
+
+			if( !empty($where_parameter['category']) )
+			{
+				if( isEqual($where_parameter['category'] , 'Approved'))
+				{
+					$where['lab.classify_doc_id'] = [
+						'condition' => 'not equal',
+						'value'     => '0',
+						'concatinator' => 'AND'
+					];
+				}else
+				{
+					$where['lab.classify_doc_id'] = [
+						'condition' => 'equal',
+						'value'     => '0',
+						'concatinator' => 'AND'
+					];
+				}
+				
+			}
+
+			$_fillables = $this->getFillablesOnly($where_parameter);
+
+			$where = array_merge($where , $_fillables);
+			$where = array_filter($where);
+
+
+			return $this->getAll([
+				'where' => $where,
+				'order' => $params['order'] ?? null
+			]);
+		}
+
 		public function getAll( $params = [])
 		{
-
 			$where = null;
 			$order = null;
 

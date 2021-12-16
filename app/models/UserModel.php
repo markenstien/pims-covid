@@ -57,7 +57,7 @@
 				$fillable_datas['user_code'] = $this->generateCode($user_data['user_type']);
 				$user_id = parent::store($fillable_datas);
 			}
-
+			
 			return $user_id;
 		}
 
@@ -169,14 +169,26 @@
 		}
 
 
-		public function getAll($condition = null )
+		public function getAll( $params = [] )
 		{
 			$where = null;
+			$order = " ORDER BY first_name asc ";
 
-			if(!is_null($condition) ){
-				$where = $this->getFillablesOnly($condition);
-			}
-			return parent::getAssoc('first_name' , $where);
+			if( isset($params['order']) )
+				$order = " ORDER BY {$params['order']}";
+
+			if( isset($params['where']) )
+				$where = " WHERE ".$this->conditionConvert($params['where']);
+
+			$this->db->query(
+				"SELECT * FROM {$this->table}
+					{$where} {$order}"
+			);
+
+
+			return $this->db->resultSet();
+
+			return parent::getAssoc('first_name' , $condition);
 		}
 
 		public function generateCode($user_type)

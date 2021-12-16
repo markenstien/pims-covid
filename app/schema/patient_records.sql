@@ -33,3 +33,8 @@ alter table patient_records
 
 
 update patient_records set reference = '123123';
+
+alter table patient_records
+	add column doctors_approval int(10),
+	add column is_deployed boolean default false,
+	report_status enum('completed','on-going','invalid','pending') default 'pending';

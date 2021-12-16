@@ -22,26 +22,66 @@
 
 		public function index()
 		{
-			$this->data['laboratory_results'] = $this->model->getAll(['order' => 'lab.id desc']);
 
+			$doctors = $this->user->getAll([
+				'where' => [
+					'user_type' => [
+						'condition' => 'in',
+						'value'     => ['medical personel' , 'doctor' , 'admin']
+					]
+				],
+				'order' => 'first_name desc'
+			]);
+
+			$request_params = request()->inputs();
+
+			if( isset($request_params['filter']) )
+			{
+				$this->data['laboratory_results'] = $this->model->getAdvance([
+					'where' => $request_params,
+					'order' => 'id desc'
+				]);
+			}else
+			{
+				$this->data['laboratory_results'] = $this->model->getAll(['order' => 'lab.id desc']);
+			}
+
+			$this->data['doctors'] = arr_layout_keypair($doctors , ['id' , 'first_name@last_name']);
 			return $this->view('laboratory/index' , $this->data);
 		}
 
 		public function classify($id)
 		{
+
+			if( isSubmitted() )
+			{
+				$post = request()->posts();
+
+				$res = $this->model->classify($post , $post['id']);
+
+				if($res) {
+					Flash::set( " Laboratory Result Updated!");
+					return redirect( _route('lab:show' , $post['id']) );
+				}
+			}
+
 			$this->data['page_title'] = " Classify Patient ";
 
 			$lab_result = $this->model->get($id);
 
 			$this->data['record'] = $this->patient_record->getComplete($lab_result->record_id);
-			$this->data['lab_form']->init(['url' => _route('lab:update' , $id)]);
+			$this->data['lab_form']->init(['url' => _route('lab:classify' , $id)]);
 			$this->data['lab_form']->addId($id);
+			$this->data['lab_form']->addRecordId($this->data['record']->id);
 			$this->data['lab_form']->setValueObject($lab_result);
 
 			return $this->view('laboratory/classify' , $this->data);
 		}
 
 
+		/*
+		*doctor classify
+		*/
 		public function update()
 		{
 			if( isSubmitted() )
@@ -56,6 +96,7 @@
 				}
 			}
 		}
+
 
 		public function create()
 		{

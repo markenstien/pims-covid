@@ -422,7 +422,7 @@
 				'name' => $name ?? 'submit',
 				'value' => $value ?? 'save',
 				'attributes' => $attributes ?? [],
-				'class' => 'btn btn-primary'
+				'class' => 'btn btn-primary form-verify'
 			]);
 		}
 	} 

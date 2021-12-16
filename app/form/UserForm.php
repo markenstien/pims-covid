@@ -262,7 +262,7 @@
 			$this->add([
 				'type' => 'submit',
 				'name' => 'submit',
-				'class' => 'btn btn-primary',
+				'class' => 'btn btn-primary form-verify',
 				'attributes' => [
 					'id' => 'id_submit'
 				],

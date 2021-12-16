@@ -192,22 +192,31 @@
 		</div>
 
 		<div class="card-footer">
-			<a href="<?php echo $public_link.'&prepare_print=true'?>">Prepare For Printing</a> 
+			<a href="<?php echo $public_link.'&prepare_print=true'?>">Prepare For Printing</a> |
 
 			<?php if( !isEqual(whoIs('user_type') , 'patient' && whoIs()) ) : ?>
-				| <?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?>
+				<?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?> |
 			<?php endif?>
 
-			<?php if( !isEqual(whoIs('user_type') , 'patient') ) : ?>
-				| <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> 
+			<?php if( !isEqual(whoIs('user_type') , ['patient' , 'doctor' , 'medical personel']) ) : ?>
+				<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> |
 			<?php endif?>
+
+			<?php echo anchor( _route('patient-record:show' , $lab_result->record_id)  , 'view' , 'Show Report ')?>
+
 			<hr>
-			<div>
-				<?php if( isEqual(whoIs('user_type') , ['doctor' , 'admin']) ) :?>
-					<a href="<?php echo _route('lab:classify' , $lab_result->id)?>"
-						class="btn btn-primary btn-lg">Classify</a>
-				<?php endif?>
-			</div>
+			<?php if(!$lab_result->classify_doc_id) :?>
+				<div>
+					<?php if( isEqual(whoIs('user_type') , ['doctor' , 'admin']) ) :?>
+						<a href="<?php echo _route('lab:classify' , $lab_result->id)?>"
+							class="btn btn-primary btn-lg">Classify</a>
+					<?php endif?>
+				</div>
+			<?php else:?>
+				<p>Lab Result Already Everified by: <?php echo $lab_result->doctor_name?>
+					<?php echo anchor( _route('user:show' , $lab_result->classify_doc_id) ,'view' , 'View Doctor' )?>
+				</p>
+			<?php endif?>
 		</div>
 
 	</div>

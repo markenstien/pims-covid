@@ -11,7 +11,10 @@
 			<?php
 				__([
 					$lab_form->get('id'),
+					$lab_form->get('record_id')
 				]);
+				
+				Form::hidden('classify_doc_id' , whoIs('id'));
 
 				if( isset($_GET['request_id']))
 					echo Form::hidden('request_id' , $_GET['request_id']);

@@ -39,3 +39,8 @@ alter table laboratory_results
 
 alter table laboratory_results
 	add column allergies varchar(100) after adult_forms;
+
+
+
+alter table laboratory_results
+	add column classify_doc_id int(10) not null;

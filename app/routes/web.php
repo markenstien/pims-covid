@@ -42,6 +42,7 @@
 		'delete' => $controller.'/destroy',
 		'show'   => $controller.'/show',
 		'update' => $controller.'/update',
+		'complete' => $controller.'/complete',
 		'phyical-examination' => $controller. '/phyicalExamination'
 	];
 
@@ -119,6 +120,18 @@
 	$controller = '/AddressController';
 
 	$routes['address'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'download' => $controller.'/download',
+		'show'   => $controller.'/show'
+	];
+
+
+	$controller = '/DeploymentController';
+
+	$routes['deployment'] = [
 		'index' => $controller.'/index',
 		'edit' => $controller.'/edit',
 		'create' => $controller.'/create',

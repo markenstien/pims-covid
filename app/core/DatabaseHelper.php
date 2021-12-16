@@ -56,7 +56,7 @@
 
 			foreach($values as $key => $val) {
 
-				$cleansedValues[] = str_escape($val , FILTER_SANITIZE_STRING);
+				$cleansedValues[] = str_escape($val);
 
 			}
 
@@ -82,7 +82,7 @@
 			if($where != null) {
 				$sql .= " WHERE $where";
 			}
-
+			
 			$this->db->query($sql);
 
 			try{
