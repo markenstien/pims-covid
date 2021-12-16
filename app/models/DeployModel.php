@@ -100,7 +100,9 @@
 					ON hosp.id = deploy.hospital_id
 					LEFT JOIN users as user 
 					ON user.id = deploy.patient_id
-					{$where} {$order} "
+					{$where} {$order} 
+
+					GROUP BY deploy.id"
 			);
 
 			return $this->db->resultSet();
