@@ -293,6 +293,8 @@
 
 			$errors = [];
 
+			if( !is_array($params) )
+				return $params;
 			/*
 			*convert-where default concatinator is and
 			*add concat on param values to use it

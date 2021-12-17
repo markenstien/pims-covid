@@ -417,12 +417,19 @@
 
 		final public function customSubmit($value = null , $name = null, $attributes = null)
 		{
+			$class = 'btn btn-primary form-verify';
+
+			if(isset($attributes['class'])){
+				$class = $attributes['class'];
+				unset($attributes['class']);
+			}
+
 			$this->add([
 				'type' => 'submit',
 				'name' => $name ?? 'submit',
 				'value' => $value ?? 'save',
 				'attributes' => $attributes ?? [],
-				'class' => 'btn btn-primary form-verify'
+				'class' => $class
 			]);
 		}
 	} 

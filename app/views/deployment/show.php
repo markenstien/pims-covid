@@ -1,5 +1,5 @@
 <?php build('content') ?>
-	
+	<?php Flash::show()?>
 	<div class="card">
 		<div class="card-header">
 			<h4 class="card-title">Patient Deployment Record</h4>
@@ -16,14 +16,16 @@
 						<li>Gender: <?php echo $record->gender?></li>
 						<li>Age: <?php echo $record->age?></li>
 						<li>Birthdate: <?php echo $record->birthdate?></li>
-						<li><?php echo anchor(_route('user:show' , $record->user_id) ,  'view' , 'Show patient') ?></li>
+						<li class="mb-2"><?php echo anchor(_route('user:show' , $record->user_id) ,  'view' , 'Show patient') ?></li>
+
+						<li><?php echo anchor(_route('patient-record:show' , $record->id) , 'view' , 'Report Record')?></li>
 					</ul>
 				</div>
 
 				<div class="col-md-6">
 					<h5>Deployment</h5>
 					<?php if( !$deployment->hospital_id ) :?>
-						<h5>Hostial Name : Children hospital</h5>
+						<p>Home Quarantine</p>
 					<?php else:?>
 						<ul>
 							<li>Date Released : <?php echo $deployment->deployment_date?></li>
@@ -34,8 +36,17 @@
 						</ul>
 					<?php endif?>
 
-					<h5>Deployed By</h5>
+					<h5 class="mt-2">Deployed By</h5>
 					<p><?php echo $deployment->deployed_by_user->last_name.','.$deployment->deployed_by_user->first_name .' '.$deployment->deployed_by_user->middle_name?></p>
+
+					<?php if($deployment->is_released) :?>
+						<p class="mt-2">
+							Release Status : <strong>Released</strong> <br>
+							<?php echo $deployment->release_remarks?>
+						</p>
+					<?php else:?>
+
+					<?php endif?>
 				</div>
 			</div>
 
@@ -65,6 +76,31 @@
 					<?php foreach($record->lab_results as $row) :?>
 						Lab Result:  <?php echo anchor(_route('lab:show' , $row->id) , 'view' , "#{$row->reference}")?>
 					<?php endforeach?>
+
+					<?php if(!$deployment->is_released) :?>
+						<hr>
+						<h5>Release</h5>
+						<?php
+							Form::open([
+								'method' => 'post',
+								'action' => _route('deployment:release')
+							]);
+
+							Form::hidden('id' , $deployment->id);
+						?>
+
+						<div class="form-group">
+							<?php
+								echo $form->getRow('release_remarks');
+							?>
+						</div>
+
+						<div class="form-group">
+							<?php echo $form->get('submit')?>
+						</div>
+
+						<?php Form::close()?>
+					<?php endif?>
 				</div>
 			</div>
 		</div>

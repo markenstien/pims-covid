@@ -2,8 +2,7 @@
 	
 	<div class="card">
 		<div class="card-header">
-			<h4 class="card-title">Hospital Patient Deployment</h4>
-			<label>For Severe and special Covid Cases</label>
+			<h4 class="card-title"><?php echo $page_title?></h4>
 		</div>
 
 		<div class="card-body">

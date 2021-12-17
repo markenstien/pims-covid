@@ -43,7 +43,7 @@
 				'url' => _route('auth:login')
 			]);
 
-			$form->customSubmit('Login');
+			$form->customSubmit('Login' , 'submit' , ['class' => 'btn btn-primary btn-sm']);
 
 			$data = [
 				'title' => 'Login Page',

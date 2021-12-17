@@ -229,7 +229,9 @@
 				<details>
 					<summary class="text-danger">Deployment</summary>
 					<ul>
-						<li><a href="#id-lab-result">Home Quarantine</a></li>
+						<li><a href="<?php echo _route('deployment:create' , $record->id, [
+							'type' => 'home-quarantine'
+						])?>">Home Quarantine</a></li>
 						<li><a href="<?php echo _route('deployment:create' , $record->id, [
 							'type' => 'hospital'
 						])?>">Hospitalize</a></li>
@@ -238,8 +240,8 @@
 			<?php else:?>
 				<p>Already Deployed : <?php echo anchor( _route('deployment:show' , $record->deployment->id) , 'view' , 'View Deployment')?> </p>
 			<?php endif?>
-
-			<?php echo anchor( _route('patient-record:complete' , $record->id) , 'check' , 'Complete Record' )?>
+			<br>
+			<a href="<?php echo _route('patient-record:complete' , $record->id) ?>" class="btn btn-primary btn-sm form-verify"> Complete Record </a>
 		</div>
 	</div>
 <?php endbuild()?>

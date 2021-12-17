@@ -19,6 +19,14 @@
 			'record_status'
 		];
 
+		public function release($release_data , $id)
+		{
+			$release_data = $this->getFillablesOnly($release_data);
+			$release_data['is_released'] = true;
+
+			return parent::update( $release_data , $id);
+		}
+
 		public function create($deployment_data)
 		{
 			$record_model = model('PatientRecordModel');
@@ -107,8 +115,11 @@
 			return $this->db->resultSet();
 		}
 
-		public function getByHospital()
+		public function getByHospital($id)
 		{
-
+			return $this->getAll([
+				'where' => 'hosp.id = '.$id,
+				'order' => "is_released asc"
+			]);
 		}
 	}

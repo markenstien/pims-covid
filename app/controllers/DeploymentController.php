@@ -46,6 +46,12 @@
 			$this->data['page_title'] = 'Home Quarantine';
 			$this->data['type'] = $type;
 			$this->data['form']->addRecordId($record_id);
+			$this->data['form']->remove('release_remarks');
+
+			if( isEqual($type , 'home-quarantine') ){
+				$this->data['form']->remove('hospital_id');
+				$this->data['page_title'] = 'Home Quarantine';
+			}
 
 			if( isEqual($type, 'hospital') )
 				$this->data['page_title'] = 'Hospital Deployment';
@@ -64,5 +70,20 @@
 			$this->data['patient_record_form'] = new PatientForm();
 
 			return $this->view('deployment/show' , $this->data);
+		}
+
+		public function release()
+		{
+			if( isSubmitted() )
+			{
+				$post = request()->posts();
+
+				$res = $this->model->release($post , $post['id']);
+
+				if($res) {
+					Flash::set("Patient Deployment Released");
+					return request()->return();
+				}
+			}
 		}
 	}

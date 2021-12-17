@@ -137,7 +137,8 @@
 		'create' => $controller.'/create',
 		'delete' => $controller.'/destroy',
 		'download' => $controller.'/download',
-		'show'   => $controller.'/show'
+		'show'   => $controller.'/show',
+		'release' => $controller.'/release'
 	];
 
 	return $routes;

@@ -11,6 +11,7 @@
 
 			$this->data['form'] = new HospitalForm();
 			$this->model = model('HospitalModel');
+			$this->deployment = model('DeployModel');
 		}
 
 
@@ -50,8 +51,11 @@
 		{
 			$hospital = $this->model->get($id);
 
+			$deployments = $this->deployment->getByHospital($id);
+
 			$this->data['hospital'] = $hospital;
 			$this->data['page_title'] = $hospital->name;
+			$this->data['deployments'] = $deployments;
 
 			return $this->view('hospital/show' , $this->data);
 		}
