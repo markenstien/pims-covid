@@ -1,5 +1,5 @@
-// const URL = 'https://vidco-pims.xyz';
-const URL = 'http://th.covidpims';
+const URL = 'https://vidco-pims.xyz';
+// const URL = 'http://th.covidpims';
 
 const DS  = '/';
 
