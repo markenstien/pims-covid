@@ -14,6 +14,6 @@
 <?php endbuild() ?>
 
 <?php build('scripts') ?>
-	<script type="text/javascript" src="<?php echo _path_public('js/classification/item.js')?>"></script>
+	<script src="<?php echo _path_public('js/classification/item.js')?>"></script>
 <?php endbuild()?>
 <?php loadTo()?>
