@@ -284,6 +284,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="<?php echo _path_tmp('assets/vendors/core/core.js')?>"></script>
     <script src="<?php echo _path_public('js/core.js')?>"></script>
     <script src="<?php echo _path_public('js/global.js')?>"></script>
+    <?php produce('scripts')?>
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
@@ -295,8 +296,8 @@ License: For each use you must have a valid license purchased only from above li
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
-      <script src="<?php echo _path_tmp('assets/vendors/datatables.net/jquery.dataTables.js')?>"></script>
-      <script src="<?php echo _path_tmp('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')?>"></script>
+    <script src="<?php echo _path_tmp('assets/vendors/datatables.net/jquery.dataTables.js')?>"></script>
+    <script src="<?php echo _path_tmp('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')?>"></script>
 
     <script type="text/javascript" defer>
         $(function() {
@@ -327,7 +328,6 @@ License: For each use you must have a valid license purchased only from above li
 
         });
     </script>
-    <?php produce('scripts')?>
     <!-- Custom js for this page -->
   <!-- End custom js for this page -->
 </body>

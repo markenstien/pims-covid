@@ -2,7 +2,7 @@
 
     function _path_public($args)
     {
-        return 	PATH_PUBLIC.DS.$args;
+        return PATH_PUBLIC.DS.$args;
     }
 
 
