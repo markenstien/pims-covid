@@ -3,7 +3,7 @@
 
 	load(['FormBuilder'], CORE);
 
-	abstract class Form
+	class Form
 	{
 
 		protected $_type = 'crud';
@@ -66,6 +66,14 @@
 
 			$this->_items = $items;
 		}
+
+		public function addAndCall( $params = [] )
+		{
+			$this->add( $params );
+
+			return $this->get($params['name']);
+		}
+
 
 		public function add($params = [])
 		{
@@ -431,5 +439,27 @@
 				'attributes' => $attributes ?? [],
 				'class' => $class
 			]);
+		}
+
+		final public function formConvertType( $type )
+		{
+			switch( strtolower($type) )
+			{
+				case 'dropdown':
+					return 'select';
+				break;
+
+				case 'short answer':
+					return 'text';
+				break;
+
+				case 'long answer':
+					return 'textarea';
+				break;
+
+				default:
+					return $type;
+				break;
+			}
 		}
 	} 

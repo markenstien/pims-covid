@@ -231,6 +231,18 @@ License: For each use you must have a valid license purchased only from above li
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('queue:index')?>">Queueing</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('hospital:index')?>">Hospitals</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('deployment:index')?>">Deployed Patients</a></li>
+
+                                        <li class="nav-item">
+                                            <p class="category-heading">File Maintenance</p>
+                                        </li>
+
+                                        <li class="nav-item"><a class="nav-link" 
+                                            href="<?php echo _route('criteria:index')?>">Classifications</a>
+                                        </li>
+
+                                        <li class="nav-item"><a class="nav-link" 
+                                            href="<?php echo _route('form:index')?>">Form Builder</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

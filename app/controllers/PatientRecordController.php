@@ -16,6 +16,7 @@
 
 			$this->model = model('PatientRecordModel');
 			$this->user_model = model('UserModel');
+			$this->classification_model = model('ClassificationModel');
 
 			$this->data['whoIs'] = whoIs();
 		}
@@ -95,6 +96,13 @@
 			}
 
 			return $this->view('patient_record/create' , $this->data);
+		}
+
+
+		public function createClassification($patient_record_id)
+		{
+			// $classification 
+
 		}
 
 		/*
