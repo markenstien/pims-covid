@@ -17,6 +17,7 @@
 			<div class="table-responsive">
 				<table class="table table-bordered dataTable">
 					<thead>
+						<th>#</th>
 						<th>Reference</th>
 						<th>Name</th>
 						<th>Date</th>
@@ -27,8 +28,9 @@
 					</thead>
 
 					<tbody>
-						<?php foreach($patient_records as $row) : ?>
+						<?php foreach($patient_records as $key => $row) : ?>
 							<tr>
+								<td><?php echo ++$key?></td>
 								<td><?php echo $row->reference?></td>
 								<td><?php echo $row->first_name , ' '. $row->last_name?></td>
 								<td><?php echo $row->date?></td>

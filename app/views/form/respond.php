@@ -1,7 +1,6 @@
 <?php build('content') ?>
 		
 	<div class="container">
-		
 		<div class="card">
 			<div class="card-header">
 				<h2><?php echo $form_data->name?></h2>

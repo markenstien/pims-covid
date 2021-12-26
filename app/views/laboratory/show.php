@@ -110,18 +110,20 @@
 				<div class="col-md-6">
 					<div class="section">
 						<h5>Urine</h5>
-						<table class="table table-bordered table-sm">
-							<tr>
-								<td><?php echo $lab_form->label('color')?></td>
-								<td><?php echo $lab_form->label('clarity')?></td>
-								<td><?php echo $lab_form->label('ketones')?></td>
-							</tr>
-							<tr>
-								<td><?php echo $lab_result->color?></td>
-								<td><?php echo $lab_result->clarity?></td>
-								<td><?php echo $lab_result->ketones?></td>
-							</tr>
-						</table>
+						<div class="table-responsive">
+							<table class="table table-bordered table-sm">
+								<tr>
+									<td><?php echo $lab_form->label('color')?></td>
+									<td><?php echo $lab_form->label('clarity')?></td>
+									<td><?php echo $lab_form->label('ketones')?></td>
+								</tr>
+								<tr>
+									<td><?php echo $lab_result->color?></td>
+									<td><?php echo $lab_result->clarity?></td>
+									<td><?php echo $lab_result->ketones?></td>
+								</tr>
+							</table>
+						</div>
 					</div>
 
 					<div class="section">

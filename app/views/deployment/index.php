@@ -21,7 +21,7 @@
 								<td><?php echo $row->last_name.', '.$row->first_name.$row->middle_name?></td>
 								<td><?php echo $row->name?></td>
 								<td><?php echo $row->deployment_date?></td>
-								<td><?php echo $row->record_status?></td>
+								<td><?php echo $row->release_remarks?></td>
 								<td>
 									<?php echo btnView(_route('deployment:show' , $row->id) )?>
 								</td>

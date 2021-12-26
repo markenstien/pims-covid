@@ -18,7 +18,20 @@
 		{
 			$_fillables = $this->getFillablesOnly($laboratory_request_data);
 			$_fillables['reference'] = $this->token->createMix('LABRQ-');
-			return parent::store($_fillables);
+
+
+			$lab_req_id = parent::store($_fillables);
+
+			$attr = [
+				'href' => _route('lab-request:show' , $lab_req_id),
+				'heading' => 'Laboratory Result Request'
+			];
+
+			_notify("your lab result is on its way." , [$_fillables['patient_id']] , $attr);
+			_notify_operations("staff ".whoIs('first_name')." is requesting a lab-result for patient " ._user($_fillables['patient_id'])->first_name);
+			
+
+			return $lab_req_id;
 		}
 
 		public function getAll( $params = [])

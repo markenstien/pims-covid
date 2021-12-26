@@ -61,73 +61,6 @@
 						</tr>
 					</table>
 					<?php divider()?>
-					<!--Physical Examination-->
-					<h4>Physical Examination</h4>
-					<a href="<?php echo _route('patient-record:phyical-examination' , $record->id , ['pe_id'=>$record->id])?>">Edit</a>
-					<table class="table table-bordered table-sm">
-						<tr>
-							<td>Oxygen Level </td>
-							<td><?php echo $record->oxygen_level_num?>%</td>
-						</tr>
-						<tr>
-							<td>Blood Pressure: </td>
-							<td><?php echo $record->blood_presure_num?></td>
-						</tr>
-						<tr>
-							<td>Temperature </td>
-							<td><?php echo $record->temperature_num?></td>
-						</tr>
-						<tr>
-							<td>Pulse Rate: </td>
-							<td><?php echo $record->pulse_rate_num?></td>
-						</tr>
-						<tr>
-							<td>Respiratory Rate: </td>
-							<td><?php echo $record->respirator_rate_num?></td>
-						</tr>
-						<tr>
-							<td>Height</td>
-							<td><?php echo $record->height_num?>CM</td>
-						</tr>
-						<tr>
-							<td>Weight</td>
-							<td><?php echo $record->weight_num?>Kg</td>
-						</tr>
-					</table>
-					<?php divider()?>
-				<!--Health Decleration-->
-					<h4>Health Decleration</h4>
-					<a href="<?php echo _route('patient-record:create' , $record->id , ['pe_id'=>$record->id])?>">Edit</a>
-					<table class="table table-bordered table-sm">
-						<tr>
-							<td><?php echo $patient_record_form->label('is_fever')?></td>
-							<td><?php echo bool_convert($record->is_fever)?></td>
-						</tr>
-						<tr>
-							<td><?php echo $patient_record_form->label('is_body_pains')?></td>
-							<td><?php echo bool_convert($record->is_body_pains)?></td>
-						</tr>
-						<tr>
-							<td><?php echo $patient_record_form->label('is_sore_throat')?></td>
-							<td><?php echo bool_convert($record->is_sore_throat)?></td>
-						</tr>
-						<tr>
-							<td><?php echo $patient_record_form->label('is_headache')?></td>
-							<td><?php echo bool_convert($record->is_headache)?></td>
-						</tr>
-						<tr>
-							<td><?php echo $patient_record_form->label('is_diarrhea')?></td>
-							<td><?php echo bool_convert($record->is_diarrhea)?></td>
-						</tr>
-						<tr>
-							<td><?php echo $patient_record_form->label('is_lost_of_taste_smell')?></td>
-							<td><?php echo bool_convert($record->is_lost_of_taste_smell)?></td>
-						</tr>
-						<tr>
-							<td><?php echo $patient_record_form->label('is_dificulty_breathing')?></td>
-							<td><?php echo bool_convert($record->is_dificulty_breathing)?></td>
-						</tr>
-					</table>
 				</div>
 
 				<div class="col-md-6">
@@ -148,6 +81,32 @@
 					</table>
 				</div>
 			</div>
+
+			<?php if( $record->forms ) :?>
+				<?php divider()?>
+				<div class="row">
+					<?php foreach( $record->forms as $key => $row) :?>
+						<div class="col-md-6">
+							<h4><?php echo $row->form_data->title?></h4>
+							<small><?php echo $row->form_data->description?></small>
+							<ul>
+								<?php foreach( $row->form_items as $item_key => $item_row) : ?>
+									<li><?php echo $item_row->name?> : <?php echo $item_row->answer?></li>
+								<?php endforeach?>
+							</ul>
+						</div>
+					<?php endforeach?>
+				</div>
+			<?php endif?>
+
+			<?php if( $record->classification) :?>
+				<h4>Patient Classification</h4>
+				<ul>
+					<?php foreach( $record->classification->items as $key => $item ) :?>
+						<li><?php echo $item->label?>  : <?php echo $item->value?></li>
+					<?php endforeach?>
+				</ul>
+			<?php endif?>
 		</div>
 
 		<div class="card-footer" id="id-lab-result">

@@ -1,7 +1,8 @@
 <?php 
 	
 	use Form\PatientForm;
-	load(['PatientForm'] , APPROOT.DS.'form');
+	use Form\FormBuilderForm;
+	load(['PatientForm' , 'FormBuilderForm'] , APPROOT.DS.'form');
 
 	class PatientRecordController extends Controller
 	{	
@@ -11,15 +12,100 @@
 			parent::__construct();
 
 			$this->data['page_title'] = 'Patient Record';
-
 			$this->data['patient_record_form'] = new PatientForm();
 
 			$this->model = model('PatientRecordModel');
 			$this->user_model = model('UserModel');
 			$this->classification_model = model('ClassificationModel');
 
+			$this->form_model = model('FormBuilderModel');
+			$this->form_builder_form = new FormBuilderForm();
+
 			$this->data['whoIs'] = whoIs();
 		}
+
+		/*
+		*start collecting forms base on order
+		*/
+		public function start()
+		{
+
+			$request = request()->inputs();
+
+			if( isSubmitted() )
+			{
+				$post = request()->posts();
+
+				$res = $this->model->processFormRespond( $post , $request['record_id']);
+			}
+
+			/*
+			*start collecting the forms
+			*/
+			
+
+			$forms = $this->model->startFormResponding();
+
+			if(empty($forms)) {
+				Flash::set("There are no forms set");
+				return request()->return();
+			}
+
+
+			$form_active_id = null;
+
+			if( is_null($form_active_id) )
+			{
+				foreach($forms as  $key => $form) {
+					if( $key >= sizeof($form))
+						$form_active_id = 0;
+
+					if( isEqual($form['status'] , 'pending') ) 
+						$form_active_id = $form['form_id'];
+				}
+			}
+
+			/*
+			*this means that form recording is finished
+			*/
+			if( is_null($form_active_id) )
+			{
+				return redirect( _route('classification-respond:respond' , null , [
+					'record_id' => $request['record_id']
+				]) );
+			}
+
+			/*
+			*get recent pending form
+			*/
+			$form = $this->form_model->getComplete( $form_active_id );
+
+			$this->data['page_title'] = $form->name;
+			$this->data['form_data'] = $form;
+
+			$route = _route('patient-record:start' , null , [
+					'user_id' => $request['user_id'],
+					'record_id' => $request['record_id']
+				]);
+
+			$form_builder_form = $this->form_builder_form;
+			$form_builder_form->init(['url' => $route]);
+
+			// dd($form_builder_form->getForm());
+
+			$this->data['form'] = $form_builder_form;
+
+			return $this->view('patient_record/start' , $this->data);
+		}
+
+		public function skipForm($form_id)
+		{
+			$this->model->skipFormResponding( $form_id );
+			$form_responding = $this->model->getFormResponding();
+
+			return redirect('PatientRecordController/start');
+		}
+
 
 		public function index()
 		{
@@ -47,7 +133,8 @@
 							'condition' => 'in',
 							'value'  => ['pending' , 'on-going']
 						]
-					]
+					],
+					'order' => 'record.id desc'
 				]);
 			}
 
@@ -69,8 +156,8 @@
 				$patient_record_id = $this->model->create($post);
 
 				if($patient_record_id) {
-
-					return redirect( _route('patient-record:phyical-examination' , $patient_record_id) );
+					$this->model->killFormResponding();
+					return redirect('PatientRecordController/start?user_id='.$post['user_id'].'&record_id='.$patient_record_id);
 				}
 			}
 
@@ -141,8 +228,8 @@
 		public function show( $id )
 		{
 			$record = $this->model->getComplete($id);
-
-			$this->data['record'] = $record;			
+			$this->data['record'] = $record;	
+			
 			return $this->view('patient_record/show' , $this->data);
 		}
 

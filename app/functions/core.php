@@ -112,31 +112,11 @@
         ]);
     }
 
-
-    function _notify($recipients = [] , $parameters = [])
+    function _user($id)
     {
+        $user_model = model('UserModel');
 
-        $db = Database::getInstance();
+        $user = $user_model->get($id);
 
-        $sql = "INSERT INTO notifications(title , sub_title , notification , href , 
-        recipient_id , type) VALUES";
-
-        $title = $parameters['title'] ?? '';
-        $sub_title = $parameters['sub_title'] ?? '';
-        $notification = str_escape($parameters['notification'] ?? '');
-        $href = str_escape($parameters['href'] ?? '');
-        $recipient_id = $parameters['recipient_id'] ?? '';
-        $type = $parameters['type'] ?? '';
-
-        foreach($recipients as $key => $userId)
-        {
-            if( $key > 0 )
-                $sql .= " , ";
-
-            $sql.= "('$title' , '$sub_title' , '$notification' , '$href' , '$userId' , '$type')";
-        }
-
-        $db->query($sql);
-        
-        return $db->execute();
+        return $user;
     }

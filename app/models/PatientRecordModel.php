@@ -43,9 +43,23 @@
 		public function create($record_data)
 		{
 			$record_data['reference'] = $this->createRefence();
-
+			$record_data['created_by'] = whoIs('id');
 			$_fillables = $this->getFillablesOnly($record_data);
-			return parent::store($_fillables);
+			
+
+			$user_id = $_fillables['user_id'];
+
+			$record_id = parent::store($_fillables);
+
+			$attr = [
+				'href' => _route('patient-record:show' , $record_id),
+				'heading' => 'Patient Record'
+			];
+
+			_notify("a medical record has been created for you." , [$user_id] , $attr);
+			_notify_operations("staff ".whoIs('first_name')." created record for " ._user($user_id)->first_name , $attr);
+
+			return $record_id;
 		}
 
 		public function update($record_data , $id)
@@ -163,6 +177,101 @@
 
 			$record->deployment = $deployed;
 
+			$record->forms = $this->getForm($record->id);
+			$record->classification = $this->getClassification($record->id);
+
 			return $record;
+		}
+
+		public function killFormResponding()
+		{
+			Session::remove('patient_record_forms');
+		}
+
+		public function startFormResponding()
+		{
+			$session_data = $this->getFormResponding();
+
+			if( $session_data )
+				return $session_data;
+
+			$form_model = model('FormBuilderModel');
+			$forms = $form_model->getAssoc('order_num');
+
+			$session_data = [];
+
+			if(!$forms) 
+				return false;
+
+			foreach($forms as $key => $row) 
+			{
+				array_push($session_data , [
+					'form_id' => $row->id,
+					'status'  => 'pending'
+				]);
+			}
+
+			Session::set('patient_record_forms' , $session_data);
+			
+			return $this->getFormResponding();
+		}
+
+		public function getFormResponding()
+		{
+			return Session::get('patient_record_forms') ?? false;
+		}
+
+		public function skipFormResponding($id)
+		{
+			$form_responding = $this->getFormResponding();
+
+			foreach($form_responding as $key => $res) 
+			{
+				if( isEqual($res['form_id'] , $id) )
+					$form_responding[$key]['status'] = 'completed';
+			}
+
+			Session::set('patient_record_forms' , $form_responding);
+		}
+
+		public function getForm($record_id)
+		{
+			$this->record_form_respondent_model = model('RecordFormRespondentsModel');
+
+			return $this->record_form_respondent_model->getByRecord( $record_id );
+		}
+
+		public function getClassification($record_id)
+		{
+			$this->classification_respondent_model = model('ClassificationRespondModel');
+
+			return $this->classification_respondent_model->getByRecord( $record_id );
+		}
+
+		/*
+		*items and form
+		*/
+		public function processFormRespond($respond_data , $record_id)
+		{
+			/*
+			*load form respond model
+			*/
+			$form_respondent_model = model('FormRespondentModel');
+
+			$record_form_respondent = model('RecordFormRespondentsModel');
+
+
+
+			$form_respondent_id = $form_respondent_model->create($respond_data);
+
+			$record_form_respondent_id = $record_form_respondent->create([
+				'record_id' => $record_id,
+				'user_id'   => $respond_data['user_id'],
+				'form_respondent_id' => $form_respondent_id
+			]);
+
+			$this->skipFormResponding($respond_data['form_id']);
+
+			return $record_form_respondent_id;
 		}
 	}

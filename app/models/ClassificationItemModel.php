@@ -143,6 +143,57 @@
 
 			return $number_array;
 		}
+
+		public function compare($id , $value)
+		{
+			$item = parent::get( $id );
+			
+			if(!$item)
+				return false;
+
+			$points = 0;
+
+			switch( strtolower($item->comparison) )
+			{
+				case 'between':
+					$value = floatval($value);
+
+					if( $value >= $item->start_number ){
+						$points += $item->points;
+					}
+				break;
+
+				case '=':
+				case 'in':
+				case 'not in':
+					$is_equal = isEqual( $value , $item->compare_to );
+					$is_not_in = isEqual($item->comparison, 'not in');
+					if( $is_equal && !$is_not_in ){
+						$points += $item->points;
+					}
+
+					if( !$is_equal && $is_not_in){
+						$points += $item->points;
+					}
+				break;
+
+				case '!=':
+					if( $item->compare_to != $value ){
+						$points += $item->points;
+					}
+				case '>=':
+					if( $item->compare_to >= $value ){
+						$points += $item->points;
+					}
+				case '<=':
+					if( $item->compare_to <= $value ){
+						$points += $item->points;
+					}
+				break;
+			}
+
+			return $points;
+		}
 	}
 
 

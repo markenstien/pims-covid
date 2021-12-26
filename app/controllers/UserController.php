@@ -25,7 +25,9 @@
 
 			if( !empty($params) )
 			{
-				$this->data['users'] = $this->model->getAll( $params );
+				$this->data['users'] = $this->model->getAll([
+					'where' => $params
+				]);
 			}else{
 				$this->data['users'] = $this->model->getAll( );
 			}

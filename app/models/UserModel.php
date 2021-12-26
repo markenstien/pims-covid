@@ -273,4 +273,70 @@
 			    : (date("Y") - $birth_date[2]));
 			return $age;
 		}
+
+		public function getPatients()
+		{
+			
+		}
+
+		public function getSummary()
+		{
+			$patients = $this->getAll([
+				'where' => [
+					'user_type' => 'patient'
+				]
+			]);
+
+			$summary = [
+				'gender' => [
+					'male' => 0,
+					'female' => 0,
+					'male_percentage' => 0,
+					'female_percentage' => 0
+				],
+
+				'age_group' => [
+					'20s' => '',
+					'30s' => '',
+					'40s' => '',
+					'others' => ''
+				]
+			];
+
+			foreach($patients as $key => $row) 
+			{
+				$age = intval($row->age);
+
+				if( isEqual($row->gender, 'male') ){
+					$summary['gender']['male']++;
+				}else{
+					$summary['gender']['female']++;
+				}
+
+				
+				if( $age >= 40)
+				{
+					$summary['age_group']['40s']++;
+				}else if($age >= 30){
+					$summary['age_group']['30s']++;
+				}else if($age >= 20)
+				{
+					$summary['age_group']['20s']++;
+				}else{
+					$summary['age_group']['others']++;
+				}
+			}
+
+			//gender summary
+
+			$gender_total = intval($summary['gender']['male']) + intval($summary['gender']['female']);
+
+			if( $summary['gender']['male'] )
+				$summary['gender']['male_percentage'] = ($summary['gender']['male'] / $gender_total) * 100;
+
+			if( $summary['gender']['female'] )
+				$summary['gender']['female_percentage'] = ($summary['gender']['female'] / $gender_total) * 100;
+
+			return $summary;
+		}
 	}

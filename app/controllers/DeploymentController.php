@@ -11,6 +11,7 @@
 		{
 			$this->data['form'] = new DeployForm();
 			$this->model = model('DeployModel');
+			$this->form_patient_respondent_model = model('RecordFormRespondentsModel');
 		}
 
 		public function index()
@@ -68,6 +69,8 @@
 			$this->data['record'] = $deployment->record;
 			$this->data['hospital'] = $deployment->hospital;
 			$this->data['patient_record_form'] = new PatientForm();
+
+			$this->data['form_patient_respondents'] = $this->form_patient_respondent_model->getByRecord( $deployment->record->id ); 
 
 			return $this->view('deployment/show' , $this->data);
 		}

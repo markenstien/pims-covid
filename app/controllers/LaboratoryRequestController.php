@@ -11,6 +11,7 @@
 			$this->data['lab_req_form'] = new LaboratoryRequestForm();
 
 			$this->model = model('LaboratoryRequestModel');
+			$this->lab_model = model('LaboratoryModel');
 
 			$this->patient_record = model('PatientRecordModel');
 		}
@@ -59,7 +60,9 @@
 		public function show( $id )
 		{
 			$this->data['lab_result'] = $this->model->get($id);
-
+			$this->data['lab'] = $this->lab_model->single([
+				'record_id' => $this->data['lab_result']->record_id
+			] , '*' , 'id desc');
 
 			return $this->view('laboratory_request/show' , $this->data);
 		}

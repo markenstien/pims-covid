@@ -59,6 +59,8 @@ License: For each use you must have a valid license purchased only from above li
                             COVID<span>PIMS</span>
                         </a>
                         <?php if($auth) :?>
+                            <?php $notifications = _notify_pull_items( $auth->id )?>
+
                             <form class="search-form">
                                 <div class="input-group">
                                     <div class="input-group-text">
@@ -68,66 +70,41 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                             </form>
                             <ul class="navbar-nav">
-                              <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i data-feather="mail"></i>
-                                </a>
-                                <div class="dropdown-menu p-0" aria-labelledby="messageDropdown">
-                                  <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                                    <p>9 New Messages</p>
-                                    <a href="javascript:;" class="text-muted">Clear all</a>
-                                  </div>
-                                  <div class="p-1">
-                                    <?php for($i = 0; $i < 3; $i++) :?>
-                                      <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                      <div class="me-3">
-                                        <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                              
+                                  <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i data-feather="bell"></i>
+                                      <?php if($notifications) :?>
+                                      <div class="indicator">
+                                        <div class="circle"></div>
                                       </div>
-                                      <div class="d-flex justify-content-between flex-grow-1">
-                                        <div class="me-4">
-                                          <p>TEST</p>
-                                          <p class="tx-12 text-muted">test-status</p>
-                                        </div>
-                                        <p class="tx-12 text-muted">2 min ago</p>
-                                      </div>    
+                                      <?php endif?>
                                     </a>
-                                    <?php endfor?>
-                                  </div>
-                                  <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                                    <a href="javascript:;">View all</a>
-                                  </div>
-                                </div>
-                              </li>
-                              <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i data-feather="bell"></i>
-                                  <div class="indicator">
-                                    <div class="circle"></div>
-                                  </div>
-                                </a>
-                                <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
-                                  <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                                    <p>(6) Notification</p>
-                                    <a href="javascript:;" class="text-muted">Clear all</a>
-                                  </div>
-                                  <div class="p-1">
-                                    <?php for($i = 0; $i < 3; $i++) :?>
-                                      <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                      <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                        <i class="icon-sm text-white" data-feather="gift"></i>
+                                    <?php if($notifications) :?>
+                                    <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
+                                      <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                                        <p>(<?php echo count($notifications) ?>) Notification</p>
+                                        <a href="javascript:;" class="text-muted">Clear all</a>
                                       </div>
-                                      <div class="flex-grow-1 me-2">
-                                        <p>New NOTIFICATION</p>
-                                        <p class="tx-12 text-muted">30 min ago</p>
-                                      </div>    
-                                    </a>
-                                    <?php endfor?>
-                                  </div>
-                                  <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                                    <a href="javascript:;">View all</a>
-                                  </div>
-                                </div>
-                              </li>
+                                      <div class="p-1">
+                                        <?php foreach($notifications as $key => $row) :?>
+                                          <a href="<?php echo $row->href ?>" class="dropdown-item d-flex align-items-center py-2">
+                                          <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-danger rounded-circle me-3">
+                                            <i class="icon-sm text-white" data-feather="alert-circle"></i>
+                                          </div>
+                                          <div class="flex-grow-1 me-2">
+                                            <p><?php echo $row->message?></p>
+                                            <p class="tx-12 text-muted">30 min ago</p>
+                                          </div>    
+                                        </a>
+                                        <?php endforeach?>
+                                      </div>
+                                      <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                                        <a href="javascript:;">View all</a>
+                                      </div>
+                                    </div>
+                                    <?php endif?>
+                                  </li>
                               <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="<?php echo _route('user:show' , $auth->id)?>" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile">

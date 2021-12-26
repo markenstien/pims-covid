@@ -59,6 +59,10 @@
 		{
 			$save_action = $this->save($laboratory_data , $id);
 
+			parent::update([
+				'severity' => $laboratory_data['severity']
+			] , $id);
+
 			//update patient record
 			if( $save_action )
 			{
@@ -72,6 +76,16 @@
 				] , $lab_result->record_id );
 
 				$this->record_id = $lab_result->record_id;
+
+				$attr = [
+					'href' => _route('lab:show' , $id),
+					'heading' => 'Doctors Classification'
+				];
+
+				_notify_include_email("Lab Result Is ready , your covid case is classified as ".$laboratory_data['severity'] , 
+					[$lab_result->patient_id] , _user($lab_result->patient_id)->email , $attr);
+				
+				_notify_operations("Lab Result Is ready ,  patient ".whoIs('first_name')." has been classified as ".$_fillables['severity']." by Dr." , whoIs('last_name') . ' and is needing medical assistance');
 			}
 
 			return $save_action;
@@ -80,7 +94,6 @@
 		public function save($laboratory_data , $id = null)
 		{
 			$_fillables = $this->getFillablesOnly($laboratory_data);
-
 			
 			$this->patient_record = model('PatientRecordModel');
 			
@@ -98,15 +111,27 @@
 				$_fillables['severity'] = $severity;
 			}
 
+			$classification_respond_remark_model = model('ClassificationRespondModel');
 
+			$_fillables['severity'] = $classification_respond_remark_model->getByRecord( $_fillables['record_id'])->remarks ?? 'mild';
 			if( !is_null($id))
 			{
-				return parent::update($_fillables , $id);
+				$res = parent::update($_fillables , $id);
 			}else
 			{
 				$_fillables['reference'] = $this->createReference();
-				return parent::store($_fillables);
+				$id = parent::store($_fillables);
 			}
+
+			$attr = [
+				'href' => _route('lab:show' , $id),
+				'heading' => 'Lab Result'
+			];
+
+			_notify_operations("Lab Result Is ready ,  patient ".whoIs('first_name')." has been classified as ".$_fillables['severity']." by our system");
+
+
+			return $id;
 		}
 
 		public function createReference()
@@ -283,5 +308,20 @@
 			_mail($recipients , $subject , $template);
 
 			return true;
+		}
+
+		public function getSummary()
+		{
+			$results = parent::getAssoc('id');
+
+			$summary = [];
+
+			foreach($results as $key => $row) {
+				if( !isset($summary[$row->severity]) )
+					$summary[$row->severity] = 0;
+				$summary[$row->severity]++;
+			}
+
+			return $summary;
 		}
 	}

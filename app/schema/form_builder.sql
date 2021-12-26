@@ -20,3 +20,7 @@ create table forms (
 	description text,
 	created_at timestamp default now()
 );
+
+
+alter table forms 
+	add column order_num int(10);

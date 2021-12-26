@@ -127,7 +127,8 @@
 				'class' => 'form-control',
 				'options' => [
 					'label' => 'Date'
-				]
+				],
+				'value' => date('Y-m-d')
 			]);
 		}
 		public function addTime()
@@ -139,7 +140,8 @@
 				'class' => 'form-control',
 				'options' => [
 					'label' => 'Time'
-				]
+				],
+				'value' => date('h:i:s')
 			]);
 		}
 

@@ -40,33 +40,7 @@
 			<tr><?php echo $patient_form->getCol('time')?></tr>
 		</table>
 	</div>
-
-	
-	<div class="mt-3">
-		<h4>Assesment</h4>
-		<div>
-			<p>Put a check mark on the appopriate column of your response(Lagyan ng tsek sa angkop na sagot)</p>
-		</div>
-		<?php divider()?>
-		<div class="row align-items-center ">
-			<div class="col-md-5">
-				<p>Are you Experiencing or did you have any of the following 
-						in the last 14 days (Ikaw ba ay may nararanasan o nakaranas ng mga sumusunod 
-						na sintomas sa nakaraang 14 na araw?)</p>
-			</div>
-
-			<div class="col-md-7">
-				<?php echo $patient_form->getCol('is_fever')?>
-				<?php echo $patient_form->getCol('is_body_pains')?>
-				<?php echo $patient_form->getCol('is_sore_throat')?>
-				<?php echo $patient_form->getCol('is_headache')?>
-				<?php echo $patient_form->getCol('is_diarrhea')?>
-				<?php echo $patient_form->getCol('is_lost_of_taste_smell')?>
-				<?php echo $patient_form->getCol('is_dificulty_breathing')?>
-			</div>
-		</div>
-		<div><?php echo $patient_form->get('submit')?></div>
-	</div>
+	<div class="mt-3"><?php echo $patient_form->get('submit')?></div>
 
 	<?php echo $patient_form->end()?>
 </div>

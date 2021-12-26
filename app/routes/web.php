@@ -43,7 +43,7 @@
 		'show'   => $controller.'/show',
 		'update' => $controller.'/update',
 		'complete' => $controller.'/complete',
-		'phyical-examination' => $controller. '/phyicalExamination'
+		'start' => $controller.'/start'
 	];
 
 	$controller = '/DashboardController';
@@ -194,6 +194,18 @@
 		'respond'   => '/FormController'.'/respond'
 	];
 
+
+	$controller = '/ClassificationRespondController';
+
+	$routes['classification-respond'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'show'   => $controller.'/show',
+		'add-item' => $controller.'/addItem',
+		'respond'  => $controller.'/respond'
+	];
 
 	return $routes;
 ?>

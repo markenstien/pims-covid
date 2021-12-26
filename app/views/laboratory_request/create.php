@@ -16,6 +16,7 @@
 							<small>(#<?php echo $record->user_code?>)</small> <?php echo $record->gender?> <?php echo $record->age?>
 						</div>
 						<div class="col-md-5">
+							<?php $lab_req_form->setValue('date_requested' , date('Y-m-d'))?>
 							<?php echo $lab_req_form->getCol('date_requested'); ?>
 						</div>
 					</div>

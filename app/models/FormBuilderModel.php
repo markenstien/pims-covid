@@ -54,8 +54,23 @@
 		{
 			$form_data['reference'] = $this->getReference();
 			$_fillables = $this->getFillablesOnly($form_data);
+			$_fillables['order_num'] = $this->createOrderNum();
 
 			return parent::store($_fillables);
+		}
+
+
+
+		public function createOrderNum()
+		{
+			$last = $this->last();
+			$order_number = 0;
+			if($last)
+				$order_number = $last->order_num;
+
+			++$order_number;
+
+			return $order_number;
 		}
 
 		public function update( $form_data , $id )

@@ -31,7 +31,7 @@
 
     define('SITE_NAME' , 'vidco-pims.xyz');
 
-    define('COMPANY_NAME' , 'Covid Triage PIMS');
+    define('COMPANY_NAME' , 'Covid Triage');
 
     define('KEY_WORDS' , 'BEST COVID APP');
 

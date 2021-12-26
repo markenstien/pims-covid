@@ -11,7 +11,12 @@
 		public function __construct()
 		{
 			parent::__construct();
+
 			$this->name = 'FORM_BUILDER';
+
+			$this->init([
+				'url' => _route('form:create')
+			]);
 
 			$this->addFormName();
 			$this->addFormDescription();
