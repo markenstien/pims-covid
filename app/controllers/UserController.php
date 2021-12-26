@@ -81,11 +81,14 @@
 
 				$user_id = $this->model->create($post , 'profile');
 
-				Flash::set('User Record Created');
+				
 
 				if(!$user_id){
 					Flash::set( $this->model->getErrorString() , 'danger');
+					return request()->return();
 				}
+
+				Flash::set('User Record Created');
 				if( isEqual($post['user_type'] , 'patient') )
 				{
 					Flash::set('Patient Record Created');
