@@ -83,8 +83,8 @@
 				];
 
 				_notify_include_email("Lab Result Is ready , your covid case is classified as ".$laboratory_data['severity'] , 
-					[$lab_result->patient_id] , _user($lab_result->patient_id)->email , $attr);
-				
+					[$lab_result->patient_id] , [_user($lab_result->patient_id)->email] , $attr);
+
 				_notify_operations("Lab Result Is ready ,  patient ".whoIs('first_name')." has been classified as ".$_fillables['severity']." by Dr." , whoIs('last_name') . ' and is needing medical assistance');
 			}
 
