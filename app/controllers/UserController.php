@@ -65,10 +65,25 @@
 			$this->data['user_form']->init([
 				'url' => _route('user:edit',$id)
 			]);
-
 			$this->data['user_form']->setValueObject($user);
 			$this->data['user_form']->addId($id);
+
+			$this->data['user_form']->remove('submit');
 			$this->data['user_form']->remove('password');
+			$this->data['user_form']->remove('address');
+
+			$this->address_form->remove('submit');
+
+			if( $user->address_object )
+			{
+				$this->address_form->setValueObject($user->address_object);
+				$this->address_form->add([
+					'name' => 'address_id',
+					'value' => $user->address_object->id,
+					'type' => 'hidden'
+				]);
+			}
+			
 			$this->data['address_form'] = $this->address_form;
 
 			if( !isEqual(whoIs('user_type') , 'admin') )
@@ -107,6 +122,7 @@
 				$this->data['user_form']->add(['name' => 'user_type' , 'type' => 'hidden' , 'value' => 'patient']);
 			}
 			$this->address_form->remove('submit');
+
 			$this->data['address_form'] = $this->address_form;
 
 			return $this->view('user/create' , $this->data);

@@ -24,6 +24,22 @@
 			'updated_at'
 		];
 
+
+		public function get($id)
+		{
+			$user = parent::get($id);
+			if(!$user)
+				return false;
+
+			$this->address = model('AddressModel');
+
+			$user_address = $this->address->getByModuleAndId('USER' , $user->id)[0] ?? false;
+
+			$user->address_object = $user_address;
+
+			return $user;
+		}
+
 		public function save($user_data , $id = null)
 		{
 			$user_id = $id;
@@ -110,6 +126,12 @@
 			if(!empty($profile) )
 				$this->uploadProfile($profile , $res);
 
+			$this->address = model('AddressModel');
+
+			$user_data['module_key'] = 'USER';
+			$user_data['module_id']  =  $res;
+			$this->address->create($user_data);
+
 			$this->addMessage("User {$user_data['first_name']} Created");
 			return $res;
 		}
@@ -152,6 +174,9 @@
 				$this->addError("Unable to update user");
 				return false;
 			}
+
+			$this->address = model('AddressModel');
+			$this->address->update($user_data , $user_data['address_id']);
 
 			$this->addMessage("User {$user_data['first_name']} has been updated!");
 

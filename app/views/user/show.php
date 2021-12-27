@@ -47,7 +47,10 @@
 					</div>
 					<div>
 						<label class="tx-11">Address</label>
-						<p><?php echo $user->address?></p>
+						<p><?php
+							$address = $user->address_object;
+							echo "{$address->block_house_number} {$address->street} {$address->city} {$address->barangay} {$address->zip}";
+						?></p>
 					</div>
 				</div>
 			</div>	

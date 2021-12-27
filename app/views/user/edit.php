@@ -2,13 +2,17 @@
 	
 	<div class="card">
 		<div class="card-header">
-			<h4 class="card-title">Edit</h4>
-			<a href="<?php echo _route('user:show' , $id)?>">Back</a>
+			<h4 class="card-title">Edit User</h4>
 		</div>
 
 		<div class="card-body">
 			<?php Flash::show()?>
-			<?php echo $user_form->getForm()?>
+			<?php echo $user_form->start()?>
+			<?php echo $address_form->get('address_id')?>
+			<?php echo $user_form->getFormItems()?>
+			<?php echo $address_form->getFormItems()?>
+				<input type="submit" name="" class="btn btn-primary btn-sm" value="Edit User">
+			<?php echo $user_form->end()?>
 		</div>
 	</div>
 <?php endbuild()?>
