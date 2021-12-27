@@ -155,6 +155,13 @@
 			return $this->view('form_builder/edit_item' , $this->data);
 		}
 
+		public function deleteItem($item_id)
+		{
+			$res = $this->model->deleteItem( $item_id );
+			Flash::set( $this->model->getMessageString() );
+			return request()->return();
+		}
+
 		public function destroy($id)
 		{
 

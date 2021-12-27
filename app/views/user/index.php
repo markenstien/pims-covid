@@ -4,7 +4,10 @@
 		<div class="card-header">
 			<h4 class="card-title">Users</h4>
 
-			<?php echo btnCreate( _route('user:create') )?>
+			<?php
+				if( isEqual(whoIs('user_type') , ['admin' , 'doctor' , 'medical personel']) )
+					echo btnCreate( _route('user:create') )
+			?>
 		</div>
 
 		<div class="card-body">
@@ -42,14 +45,18 @@
 												'url' => _route('user:edit' , $row->id),
 												'text' => 'Edit',
 												'icon' => 'edit'
-											],
+											]
+										];
+
+										if( isEqual($row->user_type , ['patient']) ) {
+
+											array_push($anchor_items , 
 											[
 												'url' => _route('patient-record:create' , null , ['user_id' => $row->id]),
 												'text' => 'add record',
 												'icon' => 'plus'
-											]
-										
-										];
+											]);
+										}
 									echo anchorList($anchor_items)?>
 								</td>
 							</tr>

@@ -13,7 +13,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+  <meta name="description" content="Covid PIMS">
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
@@ -164,7 +164,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <ul class="submenu-item">
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:create')?>">Create</a></li>
                                         <li class="category-heading">Medical Personels</li>
-                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'medical personels'])?>">Staff</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'medical personel'])?>">Staff</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index' , ['user_type' => 'doctor'])?>">Doctors</a></li>
                                         <li class="category-heading">Others<li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('user:index')?>">All</a></li>

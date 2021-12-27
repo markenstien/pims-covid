@@ -9,6 +9,7 @@
 
 		<div class="card-body">
 			<div class="col-md-6">
+				<?php echo anchor( _route('hospital:edit' , $hospital->id) )?>
 				<table class="table table-bordered">
 					<tr>
 						<td style="width: 30%;">Name</td>
@@ -30,7 +31,11 @@
 
 					<tr>
 						<td style="width: 30%;">Address</td>
-						<td><?php echo $hospital->address->complete_address ?></td>
+						<td><?php echo $hospital->address->complete_address ?>
+							<?php echo anchor( _route('address:edit' , $hospital->address->id , [
+								'route' => seal( _route('hospital:show' , $hospital->id) )
+							]) )?>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -60,7 +65,9 @@
 							<td><?php echo $row->reference?></td>
 							<td><?php echo $row->last_name.',' .$row->first_name . ' '.$row->middle_name?></td>
 							<td><?php echo empty($row->release_remarks) ? 'on-going':$row->release_remarks ?></td>
-							<td><?php echo $row->address?></td>
+							<td>
+								<?php echo $row->address?>
+							</td>
 							<td><?php echo btnView( _route('deployment:show' , $row->id) )?></td>
 						</tr>
 					<?php endforeach?>

@@ -150,15 +150,8 @@
 						<?php echo $lab_result->remarks ?>
 					</div>
 					<div class="section">
-						Criteria For Covid Severity
-						<ul>
-							<li>Oxygen Level : <?php echo $record->oxygen_level_num?>%</li>
-							<li>Respiratory Rate : <?php echo $record->respirator_rate_num?></li>
-							<li>Fever : <?php echo bool_convert($record->is_fever) ?></li>
-							<li>Pneumonia : <?php echo $lab_result->pneumonia?></li>
-							<li><strong>Severity : <?php echo $lab_result->severity?></strong></li>
-						</ul>
-
+						<strong>Severity : <?php echo $lab_result->severity?></strong>
+						<hr>
 						<?php if(!empty($lab_result->notes)) :?>
 							<h5>Doctors Notes</h5>
 							<p><?php echo $lab_result->notes?></p>
@@ -200,9 +193,7 @@
 				<?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?> |
 			<?php endif?>
 
-			<?php if( !isEqual(whoIs('user_type') , ['patient' , 'doctor' , 'medical personel']) ) : ?>
-				<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> |
-			<?php endif?>
+			<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Share</a> |
 
 			<?php echo anchor( _route('patient-record:show' , $lab_result->record_id)  , 'view' , 'Show Report ')?>
 
@@ -221,6 +212,21 @@
 			<?php endif?>
 		</div>
 
+		<div class="card-footer">
+			<h4 class="card-title">Danger Zone</h4>
+			<?php
+				Form::open([
+					'method' => 'post',
+					'action' => _route('lab:delete' , $lab_result->id , [
+						'route' => seal( _route('lab:index') )
+					])
+				]);
+			?>
+			<?php Form::submit('' , 'Delete' , ['class' => 'btn btn-danger form-verify'])?>
+
+			<?php Form::close()?>
+
+		</div>
 	</div>
 	
 	<!-- SEND LAB RESULT TO EMAIL -->

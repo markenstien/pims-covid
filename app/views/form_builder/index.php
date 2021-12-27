@@ -21,9 +21,12 @@
 						<tr>
 							<td><?php echo ++$key?></td>
 							<td><?php echo $row->name?></td>
-							<td><?php echo $row->description?></td>
+							<td>
+								<span title="<?php echo $row->description?>"><?php echo crop_string($row->description, 60) ?></span>
+							</td>
 							<td>
 								<?php echo btnView( _route('form:show' , $row->id) )?>
+								<?php echo btnEdit( _route('form:edit' , $row->id) )?>
 								<?php echo btnDelete( _route('form:delete' , $row->id) )?>
 							</td>
 						</tr>

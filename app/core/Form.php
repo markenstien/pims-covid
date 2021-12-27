@@ -386,6 +386,42 @@
 		}
 
 
+		public function getFormItems( $inputType = 'row' )
+		{
+			$items = $this->_items;
+			$html = '';
+
+			foreach($items as $item) 
+			{
+				if( isEqual($item['type'] , ['submit' , 'hidden']) )
+				{
+					$btn = $this->get($item['name']);
+
+					$html .= <<<EOF
+						<div>
+							{$btn}
+						</div>
+					EOF;
+
+				}else
+				{
+					if( isEqual($inputType , 'row') ){
+						$label_input_bundle = $this->getRow($item['name']);
+					}else{
+						$label_input_bundle = $this->getCol($item['name']);
+					}
+
+					$html .= <<<EOF
+						<div class='form-group mb-2'>
+							{$label_input_bundle}
+						</div>
+					EOF;
+				}
+			}
+
+			return $html;
+		}
+
 		public function getForm($inputType = 'row')
 		{
 			$html = '';

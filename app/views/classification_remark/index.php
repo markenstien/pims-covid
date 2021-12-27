@@ -15,6 +15,7 @@
 					<th>Remarks</th>
 					<th>Points</th>
 					<th>Color</th>
+					<th>Action</th>
 				</thead>
 
 				<tbody>
@@ -25,6 +26,10 @@
 							<td><?php echo $row->points?></td>
 							<td>
 								<span class="badge bg-<?php echo $row->color?>">Color</span>
+							</td>
+							<td>
+								<?php echo btnEdit( _route('remarks:edit' , $row->id) )?>
+								<?php echo btnDelete( _route('remarks:delete' , $row->id) , 'Delete' , ['class' => 'form-verify'] )?>
 							</td>
 						</tr>
 					<?php endforeach?>

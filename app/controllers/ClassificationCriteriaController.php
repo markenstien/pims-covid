@@ -46,4 +46,38 @@
 			return $this->view('classification_criteria/create' , $this->data);
 		}
 		
+
+
+		public function edit( $id )
+		{
+
+			if( isSubmitted() )
+			{
+				$post = request()->posts();
+
+				$res = $this->model->save( $post , $id );
+
+				if(!$res) {
+					Flash::set( "Something went wrong!" , 'danger');
+					return request()->return();
+				}
+
+				Flash::set(" Criteria has been updated {$post['remarks']} ");
+
+				return redirect( _route('criteria:index') );
+			}
+
+			$criteria = $this->model->get($id);
+			$this->data['page_title'] = 'Edit Criteria ';
+
+			$this->form->setValueObject( $criteria );
+			$this->form->init([
+				'url' => _route('criteria:edit' , $id)
+			]);
+			$this->form->setValue('submit' , 'Update Criteria');
+
+			$this->data['form'] = $this->form;
+
+			return $this->view('classification_criteria/create' , $this->data);
+		}
 	}

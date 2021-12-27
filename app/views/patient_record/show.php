@@ -112,7 +112,10 @@
 		<div class="card-footer" id="id-lab-result">
 			<?php if( !isEqual(whoIs('user_type') , 'patient')) :?>
 				<h4>Lab Results</h4>
-				<?php echo anchor(_route('lab-request:create' ,null, ['record_id' => $record->id]) , 'custom' , 'Request Laboratory Result')?>
+				<?php
+					if( !$record->lab_requests)
+						echo anchor(_route('lab-request:create' ,null, ['record_id' => $record->id]) , 'custom' , 'Request Laboratory Result')
+				?>
 				<?php divider()?>
 			<?php endif?>
 
@@ -201,6 +204,23 @@
 			<?php endif?>
 			<br>
 			<a href="<?php echo _route('patient-record:complete' , $record->id) ?>" class="btn btn-primary btn-sm form-verify"> Complete Record </a>
+		</div>
+
+		<div class="card-footer" id="id-page-actions">
+			<h4>Action</h4>
+
+			<?php
+				Form::open([
+					'method' => 'post',
+					'url'  => _route('patient-record:delete' , $record->id , [
+						'route' => seal( _route('patient-record:index') )
+					])
+				]);
+
+				Form::submit('' , 'Delete' , ['class' => 'btn btn-danger btn-sm form-verify']);
+
+				Form::close();
+			?>
 		</div>
 	</div>
 <?php endbuild()?>

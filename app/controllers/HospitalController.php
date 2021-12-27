@@ -47,6 +47,34 @@
 			return $this->view('hospital/create' , $this->data);
 		}
 
+		public function edit($id)
+		{
+			if( isSubmitted() )
+			{
+				$post = request()->posts();
+
+				$res = $this->model->update($post , $id);
+
+				if($res) {
+					Flash::set( $this->model->getMessageString() );
+
+					return redirect(_route('hospital:show' , $id));
+				}
+			}
+
+			$hospital  = $this->model->get($id);
+
+			$this->data['page_title'] = 'Edit Hospital';
+			$this->data['form']->init([
+				'url' => _route('hospital:edit' , $id)
+			]);
+			$this->data['form']->setValueObject($hospital);
+			$this->data['form']->setValue('submit' , 'Save Hospital');
+			$this->data['form']->addId($id);
+
+			return $this->view('hospital/create' , $this->data);
+		}
+
 		public function show($id)
 		{
 			$hospital = $this->model->get($id);

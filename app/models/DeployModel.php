@@ -146,7 +146,7 @@
 
 			$deployment->record = $record;
 			$deployment->hospital = $hospital->get($deployment->hospital_id);
-			$deployment->deployed_by_user = $user->get($deployment->created_by);
+			$deployment->deployed_by_user = $user->get($deployment->attending_medical_personel_id);
 
 			return $deployment;
 		}

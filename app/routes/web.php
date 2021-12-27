@@ -191,6 +191,7 @@
 		'show'   => $controller.'/show',
 		'add-item' => $controller.'/addItem',
 		'edit-item' => $controller. '/editItem',
+		'delete-item' => $controller. '/deleteItem',
 		'respond'   => '/FormController'.'/respond'
 	];
 

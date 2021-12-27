@@ -49,6 +49,17 @@
 			return $res;
 		}
 
+		public function deleteItem($item_id)
+		{
+			$this->item_model = model('FormBuilderItemModel');
+
+			$this->item_model->delete($item_id);
+
+			$this->addMessage("Item Deleted");
+
+			return true;
+		}
+
 
 		public function create( $form_data )
 		{

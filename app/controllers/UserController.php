@@ -1,6 +1,7 @@
 <?php 
-	load(['UserForm'] , APPROOT.DS.'form');
+	load(['UserForm' , 'AddressForm'] , APPROOT.DS.'form');
 	use Form\UserForm;
+	use Form\AddressForm;
 
 	class UserController extends Controller
 	{
@@ -10,7 +11,10 @@
 			parent::__construct();
 
 			$this->model = model('UserModel');
+			$this->address_form = new AddressForm();
+
 			$this->lab_model = model('LaboratoryModel');
+
 
 			$this->data['page_title'] = ' Users ';
 
@@ -65,6 +69,7 @@
 			$this->data['user_form']->setValueObject($user);
 			$this->data['user_form']->addId($id);
 			$this->data['user_form']->remove('password');
+			$this->data['address_form'] = $this->address_form;
 
 			if( !isEqual(whoIs('user_type') , 'admin') )
 				$this->data['user_form']->remove('user_type');
@@ -78,11 +83,7 @@
 			if( isSubmitted() )
 			{
 				$post = request()->posts();
-
 				$user_id = $this->model->create($post , 'profile');
-
-				
-
 				if(!$user_id){
 					Flash::set( $this->model->getErrorString() , 'danger');
 					return request()->return();
@@ -98,10 +99,15 @@
 				return redirect( _route('user:show' , $user_id , ['user_id' => $user_id]) );
 			}
 
+			$this->data['user_form']->remove('address');
+			$this->data['user_form']->remove('submit');
+
 			if(! isEqual(whoIs('user_type'), 'admin') ){
 				$this->data['user_form']->remove('user_type');
 				$this->data['user_form']->add(['name' => 'user_type' , 'type' => 'hidden' , 'value' => 'patient']);
 			}
+			$this->address_form->remove('submit');
+			$this->data['address_form'] = $this->address_form;
 
 			return $this->view('user/create' , $this->data);
 		}

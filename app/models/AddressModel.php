@@ -12,6 +12,13 @@
 			'zip',
 		];
 
+		public function update($address_data , $id)
+		{
+			$_fillables = $this->getFillablesOnly($address_data);
+			parent::update( $_fillables , $id);
+			return $id;
+		}
+
 		public function create($address_data)
 		{
 			$_fillables = $this->getFillablesOnly($address_data);

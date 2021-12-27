@@ -23,6 +23,13 @@
 			return parent::store( $_fillables );
 		}
 
+		public function save($classification_remark_data , $id)
+		{
+			$_fillables = $this->getFillablesOnly($classification_remark_data);
+
+			return parent::update( $_fillables , $id );
+		}
+
 		public function compare($points)
 		{
 			$this->db->query(

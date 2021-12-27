@@ -9,6 +9,12 @@
 		</div>
 
 		<div class="card-body">
+
+			<p class="mb-2">
+				<strong>Description</strong> <br>
+				<?php echo $form_data->description?>
+			</p>
+
 			<h4 class="mb-2">Questions</h4>
 			<?php echo btnCreate( _route('form:add-item' , null , ['form_id' => $form_data->id]) )?>
 			<div class="table-responsive mt-3">
@@ -32,6 +38,7 @@
 								</td>
 								<td>
 									<?php echo btnEdit(_route('form:edit-item' , $row->id))?>
+									<?php echo btnDelete(_route('form:delete-item' , $row->id))?>
 								</td>
 							</tr>
 						<?php endforeach?>

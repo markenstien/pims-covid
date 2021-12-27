@@ -28,6 +28,12 @@
 			return parent::store($_fillables);
 		}
 
+		public function update($hospital_data , $id)
+		{
+			$_fillables = $this->getFillablesOnly($hospital_data);
+			return parent::update($_fillables , $id);
+		}
+
 		public function get($id)
 		{
 			return $this->getAll([
@@ -73,16 +79,14 @@
 
 			$results = $this->db->resultSet();
 
-			dd($results);
-
 			$summary = [];
 
 			foreach($results as $key => $row){
 
 				if( !isset($summary[$row->hospital_id]) )
 					$summary[$row->hospital_id] = 0;
-
-
 			}
+
+			return $summary;
 		}
 	}

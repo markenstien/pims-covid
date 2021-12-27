@@ -71,6 +71,12 @@
 				<label style = "word-wrap:break-word;">	
 					<?php echo "<u>".$lab_result->remarks."</u>";?>
 				</label>
+				<br />
+				<label style = "font-size:16px;"><b><u>Severity</u></b></label>
+				<br />
+				<label style = "word-wrap:break-word;">	
+					<?php echo "<u>".$lab_result->severity."</u>";?>
+				</label>
 			</div>
 			<div style = "float:left; margin-left:90px; width:40%;">
 				<label style = "font-size:16px;margin-left:30px;"><b><u>URINE</u></b></label>
@@ -87,8 +93,6 @@
 				<label style = "margin-left:50px;">Ova:<?php echo "<u>".$lab_result->ova."</u>";?></label>
 				<br />
 				<label style = "margin-left:50px;">larva:<?php echo "<u>".$lab_result->larva."</u>";?></label>
-				<br />
-				<label style = "margin-left:50px;">Severity:<?php echo "<u>".$lab_result->severity."</u>";?></label>
 				<br />
 				<label style = "font-weight:bold; text-decoration:underline; margin-left:30px;">ALLERGIES</label>
 				<p><?php echo $lab_result->allergies ?? ''?></p>
@@ -114,9 +118,9 @@
 			<br />
 			<br />
 			<br />
-			<br />
 			<br>
 			<br>
+
 			<label style = "border-top:1px solid #000; margin-left:40px; float:left;"><center>
 				<?php echo "<u>".$lab_result->pathologist."</u>";?></center>
 			<label><center><b>Pathologist</b></center></label></label>
