@@ -228,7 +228,9 @@
 		public function show( $id )
 		{
 			$record = $this->model->getComplete($id);
+
 			$this->data['record'] = $record;	
+			$this->data['is_admin'] = $this->is_admin;
 			
 			return $this->view('patient_record/show' , $this->data);
 		}

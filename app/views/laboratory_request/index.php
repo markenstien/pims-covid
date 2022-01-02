@@ -31,7 +31,9 @@
 								<td><?php echo $row->doctor_name?></td>
 								<td>
 									<?php echo btnView(_route('lab-request:show' , $row->id),'View')?>
-									<?php echo btnDelete(_route('lab-request:delete' , $row->id),'Delete')?>
+									<?php if( $is_admin ) :?>
+										<?php echo btnDelete(_route('lab-request:delete' , $row->id),'Delete')?>
+									<?php endif?>
 								</td>
 							</tr>
 						<?php endforeach?>

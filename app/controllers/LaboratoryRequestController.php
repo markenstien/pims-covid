@@ -8,6 +8,8 @@
 
 		public function __construct()
 		{
+			parent::__construct();
+			
 			$this->data['lab_req_form'] = new LaboratoryRequestForm();
 
 			$this->model = model('LaboratoryRequestModel');
@@ -20,6 +22,7 @@
 		{
 			$this->data['page_title'] = 'Laboratory Requests';
 			$this->data['laboratory_results'] = $this->model->getAll(['order' => 'lab_req.id desc']);
+			$this->data['is_admin'] = $this->is_admin;
 
 			return $this->view('laboratory_request/index' , $this->data);
 		}

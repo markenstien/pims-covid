@@ -3,6 +3,7 @@
 	<div class="card">
 		<div class="card-header">
 			<h4 class="card-title">Address</h4>
+			<a href="<?php echo unseal($_GET['route'])?>">Back</a>
 		</div>
 
 		<div class="card-body"><?php echo $address_form->getForm()?></div>

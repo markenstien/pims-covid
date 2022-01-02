@@ -209,18 +209,20 @@
 		<div class="card-footer" id="id-page-actions">
 			<h4>Action</h4>
 
-			<?php
-				Form::open([
-					'method' => 'post',
-					'url'  => _route('patient-record:delete' , $record->id , [
-						'route' => seal( _route('patient-record:index') )
-					])
-				]);
+			<?php if( $is_admin) :?>
+				<?php
+					Form::open([
+						'method' => 'post',
+						'url'  => _route('patient-record:delete' , $record->id , [
+							'route' => seal( _route('patient-record:index') )
+						])
+					]);
 
-				Form::submit('' , 'Delete' , ['class' => 'btn btn-danger btn-sm form-verify']);
+					Form::submit('' , 'Delete' , ['class' => 'btn btn-danger btn-sm form-verify']);
 
-				Form::close();
-			?>
+					Form::close();
+				?>
+			<?php endif?>
 		</div>
 	</div>
 <?php endbuild()?>

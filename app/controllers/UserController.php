@@ -132,9 +132,16 @@
 		{
 			$user = $this->model->get($id);
 
+			if(!$user) {
+				Flash::set(" This user no longer exists " , 'warning');
+				return request()->return();
+			}
+
 			$this->data['user'] = $user;
 
 			$this->data['laboratory_results'] = $this->lab_model->getByPatient($id);
+
+			$this->data['is_admin'] = $this->is_admin;
 
 			return $this->view('user/show' , $this->data);
 		}

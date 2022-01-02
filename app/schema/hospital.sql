@@ -10,3 +10,10 @@ create table hospitals(
 	created_at timestamp default now(),
 	updated_at timestamp default now() ON UPDATE now()
 );
+
+
+alter table hospitals
+	add column capacity int(10);
+
+alter table hospitals
+	add column type varchar(50);

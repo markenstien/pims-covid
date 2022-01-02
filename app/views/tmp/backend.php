@@ -209,17 +209,19 @@ License: For each use you must have a valid license purchased only from above li
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('hospital:index')?>">Hospitals</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('deployment:index')?>">Deployed Patients</a></li>
 
-                                        <li class="nav-item">
-                                            <p class="category-heading">File Maintenance</p>
-                                        </li>
+                                        <?php if( isEqual($auth->user_type , 'admin')) :?>
+                                            <li class="nav-item">
+                                                <p class="category-heading">File Maintenance</p>
+                                            </li>
 
-                                        <li class="nav-item"><a class="nav-link" 
-                                            href="<?php echo _route('criteria:index')?>">Classifications</a>
-                                        </li>
+                                            <li class="nav-item"><a class="nav-link" 
+                                                href="<?php echo _route('criteria:index')?>">Classifications</a>
+                                            </li>
 
-                                        <li class="nav-item"><a class="nav-link" 
-                                            href="<?php echo _route('form:index')?>">Form Builder</a>
-                                        </li>
+                                            <li class="nav-item"><a class="nav-link" 
+                                                href="<?php echo _route('form:index')?>">Form Builder</a>
+                                            </li>
+                                        <?php endif?>
                                     </ul>
                                 </div>
                             </li>

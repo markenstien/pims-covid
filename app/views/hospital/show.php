@@ -16,6 +16,10 @@
 						<td><?php echo $hospital->name?></td>
 					</tr>
 					<tr>
+						<td style="width: 30%;">Capacity</td>
+						<td><?php echo $hospital->capacity?></td>
+					</tr>
+					<tr>
 						<td style="width: 30%;">Phone/Tel</td>
 						<td><?php echo $hospital->phone?></td>
 					</tr>

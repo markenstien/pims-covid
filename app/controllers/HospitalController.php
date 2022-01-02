@@ -71,6 +71,7 @@
 			$this->data['form']->setValueObject($hospital);
 			$this->data['form']->setValue('submit' , 'Save Hospital');
 			$this->data['form']->addId($id);
+			$this->data['hospital_id'] = $id;
 
 			return $this->view('hospital/create' , $this->data);
 		}

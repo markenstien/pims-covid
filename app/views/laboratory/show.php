@@ -214,18 +214,20 @@
 
 		<div class="card-footer">
 			<h4 class="card-title">Danger Zone</h4>
-			<?php
-				Form::open([
-					'method' => 'post',
-					'action' => _route('lab:delete' , $lab_result->id , [
-						'route' => seal( _route('lab:index') )
-					])
-				]);
-			?>
-			<?php Form::submit('' , 'Delete' , ['class' => 'btn btn-danger form-verify'])?>
 
-			<?php Form::close()?>
+			<?php if($is_admin) :?>
+				<?php
+					Form::open([
+						'method' => 'post',
+						'action' => _route('lab:delete' , $lab_result->id , [
+							'route' => seal( _route('lab:index') )
+						])
+					]);
+				?>
+				<?php Form::submit('' , 'Delete' , ['class' => 'btn btn-danger form-verify'])?>
 
+				<?php Form::close()?>
+			<?php endif?>
 		</div>
 	</div>
 	

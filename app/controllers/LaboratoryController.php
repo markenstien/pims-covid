@@ -11,7 +11,6 @@
 		{
 			parent::__construct();
 
-
 			$this->data['page_title'] = ' Laboratory Result Page';
 			$this->data['lab_form'] = new LaboratoryForm();
 
@@ -163,6 +162,8 @@
 
 			$this->data['public_link'] = $this->model->publicLink( $id );
 			
+			$this->data['is_admin'] = $this->is_admin;
+
 			return $this->view('laboratory/show' , $this->data);
 		}
 

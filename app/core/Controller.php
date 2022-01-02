@@ -9,16 +9,24 @@
 
 		protected $_attachmentForm = null;
 
+		//temporary
+		public $is_admin = false;
+
 		public function __construct()
 		{
 			if( is_null($this->_attachmentForm) )
 			{
 				$this->_attachmentForm = new AttachmentForm();
-				
 			}
+
 			$this->_addressForm = new AddressForm();
 
 			$this->data = [];
+
+			$user = whoIs(); 
+
+			if( $user && isEqual($user->user_type , 'admin'))
+				$this->is_admin = true;
 		}
 
 		public function model($model)

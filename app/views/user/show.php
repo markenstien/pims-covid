@@ -45,13 +45,29 @@
 						<p><?php echo $user->email?></p>
 						<p><?php echo $user->phone_number?></p>
 					</div>
-					<div>
-						<label class="tx-11">Address</label>
-						<p><?php
-							$address = $user->address_object;
-							echo "{$address->block_house_number} {$address->street} {$address->city} {$address->barangay} {$address->zip}";
-						?></p>
-					</div>
+					<?php if($user->address_object) :?>
+						<div>
+							<label class="tx-11">Address</label>
+							<p><?php
+								$address = $user->address_object;
+								echo "{$address->block_house_number} {$address->street} {$address->city} {$address->barangay} {$address->zip}";
+							?></p>
+						</div>
+					<?php else:?>
+						<div>
+							<p>Edit to add address details</p>
+						</div>
+					<?php endif?>
+					<hr>
+					<?php if( $is_admin ) :?>
+						<div>
+							<h4 class="bg-danger">Danger Zone</h4>
+							<hr>
+							<a href="<?php echo _route('user:delete' , $user->id , [
+								'route' => seal( _route('user:index') )
+							])?>" class="btn btn-danger btn-sm form-verify"> Delete User </a>
+						</div>
+					<?php endif?>
 				</div>
 			</div>	
 		</div>

@@ -32,17 +32,16 @@
 							<li>Quarantine Type : Hospitalized </li>
 							<li>Hospital Name: <?php echo anchor(_route('hospital:show' , $hospital->id) , 'view' , $hospital->name)?> </li>
 							<li style="margin-top: 7px;">Status : <?php echo $deployment->record_status?></li>
-							<li>Release Remarks : <?php echo $deployment->release_remarks?></li>
 						</ul>
 					<?php endif?>
 
+					Release Remarks : <?php echo $deployment->release_remarks?>
 					<h5 class="mt-2">Deployed By</h5>
 					<p><?php echo $deployment->deployed_by_user->last_name.','.$deployment->deployed_by_user->first_name .' '.$deployment->deployed_by_user->middle_name?></p>
 
 					<?php if($deployment->is_released) :?>
 						<p class="mt-2">
-							Release Status : <strong>Released</strong> <br>
-							<?php echo $deployment->release_remarks?>
+							Released Status : <strong><?php echo $deployment->is_released ? 'Released' : 'Waiting'?></strong> <br>
 						</p>
 					<?php else:?>
 
@@ -106,6 +105,15 @@
 					<?php endif?>
 				</div>
 			</div>
+		</div>
+
+		<div class="card-footer">
+			<?php if( $is_admin) :?>
+				<h4>Danger Zone</h4>
+				<a href="<?php echo _route('deployment:delete' , $deployment->id , [
+					'route' => seal( _route('deployment:index') )
+				])?>" class="btn btn-danger btn-sm form-verify">Delete</a>
+			<?php endif?>
 		</div>
 	</div>
 <?php endbuild()?>

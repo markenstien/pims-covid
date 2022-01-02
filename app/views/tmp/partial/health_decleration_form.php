@@ -1,6 +1,7 @@
 <?php extract($data)?>
+
 <div>
-	<h2 class="text-center mb-4">Health Declaration Form</h2>
+	<h2 class="text-center mb-4">Patient Arrival</h2>
 	<fieldset>
 		<legend>Patient Details</legend>
 		<table class="table table-bordered">
@@ -10,7 +11,18 @@
 			</tr>
 			<tr>
 				<td>Address</td>
-				<td><?php echo $user_data->address?></td>
+				<td>
+					<?php if($user_data->address_object) :?>
+						<p>
+						<?php
+							$address = $user_data->address_object;
+							echo "{$address->block_house_number} {$address->street} {$address->city} {$address->barangay} {$address->zip}";
+						?>
+						</p>
+					<?php else:?>
+						<p>No address</p>
+					<?php endif?>
+				</td>
 			</tr>
 			<tr>
 				<td>Email</td>

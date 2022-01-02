@@ -9,38 +9,41 @@
 		<div class="card-body">
 
 			<div class="col-md-5 mx-auto">
-				
-				<?php
-					Form::open([
-						'method' => 'GET'
-					]);
-				?>
-				<div class="form-group row">
-					<div class="col">
-						<?php
-							Form::label('Start Date');
-							Form::date('start_date' , '' , [
-								'class' => 'form-control'
-							])
-						?>
+				<?php if(!isset($_GET['filter'])) :?>
+					<?php
+						Form::open([
+							'method' => 'GET'
+						]);
+					?>
+					<div class="form-group row">
+						<div class="col">
+							<?php
+								Form::label('Start Date');
+								Form::date('start_date' , '' , [
+									'class' => 'form-control'
+								])
+							?>
+						</div>
+						<div class="col">
+							<?php
+								Form::label('End Date');
+								Form::date('end_date' , '' , [
+									'class' => 'form-control'
+								])
+							?>
+						</div>
 					</div>
-					<div class="col">
-						<?php
-							Form::label('End Date');
-							Form::date('end_date' , '' , [
-								'class' => 'form-control'
-							])
-						?>
-					</div>
-				</div>
-
-				<div class="mt-2">
+					<hr>
 					<?php Form::submit('filter', 'Generate Report')?>
-					<?php if(isset($_GET['filter'])) :?>
-						<a href="?" class="btn btn-secondary btn-sm">Remove Filter</a>
-					<?php endif?>
-				</div>
-				<?php Form::close()?>
+					<?php Form::close()?>
+				<?php endif?>
+			</div>
+
+			<div class="mt-2">
+				<?php if(isset($_GET['filter'])) :?>
+					<a href="?" class="btn btn-secondary btn-sm">Remove Filter</a>
+					<a href="javascript:void(0)" class="btn btn-secondary btn-sm" onclick="window.print()">Print</a>
+				<?php endif?>
 			</div>
 
 			<?php if(isset($items)) :?>

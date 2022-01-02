@@ -17,6 +17,8 @@
 			]);
 			$this->addName();
 			$this->addPhone();
+			$this->addEmail();
+			$this->addCapacity();
 			$this->addWebsite();
 
 			$this->customSubmit('Create Hospital');
@@ -48,6 +50,19 @@
 			]);
 		}
 
+		public function addEmail()
+		{
+			$this->add([
+				'type' => 'text',
+				'name' => 'email',
+				'required' => true,
+				'options' => [
+					'label' => 'Email'
+				],
+				'class' => 'form-control'
+			]);
+		}
+
 		public function addWebsite()
 		{
 			$this->add([
@@ -56,6 +71,19 @@
 				'required' => true,
 				'options' => [
 					'label' => 'Website'
+				],
+				'class' => 'form-control'
+			]);
+		}
+
+		public function addCapacity()
+		{
+			$this->add([
+				'type' => 'text',
+				'name' => 'capacity',
+				'required' => true,
+				'options' => [
+					'label' => 'Capacity'
 				],
 				'class' => 'form-control'
 			]);

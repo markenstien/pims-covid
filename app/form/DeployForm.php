@@ -70,14 +70,14 @@
 		{
 			$user_model = model('UserModel');
 
-			$condition = $user_model->conditionConvert([
-				'user_type' => [
-					'condition' => 'in',
-					'value'  => ['doctor', 'medical personel']
+			$users = $user_model->getAll([
+				'where' => [
+					'user_type' => [
+						'condition' => 'in',
+						'value'  => ['doctor', 'medical personel']
+					]
 				]
 			]);
-
-			$users = $user_model->getAll($condition);
 			$users = arr_layout_keypair($users , ['id' , 'first_name@last_name']);
 
 			$this->add([

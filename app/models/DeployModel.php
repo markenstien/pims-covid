@@ -62,13 +62,29 @@
 		{
 			$record_model = model('PatientRecordModel');
 
+			$is_hospital = isset($deployment_data['hospital_id']) ? true : false;
+
 			$_fillables = $this->getFillablesOnly($deployment_data);
-			$_fillables['reference'] = $this->getReference();
+
+
+			$_fillables['reference'] = $this->getReference( $is_hospital );
 			$_fillables['created_by'] = whoIs('id');
 
 			$record = $record_model->get($_fillables['record_id']);
 
 			$_fillables['patient_id'] = $record->user_id;
+
+
+			//check if hospital
+			if( $is_hospital )
+			{
+				$hospital_model = model('HospitalModel');
+				$hospital_name = $hospital_model->get($_fillables['hospital_id'])->name;
+			}
+
+
+			$_fillables['type'] = $is_hospital ? 'Hospital' : 'home-quarantine';
+
 
 			$deploy_id = parent::store($_fillables);
 
@@ -77,14 +93,6 @@
 				return false;
 			}
 
-
-			if( isset($_fillables['hospital_id']) )
-			{
-				$hospital_model = model('HospitalModel');
-				$hospital_name = $hospital_model->get($_fillables['hospital_id'])->name;
-			}
-
-			
 
 			//if deployed
 			$patient_record = model('PatientRecordModel');
@@ -128,7 +136,7 @@
 		{
 			$prefix = 'HOME-';
 
-			if( !is_null($hospital_id) )
+			if( $hospital_id )
 				$prefix = 'HOSP-';
 
 			return strtoupper($prefix.random_number(8));
@@ -173,7 +181,7 @@
 					ON user.id = deploy.patient_id
 					{$where} GROUP BY deploy.id {$order}"
 			);
-
+			
 			return $this->db->resultSet();
 		}
 
