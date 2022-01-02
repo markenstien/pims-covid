@@ -189,7 +189,8 @@
 		<div class="card-footer">
 			<a href="<?php echo $public_link.'&prepare_print=true'?>">Prepare For Printing</a> |
 
-			<?php if( !isEqual(whoIs('user_type') , 'patient' && whoIs()) ) : ?>
+
+			<?php if( !isEqual( whoIs('user_type') , 'patient') ):?>
 				<?php echo anchor( _route('lab:edit' , $lab_result->id)  , 'edit' , ' Edit Result ')?> |
 			<?php endif?>
 

@@ -223,7 +223,8 @@
 			]);
 
 			$this->data['lab_form'] = $lab_form;
-
+			$this->data['is_admin'] = $this->is_admin;
+			
 			return $this->view('laboratory/edit' , $this->data);
 		}
 	}

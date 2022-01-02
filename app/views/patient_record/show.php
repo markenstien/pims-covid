@@ -185,45 +185,46 @@
 			<?php endif?>
 		</div>
 
-		<div class="card-footer" id="id-page-actions">
-			<h4>Actions</h4>
-			<?php if( !$record->is_deployed) :?>
-				<details>
-					<summary class="text-danger">Deployment</summary>
-					<ul>
-						<li><a href="<?php echo _route('deployment:create' , $record->id, [
-							'type' => 'home-quarantine'
-						])?>">Home Quarantine</a></li>
-						<li><a href="<?php echo _route('deployment:create' , $record->id, [
-							'type' => 'hospital'
-						])?>">Hospitalize</a></li>
-					</ul>
-				</details>
-			<?php else:?>
-				<p>Already Deployed : <?php echo anchor( _route('deployment:show' , $record->deployment->id) , 'view' , 'View Deployment')?> </p>
-			<?php endif?>
-			<br>
-			<a href="<?php echo _route('patient-record:complete' , $record->id) ?>" class="btn btn-primary btn-sm form-verify"> Complete Record </a>
-		</div>
+		<?php if( $is_admin ) :?>
+			<div class="card-footer" id="id-page-actions">
+				<h4>Actions</h4>
+				<?php if( !$record->is_deployed) :?>
+					<details>
+						<summary class="text-danger">Deployment</summary>
+						<ul>
+							<li><a href="<?php echo _route('deployment:create' , $record->id, [
+								'type' => 'home-quarantine'
+							])?>">Home Quarantine</a></li>
+							<li><a href="<?php echo _route('deployment:create' , $record->id, [
+								'type' => 'hospital'
+							])?>">Hospitalize</a></li>
+						</ul>
+					</details>
+				<?php else:?>
+					<p>Already Deployed : <?php echo anchor( _route('deployment:show' , $record->deployment->id) , 'view' , 'View Deployment')?> </p>
+				<?php endif?>
+				<br>
+				<a href="<?php echo _route('patient-record:complete' , $record->id) ?>" class="btn btn-primary btn-sm form-verify"> Complete Record </a>
+			</div>
+		<?php endif?>
 
-		<div class="card-footer" id="id-page-actions">
-			<h4>Action</h4>
+		<?php if( $is_admin) :?>
+			<div class="card-footer" id="id-page-actions">
+				<h4>Action</h4>
+					<?php
+						Form::open([
+							'method' => 'post',
+							'url'  => _route('patient-record:delete' , $record->id , [
+								'route' => seal( _route('patient-record:index') )
+							])
+						]);
 
-			<?php if( $is_admin) :?>
-				<?php
-					Form::open([
-						'method' => 'post',
-						'url'  => _route('patient-record:delete' , $record->id , [
-							'route' => seal( _route('patient-record:index') )
-						])
-					]);
+						Form::submit('' , 'Delete' , ['class' => 'btn btn-danger btn-sm form-verify']);
 
-					Form::submit('' , 'Delete' , ['class' => 'btn btn-danger btn-sm form-verify']);
-
-					Form::close();
-				?>
-			<?php endif?>
-		</div>
+						Form::close();
+					?>
+			</div>
+		<?php endif?>
 	</div>
 <?php endbuild()?>
 

@@ -5,7 +5,7 @@
 			<h4 class="card-title">Users</h4>
 
 			<?php
-				if( isEqual(whoIs('user_type') , ['admin' , 'doctor' , 'medical personel']) )
+				if( isEqual(whoIs('user_type') , ['admin']) )
 					echo btnCreate( _route('user:create') )
 			?>
 		</div>
