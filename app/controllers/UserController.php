@@ -149,6 +149,7 @@
 
 			$number_of_days_after_deployment = null;
 			$number_of_days_remaining = null;
+			
 			if($deployment)
 			{
 				$number_of_days_after_deployment = date_difference( $deployment->deployment_date, date('Y-m-d'));
