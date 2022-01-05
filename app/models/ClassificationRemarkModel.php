@@ -41,7 +41,8 @@
 			$remark = $this->db->single();
 
 			if(!$remark)
-				return $this->getLowest();
+				$remark = $this->getLowest();
+			
 			return $remark;
 		}
 

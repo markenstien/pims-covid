@@ -257,8 +257,7 @@
 			if( is_null($deployments) && !is_null($hospital_id) ){
 				$this->db->query(
 					"SELECT COUNT(id) as total from {$this->table}
-						WHERE is_released != 0
-						AND hospital_id  = '{$hospital_id}'"
+						WHERE hospital_id  = '{$hospital_id}'"
 				);
 
 				$total = $this->db->single()->total ?? 0;

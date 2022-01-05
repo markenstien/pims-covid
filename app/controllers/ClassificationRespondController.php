@@ -20,7 +20,7 @@
 			if( isSubmitted() )
 			{
 				$post = request()->posts();
-
+				
 				$res = $this->model->create($post);
 
 				if($res) {

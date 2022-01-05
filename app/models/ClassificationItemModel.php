@@ -195,8 +195,6 @@
 				case '>':
 					if( $value > $item->compare_to ){
 						$points += $item->points;
-						if(isEqual($item->label , 'Respiratory Rate') )
-						dd([$value, $item->compare_to]);
 					}
 					break;
 				case '<':

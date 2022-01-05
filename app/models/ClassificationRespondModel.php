@@ -15,6 +15,7 @@
 			$_fillables = $this->getFillablesOnly($classification_data);
 
 			$remark = $this->computeRemarks( $_fillables['items'] );
+			
 			$_fillables['remarks'] = $remark->remarks;
 			/*
 			*compute remarks
@@ -22,7 +23,7 @@
 			$_fillables['items'] = json_encode( $classification_data['items'] );
 
 			$_fillables['points'] = $this->total_points;
-			
+
 			$respond_id = parent::store($_fillables);
 		}
 
@@ -33,6 +34,7 @@
 
 			$points = 0;
 
+			
 			foreach($items as $item ) 
 			{
 				$clasificator_id = $item['id'];
@@ -41,6 +43,7 @@
 
 				$points += $compare;
 			}
+
 			$this->total_points = $points;
 
 			return $classification_remark_model->compare($points);
