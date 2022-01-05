@@ -35,7 +35,6 @@
 			if( isSubmitted() )
 			{
 				$post = request()->posts();
-
 				$res = $this->model->processFormRespond( $post , $request['record_id']);
 			}
 
@@ -57,9 +56,6 @@
 			if( is_null($form_active_id) )
 			{
 				foreach($forms as  $key => $form) {
-					if( $key >= sizeof($form))
-						$form_active_id = 0;
-
 					if( isEqual($form['status'] , 'pending') ) 
 						$form_active_id = $form['form_id'];
 				}
@@ -103,7 +99,10 @@
 			$this->model->skipFormResponding( $form_id );
 			$form_responding = $this->model->getFormResponding();
 
-			return redirect('PatientRecordController/start');
+			$request = request()->inputs();
+
+			Flash::set("Skipped Form");
+			return redirect('PatientRecordController/start?user_id='.$request['user_id'].'&record_id='.$request['record_id']);
 		}
 
 

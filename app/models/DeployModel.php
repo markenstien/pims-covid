@@ -79,7 +79,15 @@
 			if( $is_hospital )
 			{
 				$hospital_model = model('HospitalModel');
-				$hospital_name = $hospital_model->get($_fillables['hospital_id'])->name;
+				$hospital = $hospital_model->get($_fillables['hospital_id']);
+				$hospital_name = $hospital->name;
+				//check hospital capacity
+				$under_quarantine = $this->getUnderQuarantine(null, $hospital->id);
+
+				if( ($hospital->capacity - ($under_quarantine + 1)) < 0 ){
+					$this->addError("Hospital {$hospital_name} reached its maximum capacity");
+					return false;
+				}
 			}
 
 
@@ -173,12 +181,19 @@
 
 			$this->db->query(
 				"SELECT DISTINCT * , deploy.id as id  ,
-					hosp.name as hospital_name
+					hosp.name as hospital_name ,
+					ifnull((SELECT CONCAT(block_house_number , ' ' , street , ' ' , city , ' ' , barangay , '-', zip)
+						as address_complete 
+						FROM module_address left join address
+						ON module_address.address_id = address.id 
+						WHERE module_address.module_key = 'USER'
+						AND module_id = user.id) , 'no-address') as complete_address
 					FROM {$this->table} as deploy
 					LEFT JOIN hospitals as hosp
 					ON hosp.id = deploy.hospital_id
 					LEFT JOIN users as user 
 					ON user.id = deploy.patient_id
+
 					{$where} GROUP BY deploy.id {$order}"
 			);
 			
@@ -217,6 +232,49 @@
 				'where' => 'hosp.id = '.$id,
 				'order' => "is_released asc"
 			]);
+		}
+
+		//patient
+		public function getRecent($user_id)
+		{
+			$result = $this->getAll([
+				'where' => [
+					'deploy.patient_id'  => $user_id,
+					'deploy.is_released' => [
+						'condition' => 'not equal',
+						'value' => 0
+					]
+				],
+				'order' => 'deploy.id desc'
+			]);
+
+			return $result[0]?? false;
+		}
+
+		public function getUnderQuarantine( $deployments = null , $hospital_id = null )
+		{	
+			//number number of deployment stil under quarantine in the hospital
+			if( is_null($deployments) && !is_null($hospital_id) ){
+				$this->db->query(
+					"SELECT COUNT(id) as total from {$this->table}
+						WHERE is_released != 0
+						AND hospital_id  = '{$hospital_id}'"
+				);
+
+				$total = $this->db->single()->total ?? 0;
+
+				return $total;
+			}
+
+			$total = 0;
+
+			foreach($deployments as $key => $row) {
+
+				if( $row->is_released )
+					$total++;
+			}
+
+			return $total;
 		}
 
 		

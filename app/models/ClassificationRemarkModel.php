@@ -35,14 +35,13 @@
 			$this->db->query(
 				"SELECT * FROM {$this->table}
 					WHERE points >= '{$points}'
-					ORDER BY points desc limit 1"
+					ORDER BY points asc limit 1"
 			);
 
 			$remark = $this->db->single();
 
 			if(!$remark)
 				return $this->getLowest();
-
 			return $remark;
 		}
 

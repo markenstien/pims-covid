@@ -13,6 +13,8 @@
 						<th>#</th>
 						<th>Name</th>
 						<th>Address</th>
+						<th>Capacity</th>
+						<th>Available</th>
 						<th>Action</th>
 					</thead>
 
@@ -22,6 +24,8 @@
 								<td><?php echo ++$key?></td>
 								<td><?php echo $row->name?></td>
 								<td><?php echo $row->address->barangay ?? 'N/A'?></td>
+								<td><?php echo $row->capacity?></td>
+								<td><?php echo $row->available?></td>
 								<td>
 									<?php echo btnView(_route('hospital:show' , $row->id) )?>
 								</td>

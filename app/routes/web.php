@@ -2,6 +2,16 @@
 	
 	$routes = [];
 
+	$controller = '/MailerController';
+
+	$routes['mailer'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'send'   => $controller.'/send'
+	];
+
 	$controller = '/UserController';
 
 	$routes['user'] = [

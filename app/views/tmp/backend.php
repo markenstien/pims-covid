@@ -188,7 +188,6 @@ License: For each use you must have a valid license purchased only from above li
                                 </a>
                                 <div class="submenu">
                                     <ul class="submenu-item">
-                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:create')?>">Create Request</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab-request:index' , ['user_type' => 'medical personels'])?>">Requests</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('lab:index' , ['user_type' => 'doctor'])?>">Results</a></li>
                                     </ul>

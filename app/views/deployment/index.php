@@ -65,15 +65,18 @@
 						<th>Patient Name</th>
 						<th>Hospital</th>
 						<th>Date</th>
+						<th>Time Since</th>
 						<th>Status</th>
 						<th>Action</th>
 					</thead>
 					<tbody>
+						<?php $date_now = date('Y-m-d')?>
 						<?php foreach($results as $row) :?>
 							<tr>
 								<td><?php echo $row->last_name.', '.$row->first_name.$row->middle_name?></td>
 								<td><?php echo $row->name ?? 'Home Quarantine'?></td>
 								<td><?php echo $row->deployment_date?></td>
+								<td><?php echo date_difference($row->deployment_date , $date_now)?></td>
 								<td><?php echo $row->release_remarks ?? 'waiting'?></td>
 								<td>
 									<?php echo btnView(_route('deployment:show' , $row->id) )?>

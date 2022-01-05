@@ -29,7 +29,12 @@
 					'total_moderate_cases' => 0,
 					'total_severe_cases' => 0,
 					'total_deployed_cases' => 0,
-					'total_record'   => 0
+					'total_record'   => 0,
+
+					'recovered_cases' => 0,
+					'total_death'  => 0,
+					'number_of_hospital_quarantine' => 0,
+					'number_of_home_quarantine' => 0,
 				];
 
 				$patient_record_model = model('PatientRecordModel');
@@ -65,6 +70,22 @@
 				]);
 
 				$deployments = $deploy_model->getAll();
+
+				foreach($deployments as $key => $row) 
+				{
+					if( isEqual($row->release_remarks , 'recovered') ){
+						$ret_val['recovered_cases']++;
+					}else if( isEqual($row->release_remarks, 'deceased')) {
+						$ret_val['total_death']++;
+					}
+
+
+					if( !is_null($row->hospital_id) ){
+						$ret_val['number_of_hospital_quarantine']++;
+					}else{
+						$ret_val['number_of_home_quarantine']++;
+					}
+				}
 
 				if($deployments)
 					$ret_val['total_deployed_cases'] = count($deployments);

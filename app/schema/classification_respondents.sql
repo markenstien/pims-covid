@@ -6,3 +6,6 @@ create table classification_respondents(
 	remarks varchar(100),
 	created_at timestamp default now()
 );
+
+alter table classification_respondents
+	add column points int(10);

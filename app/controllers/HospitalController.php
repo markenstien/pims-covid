@@ -19,6 +19,12 @@
 		{
 			$hospitals = $this->model->getAll();
 
+			$uran = [];
+			foreach($hospitals as $key => $row) 
+			{
+				$under_quarantine = $this->deployment->getUnderQuarantine(null , $row->id);
+				$row->available = intval($row->capacity) - $under_quarantine;
+			}
 			$this->data['hospitals'] = $hospitals;
 
 			return $this->view('hospital/index' , $this->data);
@@ -85,6 +91,7 @@
 			$this->data['hospital'] = $hospital;
 			$this->data['page_title'] = $hospital->name;
 			$this->data['deployments'] = $deployments;
+			$this->data['available_patient_deployments'] = $hospital->capacity - $this->deployment->getUnderQuarantine($deployments);
 
 			return $this->view('hospital/show' , $this->data);
 		}

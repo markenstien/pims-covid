@@ -67,6 +67,21 @@
 								<td><?php echo $items['summary']['total_record']?></td>
 							</tr>
 						</tbody>
+
+						<thead>
+							<th>Recovered Cases</th>
+							<th>Dececased Cases</th>
+							<th>Home Quarantine</th>
+							<th>Hospital Quarantine</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td><?php echo $items['summary']['recovered_cases']?></td>
+								<td><?php echo $items['summary']['total_death']?></td>
+								<td><?php echo $items['summary']['number_of_hospital_quarantine']?></td>
+								<td><?php echo $items['summary']['number_of_home_quarantine']?></td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 				<?php divider()?>

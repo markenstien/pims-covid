@@ -158,35 +158,49 @@
 				case 'between':
 					$value = floatval($value);
 
-					if( $value >= $item->start_number ){
+					if( $value >= $item->start_number && $value <= $item->end_number){
 						$points += $item->points;
 					}
 				break;
 
 				case '=':
 				case 'in':
+					if (isEqual( $value , $item->compare_to )){
+						$points += $item->points;
+					}
+					break;
 				case 'not in':
-					$is_equal = isEqual( $value , $item->compare_to );
-					$is_not_in = isEqual($item->comparison, 'not in');
-					if( $is_equal && !$is_not_in ){
+					if (!isEqual( $value , $item->compare_to )){
 						$points += $item->points;
 					}
-
-					if( !$is_equal && $is_not_in){
-						$points += $item->points;
-					}
+					break;
 				break;
 
 				case '!=':
 					if( $item->compare_to != $value ){
 						$points += $item->points;
 					}
+					break;
 				case '>=':
-					if( $item->compare_to >= $value ){
+					if( $value >= $item->compare_to ){
 						$points += $item->points;
 					}
+					break;
 				case '<=':
-					if( $item->compare_to <= $value ){
+					if( $value <=  $item->compare_to){
+						$points += $item->points;
+					}
+				break;
+
+				case '>':
+					if( $value > $item->compare_to ){
+						$points += $item->points;
+						if(isEqual($item->label , 'Respiratory Rate') )
+						dd([$value, $item->compare_to]);
+					}
+					break;
+				case '<':
+					if( $value < $item->compare_to){
 						$points += $item->points;
 					}
 				break;

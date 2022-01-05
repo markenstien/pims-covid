@@ -20,6 +20,9 @@
 			*compute remarks
 			*/
 			$_fillables['items'] = json_encode( $classification_data['items'] );
+
+			$_fillables['points'] = $this->total_points;
+			
 			$respond_id = parent::store($_fillables);
 		}
 
@@ -34,9 +37,11 @@
 			{
 				$clasificator_id = $item['id'];
 				$value = trim($item['value']);
+				$compare = $classification_item_model->compare( $clasificator_id , $value);
 
-				$points += $classification_item_model->compare( $clasificator_id , $value);
+				$points += $compare;
 			}
+			$this->total_points = $points;
 
 			return $classification_remark_model->compare($points);
 		}

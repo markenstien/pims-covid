@@ -14,6 +14,7 @@
 			$this->address_form = new AddressForm();
 
 			$this->lab_model = model('LaboratoryModel');
+			$this->deployment = model('DeployModel');
 
 
 			$this->data['page_title'] = ' Users ';
@@ -142,6 +143,20 @@
 			$this->data['laboratory_results'] = $this->lab_model->getByPatient($id);
 
 			$this->data['is_admin'] = $this->is_admin;
+
+			//recent
+			$deployment = $this->deployment->getRecent($id);
+
+			$number_of_days_after_deployment = null;
+			$number_of_days_remaining = null;
+			if($deployment)
+			{
+				$number_of_days_after_deployment = date_difference( $deployment->deployment_date, date('Y-m-d'));
+				$number_of_days_remaining = abs(( abs($number_of_days_after_deployment) - 14));
+			}
+			
+			$this->data['number_of_days_remaining'] = $number_of_days_remaining;
+			$this->data['number_of_days_after_deployment'] = $number_of_days_after_deployment;
 
 			return $this->view('user/show' , $this->data);
 		}

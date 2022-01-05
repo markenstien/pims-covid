@@ -230,7 +230,7 @@
 				if( isEqual($res['form_id'] , $id) )
 					$form_responding[$key]['status'] = 'completed';
 			}
-
+			
 			Session::set('patient_record_forms' , $form_responding);
 		}
 
