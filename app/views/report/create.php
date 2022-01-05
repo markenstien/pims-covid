@@ -70,7 +70,7 @@
 
 						<thead>
 							<th>Recovered Cases</th>
-							<th>Dececased Cases</th>
+							<th>Deceased Cases</th>
 							<th>Home Quarantine</th>
 							<th>Hospital Quarantine</th>
 						</thead>
