@@ -20,7 +20,7 @@
 
 					<div>
 						<label class="tx-11">User Type</label>
-						<p><?php echo $user->user_type?></p>
+						<p><?php echo $user->user_type?> <?php if( $user->license_number) :?> <small>License Number(<?php echo $user->license_number?>)</small> <?php endif?></p>					
 					</div>
 
 					<div>

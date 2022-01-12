@@ -7,6 +7,7 @@
 		protected $_fillables = [
 			'id',
 			'user_code' ,
+			'license_number',
 			'first_name',
 			'middle_name',
 			'last_name',
@@ -288,15 +289,11 @@
 
 		public function computeAge($birth_date)
 		{
-			//date in mm/dd/yyyy format; or it can be in other formats as well
-			$birth_date = "12/17/1983";
-			 //explode the date to get month, day and year
-			$birth_date = explode("/", $birth_date);
-			  //get age from date or birthdate
-			$age = (date("md", date("U", mktime(0, 0, 0, $birth_date[0], $birth_date[1], $birth_date[2]))) > date("md")
-			    ? ((date("Y") - $birth_date[2]) - 1)
-			    : (date("Y") - $birth_date[2]));
-			return $age;
+			$currentDate = date("d-m-Y");
+
+			$age = date_diff(date_create($birth_date), date_create($currentDate));
+
+			return $age->format("%y");
 		}
 
 		public function getPatients()

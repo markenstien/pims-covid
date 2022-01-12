@@ -32,6 +32,7 @@
 			// $this->addUsername();
 			$this->addPassword();
 			$this->addUserType();
+			$this->addLicenseNumber();
 			$this->addProfile();
 			
 			
@@ -237,6 +238,21 @@
 
 				'attributes' => [
 					'id' => 'id_user_type'
+				]
+			]);
+		}
+		public function addLicenseNumber()
+		{
+			$this->add([
+				'type' => 'text',
+				'name' => 'license_number',
+				'class' => 'form-control',
+				'options' => [
+					'label' => 'License Number',
+				],
+
+				'attributes' => [
+					'id' => 'id_license_number'
 				]
 			]);
 		}

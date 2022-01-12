@@ -24,3 +24,5 @@ alter table users
 	add column age char(3) after birthdate;
 
 
+alter table users
+	add column license_number char(50);

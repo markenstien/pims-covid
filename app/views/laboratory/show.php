@@ -146,11 +146,11 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="section">
-						<h5>Remarks</h5>
-						<?php echo $lab_result->remarks ?>
+						<h3>Remarks</h3>
+						<?php echo $lab_result->remarks ?> 
 					</div>
 					<div class="section">
-						<strong>Severity : <?php echo $lab_result->severity?></strong>
+						<h4>Severity : <span class="text-danger"><?php echo $lab_result->severity?></span> </h4>
 						<hr>
 						<?php if(!empty($lab_result->notes)) :?>
 							<h5>Doctors Notes</h5>

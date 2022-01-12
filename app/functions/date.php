@@ -74,6 +74,7 @@
     function date_today(){
       return date('Y-m-d');
     }
+    
     function date_difference($date1 , $date2)
     {
         $date1 = date_create($date1);

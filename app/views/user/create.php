@@ -15,4 +15,21 @@
 		</div>
 	</div>
 <?php endbuild()?>
+
+<?php build('scripts') ?>
+	<script>
+		$( document ).ready( function( evt ) {
+			$("#id_license_number").parent().parent().hide();
+
+			$("#id_user_type").change( function(evt) {
+
+				if( $(this).val() == 'doctor' ) {
+					$("#id_license_number").parent().parent().show();
+				}else{
+					$("#id_license_number").parent().parent().hide();
+				}
+			});
+		});
+	</script>
+<?php endbuild()?>
 <?php loadTo()?>

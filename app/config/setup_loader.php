@@ -16,7 +16,7 @@
             define('DBHOST' , 'localhost');
             define('DBUSER' , 'root');
             define('DBPASS' , '');
-            define('DBNAME' , 'th_covid_pims');
+            define('DBNAME' , 'covidpims');
 
             define('BASECONTROLLER' , 'AuthController');
             define('BASEMETHOD' , 'index');
