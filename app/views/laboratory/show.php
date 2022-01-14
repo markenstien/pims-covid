@@ -203,7 +203,7 @@
 				<div>
 					<?php if( isEqual(whoIs('user_type') , ['doctor' , 'admin']) ) :?>
 						<a href="<?php echo _route('lab:classify' , $lab_result->id)?>"
-							class="btn btn-primary btn-lg">Classify</a>
+							class="btn btn-primary btn-lg">Edit</a>
 					<?php endif?>
 				</div>
 			<?php else:?>

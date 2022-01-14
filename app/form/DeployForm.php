@@ -49,6 +49,9 @@
 				'options' => [
 					'label' => 'Hospital',
 					'option_values' => $hospitals
+				],
+				'attributes' => [
+					'id' => 'id_hospital'
 				]
 			]);
 		}
