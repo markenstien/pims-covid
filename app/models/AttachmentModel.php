@@ -82,7 +82,8 @@
 				echo die($e->getMessage());
 			}
 			
-		}
+		}	
+		
 
 		public function deleteWithFile($id)
 		{

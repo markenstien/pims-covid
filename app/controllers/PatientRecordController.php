@@ -229,8 +229,23 @@
 			$record = $this->model->getComplete($id);
 
 			$this->data['record'] = $record;	
-			$this->data['is_admin'] = $this->is_admin;
-			
+			$this->data['is_admin'] = $this->is_admin;	
+
+
+			$this->_attachmentForm->setValue('global_id' , $id);
+			$this->_attachmentForm->setValue('global_key' , 'Patient_Files');
+
+
+			$this->_attachmentForm->remove('label');
+			$this->_attachmentForm->remove('search_key');
+
+			$this->data['attachment_form'] = $this->_attachmentForm;
+
+			$this->data['patient_files'] = $this->_attachmentModel->all([
+				'global_key' => 'Patient_Files',
+				'global_id'  => $id
+			]);
+
 			return $this->view('patient_record/show' , $this->data);
 		}
 

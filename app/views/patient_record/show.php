@@ -1,5 +1,5 @@
 <?php build('content') ?>
-	
+	<?php Flash::show()?>
 	<div class="card">
 		<div class="card-header">
 			<div class="row">
@@ -226,6 +226,73 @@
 			</div>
 		<?php endif?>
 	</div>
+
+	<hr>
+	<div class="card">
+		<div class="card-header">
+			<h4 class="card-title">Patient files</h4>
+
+			<?php echo btnCreate('#' , 'Add Files' , [
+				'data-bs-toggle' => 'modal',
+				'data-bs-target' => '#exampleModal'
+			])?>
+		</div>
+
+		<?php if($patient_files) :?>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<th>#</th>
+							<th>File Name</th>
+							<th>Type</th>
+							<th>Description</th>
+							<th>Action</th>
+						</thead>
+
+						<tbody>
+							<?php foreach($patient_files as $key => $row) :?>
+								<tr>
+									<td><?php echo ++$key?></td>
+									<td><?php echo $row->filename?></td>
+									<td><?php echo $row->file_type?></td>
+									<td><?php echo $row->description?></td>
+									<td>
+										<a href="/ViewerController/show/?file=<?php echo urlencode($row->full_url)?>" class="btn btn-primary btn-sm"> Show </a>
+											&nbsp;
+
+										<a href="<?php echo _download_wrap($row->filename , $row->path) ?>" class="btn btn-primary btn-sm"> Download </a>
+											&nbsp;
+
+										<a href="<?php echo _route('attachment:delete' , $row->id) ?>" class="btn btn-danger btn-sm">Delete</a>
+									</td>
+								</tr>
+							<?php endforeach?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<?php endif?>
+	</div>
+
+	<!-- SEND LAB RESULT TO EMAIL -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">File Upload Form</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<?php echo $attachment_form->getForm()?>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- -->
 <?php endbuild()?>
 
 <?php loadTo()?>

@@ -117,6 +117,7 @@
 
 			$this->data['user_form']->remove('address');
 			$this->data['user_form']->remove('submit');
+			$this->data['user_form']->remove('password');
 
 			if(! isEqual(whoIs('user_type'), 'admin') ){
 				$this->data['user_form']->remove('user_type');

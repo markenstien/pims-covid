@@ -8,6 +8,7 @@
 		<div class="card-body">
 			<?php Flash::show()?>
 			<?php echo $user_form->start()?>
+			<p class="text-primary">Pasword will be automatically created and sent login details to specified users email</p>
 			<?php echo $user_form->getFormItems()?>
 			<?php echo $address_form->getFormItems()?>
 				<input type="submit" name="" class="btn btn-primary btn-sm" value="Create User">

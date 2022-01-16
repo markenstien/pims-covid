@@ -313,7 +313,7 @@
 
 					//check for what condition operation
 					$condition = $param_value['condition'];
-					$condition_values = $param_value['value'];
+					$condition_values = $param_value['value'] ?? '';
 
 					if( isEqual($condition , ['between' , 'not between']))
 					{
@@ -326,6 +326,11 @@
 
 						list($valueA, $valueB) = $condition_values;
 							$WHERE .= " {$key} {$condition} '{$valueA}' AND '{$valueB}'";
+					}
+
+					if( isEqual( $condition , 'not null') )
+					{
+						$WHERE .= "{$key} is not null ";
 					}
 
 					if( isEqual($condition , ['equal' , 'not equal' , 'in']) )

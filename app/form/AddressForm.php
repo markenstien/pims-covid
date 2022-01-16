@@ -38,12 +38,13 @@
 		public function addStreet()
 		{
 			$this->add([
-				'type' => 'text',
+				'type' => 'select',
 				'name' => 'street',
-				'required' => true,
 				'options' => [
-					'label' => 'Street'
+					'label' => 'Street',
+					'option_values' => self::$_STREETS
 				],
+				'required' => true,
 				'class' => 'form-control'
 			]);
 		}
@@ -57,6 +58,7 @@
 				'options' => [
 					'label' => 'City'
 				],
+				'value' => 'Quezon City',
 				'class' => 'form-control'
 			]);
 		}
@@ -70,7 +72,8 @@
 				'options' => [
 					'label' => 'Barangay'
 				],
-				'class' => 'form-control'
+				'class' => 'form-control',
+				'value' => 'culiat'
 			]);
 		}
 
@@ -83,6 +86,7 @@
 				'options' => [
 					'label' => 'Zip'
 				],
+				'value' => '1128',
 				'class' => 'form-control'
 			]);
 		}
@@ -123,4 +127,8 @@
 				'value' => $address_id
 			]);
 		}
+
+		static $_STREETS = ['Anahaw', 'Admirable Ln', 'Amethyst', 'Aldrin', 'Allan Bean', 'Anderw', 'A. Limqueco', 'Armstrong', 'Avenue Maria', 'Borman', 'Casanova Dr Ext', 'Cassanova Dr', 'Cenacle Dr', 'Central Ave', 'Charity Ln', 'Charity St', 'Charles Conrad', 'Circumferential Rd 5', 'Collins', 'Congressional Ave Ext', 'Dela Paz', 'Demetria Reynado', 'Diamond', 'Dona Regina', 'Freedon Ln', 'G. Ge Jesus', 'Gen. S. Aquino', 'General Luna', 'Golden Lane Morning Star Heights', 'Hizon Dr', 'Hope St', 'Jade', 'Jasmine', 'Jose Carlos St', 'Justice Ln', 'Ledesma Court Street', 'Libyan St', 'Lopez Jaena', 'Lotus', 'Love St', 'Lovell', 'Macaya St', 'Magsaysay', 'Maria Felipe', 'Maria Manguiat', 'Mc Divitt', 'McDivitt', 'Metro Ave', 'Morning Star Dr', 'Mystic Rose Dr', 'Opal', 'Osmena', 'P. Quiambao', 'Palmera', 'Paz Isabel St', 'Paz Isabel St', 'Peace St', 'Peaceful Ln', 'Pines St', 'Prudent Ln', 'Pura Villanueva Kalaw', 'Renowned Ln', 'Robina', 'Roxas', 'Rufo Lane', 'Salvador Estrada', 'Salvi', 'San Agustin', 'San Ponciano', 'Santa Felicia', 'Santa Margarita', 'St Bernadette', 'Sta Lucia', 'Sunriser', 'T. Alonzo', 'T. Bugallon', 'Tandang Sora Ave', 'Temparence Ln', 'Teodoro M Kalaw', 'Teody III', 'Tulips', 'Tyrone', 'Unamed', 'Union Dr Ext', 'Valerio Kalaw', 'Valor Ln', 'Via Hilario', 'Via Ramgo', 'Viola', 'Visayas Ave', 'White', 'Windgate', 'Z&H'];
+
+
 	}

@@ -1,5 +1,4 @@
 <?php
-
     function _download_wrap($file_name , $path)
     {
         $path = seal(urlencode($path));

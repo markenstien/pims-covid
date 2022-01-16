@@ -66,7 +66,7 @@
 		{
 			$this->add([
 				'type' => 'text',
-				'name' => 'searck_key',
+				'name' => 'search_key',
 				'options' => [
 					'label' => 'Search Key',
 				],

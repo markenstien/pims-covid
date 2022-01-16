@@ -33,6 +33,22 @@
 							?>
 						</div>
 					</div>
+
+
+					<div class="form-group mt-2">
+						<div class="col">
+							<?php Form::label('Report Sections'); ?>
+
+							<div class="form-control">
+								<?php foreach($report_sections as $key => $row)  :?>
+									<label>
+										<input type="checkbox" name="report_sections[]" value="<?php echo $key?>">
+										<?php echo $row?>
+									</label>
+								<?php endforeach?>
+							</div>
+						</div>
+					</div>
 					<hr>
 					<?php Form::submit('filter', 'Generate Report')?>
 					<?php Form::close()?>
@@ -49,20 +65,25 @@
 			<?php if(isset($items)) :?>
 				<?php divider()?>
 				<h5 class="text-center mb-2">Start Date : <?php echo $_GET['start_date']?> TO End Date : <?php echo $_GET['end_date']?></h5>
+
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<thead>
-							<th>Total Mild Cases</th>
-							<th>Total Moderate Cases</th>
-							<th>Total Severe Cases</th>
+							<?php if( isEqual('summary_of_severity' , $report_section_selected) ) :?>
+								<th>Total Mild Cases</th>
+								<th>Total Moderate Cases</th>
+								<th>Total Severe Cases</th>
+							<?php endif?>
 							<th>Deployed Patients</th>
 							<th>Total Records</th>
 						</thead>
 						<tbody>
 							<tr>
-								<td><?php echo $items['summary']['total_miled_cases']?></td>
-								<td><?php echo $items['summary']['total_moderate_cases']?></td>
-								<td><?php echo $items['summary']['total_severe_cases']?></td>
+								<?php if( isEqual('summary_of_severity' , $report_section_selected) ) :?>
+									<td><?php echo $items['summary']['total_miled_cases']?></td>
+									<td><?php echo $items['summary']['total_moderate_cases']?></td>
+									<td><?php echo $items['summary']['total_severe_cases']?></td>
+								<?php endif?>
 								<td><?php echo $items['summary']['total_deployed_cases']?></td>
 								<td><?php echo $items['summary']['total_record']?></td>
 							</tr>
@@ -71,15 +92,26 @@
 						<thead>
 							<th>Recovered Cases</th>
 							<th>Deceased Cases</th>
-							<th>Home Quarantine</th>
-							<th>Hospital Quarantine</th>
+							
+							<?php if( isEqual('hospital_quarantine ' , $report_section_selected) ) :?>
+								<th>Hospital Quarantine</th>
+							<?php endif?>
+
+							<?php if( isEqual('home_quarantine' , $report_section_selected) ) :?>
+								<th>Home Quarantine</th>
+							<?php endif?>
 						</thead>
 						<tbody>
 							<tr>
 								<td><?php echo $items['summary']['recovered_cases']?></td>
 								<td><?php echo $items['summary']['total_death']?></td>
-								<td><?php echo $items['summary']['number_of_hospital_quarantine']?></td>
-								<td><?php echo $items['summary']['number_of_home_quarantine']?></td>
+								<?php if( isEqual('hospital_quarantine' , $report_section_selected) ) :?>
+									<td><?php echo $items['summary']['number_of_hospital_quarantine']?></td>
+								<?php endif?>
+
+								<?php if( isEqual('home_quarantine' , $report_section_selected) ) :?>
+									<td><?php echo $items['summary']['number_of_home_quarantine']?></td>
+								<?php endif?>
 							</tr>
 						</tbody>
 					</table>
@@ -145,7 +177,7 @@
 					<thead>
 						<th>Reference</th>
 						<th>Name</th>
-						<th>Hospital</th>
+						<th>Hospital/Home</th>
 						<th>Status</th>
 					</thead>
 
@@ -154,7 +186,13 @@
 							<tr>
 								<td><?php echo $row->reference?></td>
 								<td><?php echo $row->first_name , ' '. $row->last_name?></td>
-								<td><?php echo $row->name?></td>
+								<td>
+									<?php if( isEqual($row->type , 'hospital')  ) :?>
+										<?php echo $row->name ?? ''?>
+									<?php else:?>
+										Home Quarantine
+									<?php endif?>
+								</td>
 								<td><?php echo $row->record_status?></td>
 							</tr>
 						<?php endforeach?>

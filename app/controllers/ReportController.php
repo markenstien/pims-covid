@@ -12,12 +12,15 @@
 		{	
 			$request_params = request()->inputs();
 
-			
+			$report_sections = $request_params['report_sections'] ?? [];
 
 			if( !empty($request_params) )
 			{
 				$start_date = $request_params['start_date'];
 				$end_date = $request_params['end_date'];
+
+
+				// dd($request_params);
 
 				if( empty($start_date) || empty($end_date) )
 				{
@@ -63,13 +66,55 @@
 				}
 
 				$records = $patient_record_model->getAll([
-					'date' => [
-						'condition' => 'between',
-						'value'     => [$start_date , $end_date]
+
+					'where' => [
+						'date' => [
+							'condition' => 'between',
+							'value'     => [$start_date , $end_date]
+						],
+						'first_name' => [
+							'condition' => 'not null'
+						]
 					]
+					
 				]);
 
-				$deployments = $deploy_model->getAll();
+				$types = [];
+
+				if( isEqual('home_quarantine' , $report_sections))
+					$types [] = 'home-quarantine';
+					
+
+				if( isEqual('hospital_qurantine' , $report_sections) )
+					$types [] = 'hospital';
+
+
+				$where_types = null;
+
+
+				$where_param = [
+					'deployment_date' => [
+						'condition' => 'between',
+						'value'     => [$start_date , $end_date],
+						'concatinator' => ' AND '
+					]
+				];
+
+				if( !empty($types) )
+				{
+					$where_types = [
+						'deploy.type' => [
+							'condition' => 'in',
+							'value' => $types
+						]
+					];
+
+					$where_param = array_merge($where_param,$where_types);
+				}
+
+				$deployments = $deploy_model->getAll([
+					'where' => $where_param
+				]);
 
 				foreach($deployments as $key => $row) 
 				{
@@ -102,6 +147,19 @@
 			}
 
 			$this->data['title'] = 'Report';
+
+			$this->data['report_sections'] = [
+				'number_of_cases' => 'Number of Cases',
+				'summary_of_severity' => 'Summary of Severity',
+				'summary_of_quarantine' => 'Summary of Quarantine',
+				'recovered_cases' => 'Recovered Cases',
+				'deceased_cases' => 'Deceased Cases',
+				'home_quarantine' => 'Home Quarantine',
+				'hospital_quarantine' => 'Hospital Quarantine',
+				'patients' => 'Patients'
+			];
+
+			$this->data['report_section_selected'] = $report_sections ?? [];
 
 			return $this->view('report/create' , $this->data);
 		}
