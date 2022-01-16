@@ -14,8 +14,15 @@
 
 			$report_sections = $request_params['report_sections'] ?? [];
 
+
 			if( !empty($request_params) )
 			{
+				if(empty($report_sections))
+				{
+					Flash::set("You must select atleast one report section");
+					return request()->return();
+				}
+
 				$start_date = $request_params['start_date'];
 				$end_date = $request_params['end_date'];
 
