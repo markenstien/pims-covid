@@ -64,12 +64,13 @@
 
 			<?php if(isset($items)) :?>
 				<?php divider()?>
-				<h5 class="text-center mb-2">Start Date : <?php echo $_GET['start_date']?> TO End Date : <?php echo $_GET['end_date']?></h5>
-
-				<?php if( $report_section_selected ) : ?>
-					Filters Used: <?php echo implode(',' , $report_section_selected)?>
-				<?php endif?>
-				<div class="mt-2"></div>
+				<div class="text-center">
+					<h5 class="mb-2">Start Date : <?php echo $_GET['start_date']?> TO End Date : <?php echo $_GET['end_date']?></h5>
+					<?php if( $report_section_selected ) : ?>
+						Filters Used: <?php echo implode(',' , $report_section_selected)?>
+					<?php endif?>
+					<div class="mt-2"></div>
+				</div>
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<thead>
