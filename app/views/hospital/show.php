@@ -43,6 +43,9 @@
 							</td>
 						</tr>
 					</table>
+					<?php echo btnDelete( _route('hospital:delete' , $hospital->id , [
+						'route' => seal(_route('hospital:index'))
+					]) )?>
 				</div>
 
 				<div class="col-md-6">
