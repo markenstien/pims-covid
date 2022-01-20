@@ -74,6 +74,8 @@
 			$this->data['lab_form']->addRecordId($this->data['record']->id);
 			$this->data['lab_form']->setValueObject($lab_result);
 
+			$this->data['lab_result'] = $lab_result;
+
 			return $this->view('laboratory/classify' , $this->data);
 		}
 

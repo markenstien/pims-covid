@@ -22,9 +22,14 @@
 		$( document ).ready( function( evt ) {
 			$("#id_license_number").parent().parent().hide();
 
-			$("#id_user_type").change( function(evt) {
+			$("#id_user_type").change( function(evt) 
+			{
+				let value = $(this).val();
 
-				if( $(this).val() == 'doctor' ) {
+				let usersWithLicenseNumber = ['doctor' , 'medical personel'];
+
+				if(  usersWithLicenseNumber.includes(value) )
+				{
 					$("#id_license_number").parent().parent().show();
 				}else{
 					$("#id_license_number").parent().parent().hide();

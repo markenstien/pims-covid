@@ -44,6 +44,8 @@
 						<label class="tx-11">Email And Mobile Number</label>
 						<p><?php echo $user->email?></p>
 						<p><?php echo $user->phone_number?></p>
+
+						<span><a href="<?php echo _route('user:sendCredential' , $user->id)?>" title="Click to send the credential to the user">Send Credentials to User :</a><?php echo $user->email?></span>
 					</div>
 					<?php if($user->address_object) :?>
 						<div>

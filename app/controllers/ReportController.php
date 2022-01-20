@@ -26,9 +26,6 @@
 				$start_date = $request_params['start_date'];
 				$end_date = $request_params['end_date'];
 
-
-				// dd($request_params);
-
 				if( empty($start_date) || empty($end_date) )
 				{
 					Flash::set("Start date and End date must not be empty" , 'danger');

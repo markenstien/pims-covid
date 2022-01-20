@@ -66,12 +66,28 @@
 			$this->data['user_form']->init([
 				'url' => _route('user:edit',$id)
 			]);
+
 			$this->data['user_form']->setValueObject($user);
 			$this->data['user_form']->addId($id);
 
 			$this->data['user_form']->remove('submit');
-			$this->data['user_form']->remove('password');
 			$this->data['user_form']->remove('address');
+			$this->data['user_form']->remove('password');
+
+			$this->data['user_form']->remove('user_type');
+
+			$this->data['user_form']->add([
+				'name' => 'password',
+				'type' => 'password',
+				'class' => 'form-control',
+				'options' => [
+					'label' => 'Password'
+				]
+			]);
+
+			if( !isEqual($user->user_type , ['doctor' , 'medical personel']) )
+				$this->data['user_form']->remove('license_number');
+
 
 			$this->address_form->remove('submit');
 
@@ -161,5 +177,30 @@
 			$this->data['number_of_days_after_deployment'] = $number_of_days_after_deployment;
 
 			return $this->view('user/show' , $this->data);
+		}
+
+		public function sendCredential($id)
+		{
+			$user = $this->model->get($id);
+
+			$company_name = COMPANY_NAME;
+
+			$login_href = URL.DS._route('auth:login');
+
+			$link = "<a href='{$login_href}'> Click here to login </a>";
+
+			$message = <<<EOF
+				Hi , {$user->first_name} This is your credential for {$company_name}
+				<ul>
+					<li> Email : {$user->email} </li>
+					<li> Password : {$user->password} </li>
+				</ul>
+				{$link}
+			EOF;
+
+			_mail($user->email, 'User Credential' , $message);
+
+			Flash::set("Credentials has been set to the user : {$user->email}");
+			return request()->return();
 		}
 	}

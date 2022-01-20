@@ -34,7 +34,13 @@
 
 			<div class="form-group">
 				<?php
-					echo $lab_form->getCol('severity')
+					if( $lab_result->classify_doc_id ){
+						echo $lab_form->getCol('severity');
+					}else{
+						echo '<label> From the Laboratory Results </label>';
+						echo $lab_form->get('severity');
+					}
+					
 				?>
 			</div>
 

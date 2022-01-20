@@ -19,7 +19,8 @@
 		'edit' => $controller.'/edit',
 		'create' => $controller.'/create',
 		'delete' => $controller.'/destroy',
-		'show'   => $controller.'/show'
+		'show'   => $controller.'/show',
+		'sendCredential' => $controller.'/sendCredential'
 	];
 
 	$controller = '/AuthController';
