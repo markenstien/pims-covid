@@ -76,29 +76,38 @@
 				$fillable_datas['user_code'] = $this->generateCode($user_data['user_type']);
 				$fillable_datas['password'] = $password;
 
-				$app_name = COMPANY_NAME;
-
-				$login_href = URL.DS._route('auth:login');
-
-				$anchor = "<a href='{$login_href}'>Login here.</a>";
-				/**
-				 * send auth to email*/
-				$body = <<<EOF
-					<div>
-						Hi {$fillable_datas['first_name']} , Your Credentials
-						for the {$app_name} Portal <br/>
-						<strong>username/email : {$fillable_datas['email']}  </strong> <br/>
-						<strong>password : {$password}  </strong>
-						{$anchor}
-					</div>
-				EOF;
-				_mail($fillable_datas['email'] , 'Credentials' , $body);
 				$user_id = parent::store($fillable_datas);
+
+				$this->sendCredential($user_id);
 			}
 			
 			return $user_id;
 		}
 
+
+		public function sendCredential($id)
+		{
+			$user = $this->model->get($id);
+
+			$app_name = COMPANY_NAME;
+
+			$login_href = URL.DS._route('auth:login');
+
+			$anchor = "<a href='{$login_href}'>Login here.</a>";
+			/**
+			 * send auth to email*/
+			$body = <<<EOF
+				<div>
+					Hi {$user->first_name} , Your Credentials
+					for the {$app_name} Portal <br/>
+					<strong>username/email : {$user->email}  </strong> <br/>
+					<strong>password : {$user->password}  </strong>
+					{$anchor}
+				</div>
+			EOF;
+
+			_mail($user->email, 'User Credential' , $message);
+		}
 
 		private function validate($user_data , $id = null)
 		{

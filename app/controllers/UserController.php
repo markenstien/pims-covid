@@ -181,26 +181,8 @@
 
 		public function sendCredential($id)
 		{
-			$user = $this->model->get($id);
-
-			$company_name = COMPANY_NAME;
-
-			$login_href = URL.DS._route('auth:login');
-
-			$link = "<a href='{$login_href}'> Click here to login </a>";
-
-			$message = <<<EOF
-				Hi , {$user->first_name} This is your credential for {$company_name}
-				<ul>
-					<li> Email : {$user->email} </li>
-					<li> Password : {$user->password} </li>
-				</ul>
-				{$link}
-			EOF;
-
-			_mail($user->email, 'User Credential' , $message);
-
-			Flash::set("Credentials has been set to the user : {$user->email}");
+			$this->model->sendCredential($id);
+			Flash::set("Credentials has been set to the user");
 			return request()->return();
 		}
 	}

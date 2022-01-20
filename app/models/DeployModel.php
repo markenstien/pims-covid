@@ -240,10 +240,6 @@
 			$result = $this->getAll([
 				'where' => [
 					'deploy.patient_id'  => $user_id,
-					'deploy.is_released' => [
-						'condition' => 'not equal',
-						'value' => 0
-					]
 				],
 				'order' => 'deploy.id desc'
 			]);
